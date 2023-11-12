@@ -1,9 +1,10 @@
 import react from "react";
+import './Header.scss';
 
 const Header = () => {
   return (
     <header>
-      Header block
+      <a href="/" className="logo">MIKENOIRED</a>
     </header>
   )
 }
