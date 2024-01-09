@@ -4,11 +4,11 @@ import Image from "next/image";
 import clsx from "clsx";
 import { useState } from "react";
 
-export const Header = () => {
+export const Header = ({ transparent }: { transparent: Boolean }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
   return (
-    <header className='flex flex-col w-full bg-black fixed'>
+    <header className={clsx("flex flex-col w-full fixed z-10", !transparent && 'bg-black')}>
       <div className='pl-8 pr-8 relative flex w-full md:justify-between items-center h-10 md:h-12 border-b border-white'>
         <div className='text-2xl font-semibold uppercase'>Mikenoired</div>
         <nav className='md:flex items-center text-xl hidden'>
