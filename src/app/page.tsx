@@ -4,9 +4,14 @@ import { Header } from './ui/header';
 export default function Home() {
   return (
     <main>
-      <Header />
+      <Header transparent={true} />
       <div className='w-screen h-screen relative'>
-        <Image src='/video-blank.jpg' alt='Video preview' objectFit='cover' fill />
+        <Image
+          src='/video-blank.jpg'
+          alt='Video preview'
+          objectFit='cover'
+          fill
+        />
       </div>
     </main>
   );
