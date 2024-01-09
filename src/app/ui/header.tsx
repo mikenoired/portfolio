@@ -3,6 +3,7 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { useState } from "react";
+import Link from 'next/link';
 
 export const Header = ({ transparent }: { transparent: Boolean }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -13,7 +14,7 @@ export const Header = ({ transparent }: { transparent: Boolean }) => {
         <div className='text-2xl font-semibold uppercase'>Mikenoired</div>
         <nav className='md:flex items-center text-xl hidden'>
           <div className='cursor-pointer'>WORKS</div>
-          <div className='pl-5 cursor-pointer'>Q/A</div>
+          <Link href='/qna' className='pl-5'>Q/A</Link>
           <div className='pl-5 cursor-pointer'>ABOUT</div>
         </nav>
         <div
