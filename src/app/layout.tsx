@@ -16,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={archivo.className}>{children}</body>
+      <body className={archivo.className + " bg-black text-white"}>
+        {children}
+      </body>
     </html>
   );
 }
