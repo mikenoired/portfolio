@@ -9,12 +9,21 @@ export const Header = ({ transparent }: { transparent: Boolean }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
   return (
-    <header className={clsx("flex flex-col w-full fixed z-10", !transparent && 'bg-black')}>
+    <header
+      className={clsx(
+        "flex flex-col w-full fixed z-10",
+        !transparent && "bg-black"
+      )}
+    >
       <div className='pl-8 pr-8 relative flex w-full md:justify-between items-center h-10 md:h-12 border-b border-white'>
         <div className='text-2xl font-semibold uppercase'>Mikenoired</div>
         <nav className='md:flex items-center text-xl hidden'>
-          <div className='cursor-pointer'>WORKS</div>
-          <Link href='/qna' className='pl-5'>Q/A</Link>
+          <Link href='/works'>
+            WORKS
+          </Link>
+          <Link href='/qna' className='pl-5'>
+            Q/A
+          </Link>
           <div className='pl-5 cursor-pointer'>ABOUT</div>
         </nav>
         <div
