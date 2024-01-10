@@ -10,7 +10,8 @@ export default async function Page() {
         {data.map((link, index) => <NavButton
           key={index}
           title={link.title}
-          thumb={link.thubnail}
+          thumb={link.thumbnail}
+          url={link.url}
         />)}
       </main>
     </>
