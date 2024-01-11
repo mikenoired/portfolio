@@ -8,13 +8,13 @@ export default async function List() {
       {qnas.map((block, index) => (
         <div key={index} className='flex p-5 border justify-between mb-5'>
           <div className='max-w-fit'>{block.title}</div>
-          <div>
-            <Link className='pl-4' href='#'>
+          <div className='flex'>
+            <div className='pl-4 cursor-pointer'>
               Delete
-            </Link>
-            <Link className='pl-4' href='#'>
+            </div>
+            <div className='pl-4 cursor-pointer'>
               Edit
-            </Link>
+            </div>
           </div>
         </div>
       ))}
