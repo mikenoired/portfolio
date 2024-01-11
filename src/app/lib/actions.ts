@@ -19,6 +19,9 @@ export async function newQNA(data: FormData) {
   const block = await db.answerBlock.create({
     data: createBlock,
   });
+
+  revalidatePath('/admin/qna');
+  redirect('/admin/qna');
 }
 
 export async function deleteQNAById(currentId: number) {
