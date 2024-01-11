@@ -16,13 +16,16 @@ export const Header = ({ transparent }: { transparent: Boolean }) => {
       )}
     >
       <div className='pl-8 pr-8 relative flex w-full md:justify-between items-center h-10 md:h-12 border-b border-white'>
-        <Link href='/' className='text-2xl font-semibold uppercase'>Mikenoired</Link>
+        <Link href='/' className='text-2xl font-semibold uppercase'>
+          Mikenoired
+        </Link>
         <nav className='md:flex items-center text-xl hidden'>
-          <Link href='/works'>
-            WORKS
-          </Link>
+          <Link href='/works'>WORKS</Link>
           <Link href='/qna' className='pl-5'>
             Q/A
+          </Link>
+          <Link href='/admin' className='pl-5'>
+            ADMIN
           </Link>
           <div className='pl-5 cursor-pointer'>ABOUT</div>
         </nav>
