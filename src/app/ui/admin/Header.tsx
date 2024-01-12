@@ -26,10 +26,18 @@ export default function Header() {
   const router = useRouter();
   return (
     <header className='h-12 flex relative items-center justify-center border-b mb-8'>
-      <div
-        className='absolute left-[30px] text-xl font-semibold cursor-pointer'
-        onClick={() => router.back()}
-      >{`<- Back`}</div>
+      <div className='absolute left-[30px] flex'>
+        <div
+          className='text-xl font-semibold cursor-pointer mr-4'
+          onClick={() => router.back()}
+        >{`<- Back`}</div>
+        <div
+          className='text-xl font-semibold cursor-pointer'
+          onClick={() => router.push("/admin")}
+        >
+          Dashboard
+        </div>
+      </div>
       {routes.map((route, index) => (
         <Link
           key={index}
@@ -39,6 +47,14 @@ export default function Header() {
           {route.title}
         </Link>
       ))}
+      <div className='absolute right-[30px] flex'>
+        <div
+          className='text-xl font-semibold cursor-pointer'
+          onClick={() => router.push("/")}
+        >
+          Homepage
+        </div>
+      </div>
     </header>
   );
 }
