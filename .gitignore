@@ -36,4 +36,4 @@ lerna-debug.log*
 next-env.d.ts
 
 # project ignore
-public/upload
+public/upload/*.*
