@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
-import prisma from '@/app/lib/utils';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+import prisma from "@/app/lib/utils";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const QNASchema = z.object({
@@ -11,7 +11,7 @@ const QNASchema = z.object({
   content: z.string(),
 });
 
-const newQNAData = QNASchema.omit({id: true});
+const newQNAData = QNASchema.omit({ id: true });
 
 export async function newQNA(data: FormData) {
   const createBlock = newQNAData.parse({
@@ -23,8 +23,8 @@ export async function newQNA(data: FormData) {
     data: createBlock,
   });
 
-  revalidatePath('/admin/qna');
-  redirect('/admin/qna');
+  revalidatePath("/admin/qna");
+  redirect("/admin/qna");
 }
 
 export async function editQNA(id: number, data: FormData) {
@@ -36,27 +36,27 @@ export async function editQNA(id: number, data: FormData) {
 
   const block = await prisma.answerBlock.update({
     where: {
-      id: editBlock.id
+      id: editBlock.id,
     },
     data: {
       title: editBlock.title,
-      content: editBlock.content
-    }
+      content: editBlock.content,
+    },
   });
 
-  revalidatePath('/admin/qna');
-  redirect('/admin/qna');
+  revalidatePath("/admin/qna");
+  redirect("/admin/qna");
 }
 
 export async function deleteQNAById(currentId: number) {
   const action = await prisma.answerBlock.delete({
     where: {
-      id: currentId
-    }
+      id: currentId,
+    },
   });
 
-  revalidatePath('/admin/qna');
-  redirect('/admin/qna');
+  revalidatePath("/admin/qna");
+  redirect("/admin/qna");
 }
 
 export async function fetchQNAById(id: number) {

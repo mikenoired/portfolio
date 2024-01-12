@@ -22,7 +22,7 @@ model Work {
 }
 
 model AnswerBlock {
-  id      Int    @id @unique @default(autoincrement())
+  id      Int             @id @unique @default(autoincrement())
   title   String
   content String
 }

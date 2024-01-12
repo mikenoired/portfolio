@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import Link from 'next/link'
-import { Works } from '@/app/works/data';
-import clsx from 'clsx';
+import Link from "next/link";
+import { Works } from "@/app/works/data";
+import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
-export const Sidebar = ({data}: {data: Works[]}) => {
+export const Sidebar = ({ data }: { data: Works[] }) => {
   const pathname = usePathname();
   return (
     <div className='h-screen fixed md:block hidden w-[200px]'>
@@ -23,4 +23,4 @@ export const Sidebar = ({data}: {data: Works[]}) => {
       </div>
     </div>
   );
-}
+};

@@ -1,6 +1,6 @@
-import { Header } from '@/app/ui/header';
-import { data } from '../data';
-import { Sidebar } from '@/app/ui/works/sidebar';
+import { Header } from "@/app/ui/header";
+import { data } from "../data";
+import { Sidebar } from "@/app/ui/works/sidebar";
 
 export default function SlugPage({ children }: { children: React.ReactNode }) {
   return (
@@ -12,4 +12,4 @@ export default function SlugPage({ children }: { children: React.ReactNode }) {
       </main>
     </>
   );
-};
+}

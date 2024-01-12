@@ -1,20 +1,18 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
+import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
-export const NavButton =
-  ({
-    title,
-    thumb,
-    url,
-  }:
-  {
-    title: string,
-    thumb: string,
-    url: string
-  }) => {
+export const NavButton = ({
+  title,
+  thumb,
+  url,
+}: {
+  title: string;
+  thumb: string;
+  url: string;
+}) => {
   const [hover, setHover] = useState(false);
   const pathname = usePathname();
   return (

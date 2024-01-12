@@ -1,6 +1,6 @@
 import { Header } from "@/app/ui/header";
-import { blocks } from './data';
-import { Block } from '@/app/ui/qna/block';
+import { blocks } from "./data";
+import { Block } from "@/app/ui/qna/block";
 
 export default async function Page() {
   return (

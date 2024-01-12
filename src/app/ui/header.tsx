@@ -3,7 +3,7 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { useState } from "react";
-import Link from 'next/link';
+import Link from "next/link";
 
 export const Header = ({ transparent }: { transparent: Boolean }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
