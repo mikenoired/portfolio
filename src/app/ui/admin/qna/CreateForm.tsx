@@ -1,6 +1,6 @@
 import { newQNA } from '@/app/lib/actions';
 
-export const BlockForm = () => {
+export const CreateForm = () => {
   return (
     <div className='mt-5'>
       <h1 className='text-2xl font-bold mb-3'>Add new Q&A block</h1>
