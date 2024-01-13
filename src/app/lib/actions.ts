@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/app/lib/utils";
+import prisma, { loadImage } from "@/app/lib/utils";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -86,23 +86,50 @@ const WorksType = z.object({
 const newWorkCatData = WorksType.omit({ images: true });
 
 export async function newWorkCat(data: FormData) {
-  const image = data.get("thumbnail") as File;
-  const arrayBuffer = await image.arrayBuffer();
-  const buffer = new Uint8Array(arrayBuffer);
-
-  const filename = `${Date.now()}-${image.name}`;
-  const uploadDir = `./public/upload/${filename}`;
-
-  writeFile(uploadDir, buffer);
+  const loadedImage = await loadImage(data.get("thumbnail"));
 
   const createCat = newWorkCatData.parse({
     title: data.get("title"),
     url: data.get("url"),
-    thumbnail: filename,
+    thumbnail: loadedImage.filename,
   });
 
   const action = await prisma.work.create({
     data: createCat,
+  });
+
+  revalidatePath("/admin/works");
+  redirect("/admin/works");
+}
+
+export async function fetchWorkCat(url: string) {
+  const data = await prisma.work.findUnique({
+    where: {
+      url,
+    },
+  });
+
+  return data;
+}
+
+export async function updateWorkCat(url: string, data: FormData) {
+  const loadedImage = await loadImage(data.get("thumbnail"));
+
+  const editCat = newWorkCatData.parse({
+    title: data.get("title"),
+    url: data.get("url"),
+    thumbnail: loadedImage.filename,
+  });
+
+  const action = await prisma.work.update({
+    where: {
+      url,
+    },
+    data: {
+      title: editCat.title,
+      url: editCat.url,
+      thumbnail: editCat.thumbnail,
+    },
   });
 
   revalidatePath("/admin/works");

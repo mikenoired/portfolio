@@ -8,7 +8,7 @@ export const Header = ({
   thumb: string | undefined;
 }) => {
   return (
-    <div className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden mb-5'>
+    <div className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full'>
       <div className='absolute px-8 text-[64px] font-bold h-full z-[1]'>
         {title}
       </div>

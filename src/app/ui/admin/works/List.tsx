@@ -8,7 +8,15 @@ export default async function List() {
     <div className='md:w-[700px] w-full px-4'>
       {works.length !== 0 ? (
         works.map((block, index) => (
-          <Header key={index} title={block.title} thumb={block.thumbnail} />
+          <div key={index} className='relative flex items-center mb-5'>
+            <Link
+              href={`works/${block.url}/edit`}
+              className='absolute z-[2] right-[20px] text-xl font-semibold'
+            >
+              Edit
+            </Link>
+            <Header title={block.title} thumb={block.thumbnail} />
+          </div>
         ))
       ) : (
         <div className='text-center text-2xl font-bold py-5'>

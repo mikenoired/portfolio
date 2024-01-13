@@ -1,20 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { newWorkCat } from "@/app/lib/actions";
+import { updateWorkCat } from "@/app/lib/actions";
+import { WorkCat } from "@/app/lib/definitions";
+import Image from "next/image";
 
-export const CreateForm = () => {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [preview, setPreview] = useState<string>();
+export const EditForm = ({ data }: { data: WorkCat }) => {
+  const editWorkCat = updateWorkCat.bind(null, data.url);
+  const [title, setTitle] = useState(data.title);
+  const [url, setUrl] = useState(data.url);
+  const [preview, setPreview] = useState(`/upload/${data.thumbnail}`);
 
   return (
     <div className='flex'>
       <div>
-        <h1 className='text-2xl font-bold mb-3'>Add new work category</h1>
+        <h1 className='text-2xl font-bold mb-3'>Edit work category</h1>
         <form
           className='p-4 border flex flex-col w-[400px]'
-          action={newWorkCat}
+          action={editWorkCat}
         >
           <div className='flex flex-col'>
             <label className='text-xl font-semibold mb-3'>Title</label>
@@ -57,17 +60,17 @@ export const CreateForm = () => {
               autoFocus
             />
           </div>
-          <input type='submit' value='Save' />
+          <input type='submit' value='Update' />
         </form>
       </div>
       <div className='w-[700px] ml-6'>
         <h1>Preview</h1>
-        <div
-          className='h-[90px] overflow-hidden w-full relative bg-cover bg-center bg-no-repeat'
-          style={{ backgroundImage: preview ? `url(${preview})` : "none" }}
-        >
-          <div className='px-8 text-[64px] font-bold h-full z-1'>{title}</div>
+        <div className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full'>
+          <div className='absolute px-8 text-[64px] font-bold h-full z-[1]'>
+            {title}
+          </div>
           <div className='bg-black absolute opacity-15 w-full h-[88px]'></div>
+          <Image src={preview} alt='thumb' fill objectFit='cover' />
         </div>
       </div>
     </div>
