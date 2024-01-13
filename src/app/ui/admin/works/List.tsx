@@ -1,5 +1,6 @@
 import prisma from "@/app/lib/utils";
 import Link from "next/link";
+import { Header } from "@/app/ui/works/Header";
 
 export default async function List() {
   const works = await prisma.work.findMany();
@@ -7,18 +8,7 @@ export default async function List() {
     <div className='md:w-[700px] w-full px-4'>
       {works.length !== 0 ? (
         works.map((block, index) => (
-          <div key={index} className='flex p-5 border justify-between mb-5'>
-            <div className='max-w-fit'>{block.title}</div>
-            <div className='flex'>
-              {/* <DeleteQNA id={block.id} />
-              <Link
-                href={`qna/${block.id}/edit`}
-                className='pl-4 cursor-pointer'
-              >
-                Edit
-              </Link> */}
-            </div>
-          </div>
+          <Header key={index} title={block.title} thumb={block.thumbnail} />
         ))
       ) : (
         <div className='text-center text-2xl font-bold py-5'>
