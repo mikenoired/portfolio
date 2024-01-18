@@ -1,9 +1,11 @@
 import List from "@/app/ui/admin/qna/List";
+import { fetchQNA } from "@/app/lib/actions";
 
 export default async function Page() {
+  const qnas = await fetchQNA();
   return (
     <main className='flex justify-center'>
-      <List />
+      <List qnas={qnas} />
     </main>
   );
 }

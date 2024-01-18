@@ -1,9 +1,8 @@
-import prisma from "@/app/lib/utils";
 import Link from "next/link";
 import { Header } from "@/app/ui/works/Header";
+import { WorkCat } from "@/app/lib/definitions";
 
-export default async function List() {
-  const works = await prisma.work.findMany();
+export default async function List({ works }: { works: WorkCat[] }) {
   return (
     <div className='md:w-[700px] w-full px-4'>
       {works.length !== 0 ? (

@@ -27,14 +27,20 @@ export const CreateForm = () => {
           <div className='flex flex-col mt-4'>
             <label className='text-xl font-semibold mb-3'>Answer</label>
             <textarea
-              className='border bg-black p-3'
+              className='border bg-black p-3 min-h-[200px]'
               name='content'
               placeholder='Bleh'
               onChange={(e) => setContent(e.target.value)}
               value={content}
             />
           </div>
-          <input type='submit' value='Upload' />
+          <button
+            className='w-full mt-5 h-10 bg-white text-black'
+            type='submit'
+            value='Upload'
+          >
+            Upload
+          </button>
         </form>
       </div>
       <div className='w-[500px]'>

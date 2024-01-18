@@ -72,6 +72,12 @@ export async function fetchQNAById(id: number) {
   return data;
 }
 
+export async function fetchQNA() {
+  noStore();
+  const data = await prisma.answerBlock.findMany();
+  return data;
+}
+
 const WorksType = z.object({
   title: z.string(),
   url: z.string(),
@@ -106,6 +112,12 @@ export async function fetchWorkCat(url: string) {
     },
   });
 
+  return data;
+}
+
+export async function fetchWorks() {
+  noStore();
+  const data = await prisma.work.findMany();
   return data;
 }
 

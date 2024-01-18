@@ -1,9 +1,8 @@
-import prisma from "@/app/lib/utils";
 import Link from "next/link";
-import { deleteQNAById } from "@/app/lib/actions";
+import { deleteQNAById, fetchQNA } from "@/app/lib/actions";
+import { AnswerBlock } from "@prisma/client";
 
-export default async function List() {
-  const qnas = await prisma.answerBlock.findMany();
+export default async function List({ qnas }: { qnas: AnswerBlock[] }) {
   return (
     <div className='md:w-[700px] w-full px-4'>
       {qnas.length !== 0 ? (

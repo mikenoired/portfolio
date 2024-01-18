@@ -41,7 +41,12 @@ export default function EditForm({
               value={content}
             />
           </div>
-          <input type='submit' value='Upload' />
+          <button
+            className='w-full mt-5 h-10 bg-white text-black'
+            type='submit'
+          >
+            Update
+          </button>
         </form>
       </div>
       <div className='w-[500px]'>
