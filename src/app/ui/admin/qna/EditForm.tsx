@@ -1,7 +1,7 @@
 "use client";
 
 import { editQNA } from "@/app/lib/actions";
-import { Image, QNAForm } from "@/app/lib/definitions";
+import { QNAForm } from "@/app/lib/definitions";
 import Markdown from "react-markdown";
 import { useState } from "react";
 

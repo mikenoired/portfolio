@@ -37,7 +37,7 @@ export const EditForm = ({ data }: { data: WorkCat }) => {
               value={JSON.stringify({ data: images })}
             />
             <div className='flex flex-col'>
-              <label className='text-xl font-semibold mb-3'>Title</label>
+              <label className='text-xl font-medium mb-3'>Title</label>
               <input
                 className='border bg-black p-3'
                 type='text'
@@ -48,20 +48,18 @@ export const EditForm = ({ data }: { data: WorkCat }) => {
               />
             </div>
             <div className='flex flex-col mt-4'>
-              <label className='text-xl font-semibold mb-3'>
-                Custom address
-              </label>
+              <label className='text-xl font-medium mb-3'>Page tag</label>
               <input
                 className='border bg-black p-3'
                 type='text'
                 name='url'
-                placeholder='Example: "print" eqals /works/print'
+                placeholder='Write tag without slash'
                 onChange={(e) => setUrl(e.target.value)}
                 value={url}
               />
             </div>
             <div className='flex flex-col mt-4'>
-              <label className='text-xl font-semibold mb-3'>Thumbnail</label>
+              <label className='text-xl font-medium mb-3'>Thumbnail</label>
               <input
                 className='border bg-black p-3'
                 type='file'
@@ -78,23 +76,31 @@ export const EditForm = ({ data }: { data: WorkCat }) => {
               />
             </div>
             <button
-              type='button'
-              className='w-full h-10 bg-white text-black'
-              onClick={() => setToggleManager(!toggleManager)}
+              className='w-full mt-5 h-10 bg-white text-black'
+              type='submit'
             >
-              Open image manager
+              Update
             </button>
-            <input type='submit' value='Update' />
           </form>
         </div>
         <div className='w-[700px] ml-6'>
-          <h1>Preview</h1>
-          <div className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full'>
+          <h1 className='text-2xl font-bold mb-3'>Preview</h1>
+          <div
+            className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full'
+            style={{ backgroundImage: preview ? `url(${preview})` : "none" }}
+          >
             <div className='absolute px-8 text-[64px] font-bold h-full z-[1]'>
               {title}
             </div>
             <div className='bg-black absolute opacity-15 w-full h-[88px]'></div>
           </div>
+          <button
+            type='button'
+            className='w-full mt-5 h-10 bg-white text-black'
+            onClick={() => setToggleManager(!toggleManager)}
+          >
+            Change gallery
+          </button>
         </div>
       </div>
       <div className='masonry-xl mt-8'>

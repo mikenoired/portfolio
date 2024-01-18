@@ -1,7 +1,6 @@
-import clsx from "clsx";
 import Sidebar from "./Sidebar";
 import Grid from "./Grid";
-import { ManagerProvider, useManagerContext } from "./ManagerContext";
+import { ManagerProvider } from "./ManagerContext";
 
 export default function ImageManager({
   active,
