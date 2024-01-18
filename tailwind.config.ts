@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -17,6 +17,9 @@ const config: Config = {
     colors: {
       white: "#ebebeb",
       black: "#101010",
+      green: "#0ECC88",
+      orange: "#EDAE0D",
+      red: "#ED0D35",
     },
     spacing: {
       "1": "1px",
@@ -35,4 +38,4 @@ const config: Config = {
   },
   plugins: [require("@tailwindcss/typography")],
 };
-export default config
+export default config;

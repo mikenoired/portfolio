@@ -6,7 +6,7 @@ export default async function Page({ params }: { params: { url: string } }) {
   const data = (await fetchWorkCat(params.url)) as WorkCat;
 
   return (
-    <main className='flex justify-center'>
+    <main className='flex flex-col items-center'>
       {data && <EditForm data={data} />}
     </main>
   );

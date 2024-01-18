@@ -1,17 +1,21 @@
 -- CreateTable
-CREATE TABLE "WorkImage" (
+CREATE TABLE "Image" (
     "id" SERIAL NOT NULL,
     "url" TEXT NOT NULL,
     "caption" TEXT NOT NULL,
+    "size" TEXT NOT NULL,
+    "type" TEXT NOT NULL,
+    "lastModified" TEXT NOT NULL,
 
-    CONSTRAINT "WorkImage_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Image_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Work" (
     "title" TEXT NOT NULL,
     "url" TEXT NOT NULL,
-    "thumbnail" TEXT NOT NULL
+    "thumbnail" TEXT NOT NULL,
+    "images" TEXT[]
 );
 
 -- CreateTable
@@ -24,13 +28,13 @@ CREATE TABLE "AnswerBlock" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "WorkImage_id_key" ON "WorkImage"("id");
+CREATE UNIQUE INDEX "Image_id_key" ON "Image"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Image_url_key" ON "Image"("url");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Work_url_key" ON "Work"("url");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "AnswerBlock_id_key" ON "AnswerBlock"("id");
-
--- AddForeignKey
-ALTER TABLE "WorkImage" ADD CONSTRAINT "WorkImage_url_fkey" FOREIGN KEY ("url") REFERENCES "Work"("url") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -6,19 +6,19 @@ import { useRouter } from "next/navigation";
 const routes = [
   {
     title: "Q&A",
-    link: "admin/qna",
+    link: "/admin/qna",
   },
   {
     title: "Works",
-    link: "admin/works",
+    link: "/admin/works",
   },
   {
     title: "About",
-    link: "admin/about",
+    link: "/admin/about",
   },
   {
     title: "Settings",
-    link: "admin/settings",
+    link: "/admin/settings",
   },
 ];
 

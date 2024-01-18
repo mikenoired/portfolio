@@ -7,22 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model WorkImage {
-  id       Int    @id @unique @default(autoincrement())
-  url      String
-  caption  String
-  workPage Work   @relation(fields: [url], references: [url])
+model Image {
+  id           Int    @id @unique @default(autoincrement())
+  url          String @unique
+  caption      String
+  size         String
+  type         String
+  lastModified String
 }
 
 model Work {
   title     String
-  url       String      @unique
+  url       String   @unique
   thumbnail String
-  images    WorkImage[]
+  images    String[]
 }
 
 model AnswerBlock {
-  id      Int             @id @unique @default(autoincrement())
+  id      Int    @id @unique @default(autoincrement())
   title   String
   content String
 }
