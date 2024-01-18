@@ -57,7 +57,12 @@ export const CreateForm = () => {
               autoFocus
             />
           </div>
-          <input type='submit' value='Save' />
+          <button
+            className='w-full mt-5 h-10 bg-white text-black'
+            type='submit'
+          >
+            Upload
+          </button>
         </form>
       </div>
       <div className='w-[700px] ml-6'>

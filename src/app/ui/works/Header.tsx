@@ -1,14 +1,14 @@
 import Image from "next/image";
 
-export const Header = ({
+export function Header({
   title,
   thumb,
 }: {
   title: string;
   thumb: string | undefined;
-}) => {
+}) {
   return (
-    <div className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full'>
+    <div className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full border-b'>
       <div className='absolute px-8 text-[64px] font-bold h-full z-[1]'>
         {title}
       </div>
@@ -21,4 +21,4 @@ export const Header = ({
       />
     </div>
   );
-};
+}
