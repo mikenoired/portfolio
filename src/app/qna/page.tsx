@@ -1,8 +1,10 @@
 import { Header } from "@/app/ui/header";
 import { blocks } from "./data";
 import { Block } from "@/app/ui/qna/block";
+import { fetchQNA } from "../lib/actions";
 
 export default async function Page() {
+  const blocks = await fetchQNA();
   return (
     <>
       <Header transparent={false} />

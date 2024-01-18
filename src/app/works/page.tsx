@@ -1,8 +1,9 @@
 import { Header } from "@/app/ui/header";
-import { data } from "./data";
 import { NavButton } from "@/app/ui/works/nav-button";
+import { fetchWorks } from "../lib/actions";
 
 export default async function Page() {
+  const data = await fetchWorks();
   return (
     <>
       <Header transparent={false} />
