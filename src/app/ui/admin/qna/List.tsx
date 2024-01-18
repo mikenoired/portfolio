@@ -1,6 +1,6 @@
 import prisma from "@/app/lib/utils";
 import Link from "next/link";
-import { DeleteQNA } from "../buttons";
+import { deleteQNAById } from "@/app/lib/actions";
 
 export default async function List() {
   const qnas = await prisma.answerBlock.findMany();
@@ -11,7 +11,12 @@ export default async function List() {
           <div key={index} className='flex p-5 border justify-between mb-5'>
             <div className='max-w-fit'>{block.title}</div>
             <div className='flex'>
-              <DeleteQNA id={block.id} />
+              <div
+                className='pl-4 cursor-pointer'
+                onClick={() => deleteQNAById(block.id)}
+              >
+                Delete
+              </div>
               <Link
                 href={`qna/${block.id}/edit`}
                 className='pl-4 cursor-pointer'
