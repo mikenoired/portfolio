@@ -1,6 +1,6 @@
-import Sidebar from "./Sidebar";
 import Grid from "./Grid";
 import { ManagerProvider } from "./ManagerContext";
+import Sidebar from "./Sidebar";
 
 export default function ImageManager({
   active,

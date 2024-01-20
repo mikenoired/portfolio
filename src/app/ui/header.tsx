@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import clsx from "clsx";
-import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export const Header = ({ transparent }: { transparent: Boolean }) => {
   const [toggleMenu, setToggleMenu] = useState(false);

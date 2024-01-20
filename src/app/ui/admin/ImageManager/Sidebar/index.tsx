@@ -1,7 +1,7 @@
 import { useManagerContext } from "../ManagerContext";
-import ImageData from "./ImageData";
 import Caption from "./Caption";
 import ExplorerButton from "./ExplorerButton";
+import ImageData from "./ImageData";
 import SaveButton from "./SaveButton";
 
 export default function Sidebar({

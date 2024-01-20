@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Header } from "@/app/ui/works/Header";
 import { WorkCat } from "@/app/lib/definitions";
+import { Header } from "@/app/ui/works/Header";
+import Link from "next/link";
 
 export default async function List({ works }: { works: WorkCat[] }) {
   return (

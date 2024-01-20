@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { deleteQNAById, fetchQNA } from "@/app/lib/actions";
+import { deleteQNAById } from "@/app/lib/actions";
 import { AnswerBlock } from "@prisma/client";
+import Link from "next/link";
 
 export default async function List({ qnas }: { qnas: AnswerBlock[] }) {
   return (

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useManagerContext } from "../ManagerContext";
 
 export default function ExplorerButton() {

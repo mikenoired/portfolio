@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { updateWorkCat } from "@/app/lib/actions";
 import { WorkCat } from "@/app/lib/definitions";
 import ImageManager from "@/app/ui/admin/ImageManager";
 import Image from "next/image";
+import { useState } from "react";
 
 export const EditForm = ({ data }: { data: WorkCat }) => {
   const editWorkCat = updateWorkCat.bind(null, data.url);

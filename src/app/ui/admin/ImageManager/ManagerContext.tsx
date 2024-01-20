@@ -1,5 +1,5 @@
+import { ContextType, ImageType } from "@/app/lib/definitions";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
-import { ImageType, ContextType } from "@/app/lib/definitions";
 
 export const ManagerContext = createContext<ContextType | undefined>(undefined);
 

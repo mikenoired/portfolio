@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
 import { WorkCat } from "@/app/lib/definitions";
+import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Sidebar = ({ data }: { data: WorkCat[] }) => {
   const pathname = usePathname();

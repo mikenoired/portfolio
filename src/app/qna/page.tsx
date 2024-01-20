@@ -1,5 +1,4 @@
 import { Header } from "@/app/ui/header";
-import { blocks } from "./data";
 import { Block } from "@/app/ui/qna/block";
 import { fetchQNA } from "../lib/actions";
 

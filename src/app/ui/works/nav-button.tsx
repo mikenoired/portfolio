@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export const NavButton = ({
   title,

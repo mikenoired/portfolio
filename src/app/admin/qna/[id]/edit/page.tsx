@@ -1,6 +1,6 @@
-import EditForm from "@/app/ui/admin/qna/EditForm";
 import { fetchQNAById } from "@/app/lib/actions";
 import { QNAForm } from "@/app/lib/definitions";
+import EditForm from "@/app/ui/admin/qna/EditForm";
 
 export default async function Page({ params }: { params: { id: number } }) {
   const block = await fetchQNAById(params.id);
