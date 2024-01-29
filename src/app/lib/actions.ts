@@ -121,26 +121,39 @@ export async function fetchWorks() {
 }
 
 export async function updateWorkCat(url: string, data: FormData) {
-  const loadedImage = await loadImage(data.get("thumbnail"));
+  const loadedThumb = await loadImage(data.get("thumbnail"));
 
   const editCat = WorksType.parse({
     title: data.get("title"),
     url: data.get("url"),
-    thumbnail: loadedImage.url,
+    thumbnail: loadedThumb.url,
     images: JSON.parse(data.get("images") as string).data,
   });
 
-  const action = await prisma.work.update({
-    where: {
-      url,
-    },
-    data: {
-      title: editCat.title,
-      url: editCat.url,
-      thumbnail: editCat.thumbnail,
-      images: editCat.images,
-    },
-  });
+  if (loadedThumb.url !== "") {
+    const action = await prisma.work.update({
+      where: {
+        url,
+      },
+      data: {
+        title: editCat.title,
+        url: editCat.url,
+        images: editCat.images,
+      },
+    });
+  } else {
+    const action = await prisma.work.update({
+      where: {
+        url,
+      },
+      data: {
+        title: editCat.title,
+        url: editCat.url,
+        thumbnail: editCat.thumbnail,
+        images: editCat.images,
+      },
+    });
+  }
 
   revalidatePath("/admin/works");
   redirect("/admin/works");
