@@ -174,6 +174,15 @@ export async function deleteWorkByURL(data: FormData) {
 
 export async function loadImage(imageValue: FormDataEntryValue | null) {
   const image = imageValue as File;
+  if (image.size == 0) {
+    return {
+      url: "",
+      caption: "",
+      size: 0,
+      lastModified: 0,
+      type: "undefined",
+    };
+  }
   const arrayBuffer = await image.arrayBuffer();
   const buffer = new Uint8Array(arrayBuffer);
 
@@ -190,7 +199,7 @@ export async function loadImage(imageValue: FormDataEntryValue | null) {
     type: image.type,
   };
 
-  const putToDB = await prisma.image.create({ data });
+  const res = await prisma.image.create({ data });
 
   return data;
 }
