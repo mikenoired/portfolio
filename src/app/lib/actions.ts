@@ -131,18 +131,7 @@ export async function updateWorkCat(url: string, data: FormData) {
   });
 
   if (loadedThumb.url !== "") {
-    const action = await prisma.work.update({
-      where: {
-        url,
-      },
-      data: {
-        title: editCat.title,
-        url: editCat.url,
-        images: editCat.images,
-      },
-    });
-  } else {
-    const action = await prisma.work.update({
+    const res = await prisma.work.update({
       where: {
         url,
       },
@@ -150,6 +139,17 @@ export async function updateWorkCat(url: string, data: FormData) {
         title: editCat.title,
         url: editCat.url,
         thumbnail: editCat.thumbnail,
+        images: editCat.images,
+      },
+    });
+  } else {
+    const res = await prisma.work.update({
+      where: {
+        url,
+      },
+      data: {
+        title: editCat.title,
+        url: editCat.url,
         images: editCat.images,
       },
     });
@@ -174,34 +174,29 @@ export async function deleteWorkByURL(data: FormData) {
 
 export async function loadImage(imageValue: FormDataEntryValue | null) {
   const image = imageValue as File;
-  if (image.size == 0) {
-    return {
-      url: "",
+  if (image.size !== 0) {
+    const arrayBuffer = await image.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+
+    const filename = `${Date.now()}-${image.name}`;
+    const uploadDir = `./public/upload/${filename}`;
+
+    writeFile(uploadDir, buffer);
+
+    const data = {
+      url: filename,
       caption: "",
-      size: 0,
-      lastModified: 0,
-      type: "undefined",
+      size: String(image.size),
+      lastModified: String(image.lastModified),
+      type: image.type,
     };
+
+    const res = await prisma.image.create({ data });
+
+    return data;
+  } else {
+    return { url: "" };
   }
-  const arrayBuffer = await image.arrayBuffer();
-  const buffer = new Uint8Array(arrayBuffer);
-
-  const filename = `${Date.now()}-${image.name}`;
-  const uploadDir = `./public/upload/${filename}`;
-
-  writeFile(uploadDir, buffer);
-
-  const data = {
-    url: filename,
-    caption: "",
-    size: String(image.size),
-    lastModified: String(image.lastModified),
-    type: image.type,
-  };
-
-  const res = await prisma.image.create({ data });
-
-  return data;
 }
 
 export async function fetchImages() {
@@ -217,6 +212,5 @@ export async function updateCaption(url: string, caption: string) {
       caption,
     },
   });
-  console.log("DONE!");
   return res;
 }
