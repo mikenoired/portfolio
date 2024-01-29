@@ -11,7 +11,7 @@ const prisma = globalThis.prisma ?? prismaClientSingleton();
 export default prisma;
 if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
 
-export const useOutsideClick = (callback: () => void) => {
+export function useOutsideClick(callback: () => void) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,9 +25,9 @@ export const useOutsideClick = (callback: () => void) => {
   }, [callback]);
 
   return ref;
-};
+}
 
-export const formatBytes = (bytes: number, decimals = 2) => {
+export function formatBytes(bytes: number, decimals = 2) {
   if (!+bytes) return "0 B";
 
   const k = 1024;
@@ -37,9 +37,9 @@ export const formatBytes = (bytes: number, decimals = 2) => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-};
+}
 
-export const formatDate = (upd: string) => {
+export function formatDate(upd: string) {
   const date = new Date(Number(upd));
   const format = {
     hours: date.getUTCHours(),
@@ -50,4 +50,4 @@ export const formatDate = (upd: string) => {
     day: date.getUTCDay(),
   };
   return format;
-};
+}

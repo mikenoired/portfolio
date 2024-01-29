@@ -3,7 +3,7 @@ import { PropsWithChildren, createContext, useContext, useState } from "react";
 
 export const ManagerContext = createContext<ContextType | undefined>(undefined);
 
-export const ManagerProvider = ({ children }: PropsWithChildren<{}>) => {
+export function ManagerProvider({ children }: PropsWithChildren<{}>) {
   const [managerActive, setManagerActive] =
     useState<ContextType["managerActive"]>(false);
   const [loadedImages, setLoadedImages] = useState<ContextType["loadedImages"]>(
@@ -47,9 +47,9 @@ export const ManagerProvider = ({ children }: PropsWithChildren<{}>) => {
       {children}
     </ManagerContext.Provider>
   );
-};
+}
 
-export const useManagerContext = () => {
+export function useManagerContext() {
   const context = useContext(ManagerContext);
   if (!context) {
     throw new Error(
@@ -57,4 +57,4 @@ export const useManagerContext = () => {
     );
   }
   return context;
-};
+}

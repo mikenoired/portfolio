@@ -86,6 +86,33 @@ const WorksType = z.object({
 
 const newWorkCatData = WorksType.omit({ images: true });
 
+export async function loadImage(imageValue: FormDataEntryValue | null) {
+  const image = imageValue as File;
+  if (image.size !== 0) {
+    const arrayBuffer = await image.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+
+    const filename = `${Date.now()}-${image.name}`;
+    const uploadDir = `./public/upload/${filename}`;
+
+    writeFile(uploadDir, buffer);
+
+    const data = {
+      url: filename,
+      caption: "",
+      size: String(image.size),
+      lastModified: String(image.lastModified),
+      type: image.type,
+    };
+
+    const res = await prisma.image.create({ data });
+
+    return data;
+  } else {
+    return { url: "" };
+  }
+}
+
 export async function newWorkCat(data: FormData) {
   const loadedImage = await loadImage(data.get("thumbnail"));
 
@@ -170,33 +197,6 @@ export async function deleteWorkByURL(data: FormData) {
 
   revalidatePath("/admin/works");
   redirect("/admin/works");
-}
-
-export async function loadImage(imageValue: FormDataEntryValue | null) {
-  const image = imageValue as File;
-  if (image.size !== 0) {
-    const arrayBuffer = await image.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
-
-    const filename = `${Date.now()}-${image.name}`;
-    const uploadDir = `./public/upload/${filename}`;
-
-    writeFile(uploadDir, buffer);
-
-    const data = {
-      url: filename,
-      caption: "",
-      size: String(image.size),
-      lastModified: String(image.lastModified),
-      type: image.type,
-    };
-
-    const res = await prisma.image.create({ data });
-
-    return data;
-  } else {
-    return { url: "" };
-  }
 }
 
 export async function fetchImages() {

@@ -4,7 +4,7 @@ import { newQNA } from "@/app/lib/actions";
 import { useState } from "react";
 import Markdown from "react-markdown";
 
-export const CreateForm = () => {
+export function CreateForm() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   return (
@@ -56,4 +56,4 @@ export const CreateForm = () => {
       </div>
     </div>
   );
-};
+}

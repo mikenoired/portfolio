@@ -3,7 +3,7 @@
 import { newWorkCat } from "@/app/lib/actions";
 import { useState } from "react";
 
-export const CreateForm = () => {
+export function CreateForm() {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [preview, setPreview] = useState<string>();
@@ -77,4 +77,4 @@ export const CreateForm = () => {
       </div>
     </div>
   );
-};
+}

@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const Sidebar = ({ data }: { data: WorkCat[] }) => {
+export function Sidebar({ data }: { data: WorkCat[] }) {
   const pathname = usePathname();
   return (
     <div className='h-screen fixed md:block hidden w-[250px]'>
@@ -25,4 +25,4 @@ export const Sidebar = ({ data }: { data: WorkCat[] }) => {
       </div>
     </div>
   );
-};
+}

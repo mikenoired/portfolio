@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Icon from "./Icon";
 
-export const Header = ({ transparent }: { transparent: Boolean }) => {
+export function Header({ transparent }: { transparent: Boolean }) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
   return (
@@ -72,4 +72,4 @@ export const Header = ({ transparent }: { transparent: Boolean }) => {
       </div>
     </header>
   );
-};
+}

@@ -8,7 +8,7 @@ export default function Home() {
       <main>
         <div className='w-screen h-screen relative'>
           <Image
-            src='/video-blank.jpg'
+            src='/upload/video-blank.jpg'
             alt='Video preview'
             objectFit='cover'
             fill

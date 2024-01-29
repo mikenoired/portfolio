@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { DeleteModal } from "./DeleteModal";
 
-export const EditForm = ({ data }: { data: WorkCat }) => {
+export function EditForm({ data }: { data: WorkCat }) {
   const editWorkCat = updateWorkCat.bind(null, data.url);
   const [title, setTitle] = useState(data.title);
   const [url, setUrl] = useState(data.url);
@@ -127,4 +127,4 @@ export const EditForm = ({ data }: { data: WorkCat }) => {
       </div>
     </>
   );
-};
+}
