@@ -5,7 +5,13 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useManagerContext } from "../ManagerContext";
 
-export default function Grid({ initSelected }: { initSelected: string[] }) {
+export default function Grid({
+  initSelected,
+  multiple,
+}: {
+  initSelected: string[];
+  multiple: boolean;
+}) {
   const { loadedImages, setLoadedImages } = useManagerContext();
   const { currentModify, setCurrentModify } = useManagerContext();
   const { selectedImages, setSelectedImages } = useManagerContext();
@@ -32,7 +38,9 @@ export default function Grid({ initSelected }: { initSelected: string[] }) {
     if (currentModify.url == image.url) {
       setCurrentModify({} as ImageType);
     } else {
-      setSelectedImages([...selectedImages, image.url]);
+      multiple
+        ? setSelectedImages([...selectedImages, image.url])
+        : setSelectedImages([image.url]);
       setCurrentModify(findObjectByStr(loadedImages, image.url) as ImageType);
     }
   };
@@ -44,11 +52,11 @@ export default function Grid({ initSelected }: { initSelected: string[] }) {
 
   return (
     <div className='w-full h-full p-6 overflow-y-scroll'>
-      {loadedImages.length == 0 && "There's no loadedImages in website :/"}
+      {loadedImages.length == 0 && "There's no loaded images in website :/"}
       <div className='masonry-sm sm:masonry-md md:masonry-xl w-full'>
-        {loadedImages.map((image, index) => (
+        {loadedImages.map((image) => (
           <div
-            key={index}
+            key={image.id}
             className={clsx(
               selectedImages.indexOf(image.url) > -1 && "border-2 border-green",
               image.url == currentModify?.url && "border-orange",

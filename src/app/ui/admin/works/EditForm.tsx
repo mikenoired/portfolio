@@ -23,6 +23,7 @@ export function EditForm({ data }: { data: WorkCat }) {
           saveHandler={setImages}
           initSelected={images}
           active={setToggleManager}
+          multiple={true}
         />
       )}
       {toggleDelete && <DeleteModal toggleModal={setToggleDelete} url={url} />}
