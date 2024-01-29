@@ -1,4 +1,5 @@
 import { deleteWorkByURL } from "@/app/lib/actions";
+import Icon from "@/app/ui/Icon";
 import { useState } from "react";
 
 export function DeleteModal({
@@ -19,14 +20,7 @@ export function DeleteModal({
           onClick={() => toggleModal(false)}
           className='w-6 h-6 absolute right-[15px] top-[15px] cursor-pointer'
         >
-          <svg viewBox='0 0 22 22' xmlns='http://www.w3.org/2000/svg'>
-            <path
-              fill-rule='evenodd'
-              clip-rule='evenodd'
-              d='M11.2929 12.4142L20.5858 21.7071L22 20.2929L12.7071 11L22 1.70712L20.5858 0.292908L11.2929 9.5858L2 0.292908L0.585785 1.70712L9.87868 11L0.585785 20.2929L2 21.7071L11.2929 12.4142Z'
-              fill='#000000'
-            />
-          </svg>
+          <Icon type='close' dark={true} width={20} height={20} />
         </div>
         <span className='block font-semibold text-lg'>
           Do you really want to delete this work category?

@@ -1,7 +1,8 @@
-import Image from "next/image";
-import clsx from "clsx";
-import { useEffect } from "react";
 import { ImageType } from "@/app/lib/definitions";
+import Icon from "@/app/ui/Icon";
+import clsx from "clsx";
+import Image from "next/image";
+import { useEffect } from "react";
 import { useManagerContext } from "../ManagerContext";
 
 export default function Grid({ initSelected }: { initSelected: string[] }) {
@@ -62,7 +63,7 @@ export default function Grid({ initSelected }: { initSelected: string[] }) {
                 )}
                 onClick={() => removeSelection(image)}
               >
-                <Image src='/done.svg' width={20} height={20} alt='' />
+                <Icon type='done' dark={true} width={20} height={20} />
               </div>
             )}
             <Image

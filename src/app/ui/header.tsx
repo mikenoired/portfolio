@@ -1,9 +1,9 @@
 "use client";
 
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Icon from "./Icon";
 
 export const Header = ({ transparent }: { transparent: Boolean }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -36,15 +36,9 @@ export const Header = ({ transparent }: { transparent: Boolean }) => {
           }}
         >
           {!toggleMenu ? (
-            <Image priority src='/menu.svg' alt='Menu' width={20} height={20} />
+            <Icon type='menu' dark={false} width={20} height={20} />
           ) : (
-            <Image
-              priority
-              src='/close.svg'
-              alt='Close'
-              width={20}
-              height={20}
-            />
+            <Icon type='close' dark={false} width={20} height={20} />
           )}
         </div>
       </div>
@@ -55,13 +49,7 @@ export const Header = ({ transparent }: { transparent: Boolean }) => {
             onClick={(e) => setToggleCat(!toggleCat)}
           >
             <div className='text-white text-xl font-medium'>WORKS</div>
-            <Image
-              src='/arrow-down.svg'
-              alt='Drop down'
-              width={12}
-              height={10}
-              className={clsx(toggleCat && "rotate-180")}
-            />
+            <Icon type='arrowDown' dark={false} width={12} height={12} />
           </div>
           <div className='pl-5 text-white text-xl font-medium'>Q/A</div>
           <div className='pl-5 text-xl font-medium'>CONTACTS</div>
