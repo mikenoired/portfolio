@@ -28,3 +28,8 @@ model AnswerBlock {
   title   String
   content String
 }
+
+model SiteThumbnail {
+  id    Int    @id @unique @default(autoincrement())
+  media String
+}

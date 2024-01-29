@@ -36,3 +36,8 @@ export type ContextType = {
   setAddedImages: (file: File[]) => void;
   setManagerActive: (open: boolean) => void;
 };
+
+export type ThumbType = {
+  id: number;
+  media: string;
+};

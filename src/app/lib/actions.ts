@@ -214,3 +214,23 @@ export async function updateCaption(url: string, caption: string) {
   });
   return res;
 }
+
+export async function fetchThumb() {
+  noStore();
+  const res = prisma.siteThumbnail.findFirst();
+  return res;
+}
+
+export async function updateThumb(data: FormData) {
+  const thumb = data.get("url") as string;
+  const res = prisma.siteThumbnail.deleteMany().then(() =>
+    prisma.siteThumbnail.create({
+      data: {
+        media: thumb,
+      },
+    })
+  );
+
+  revalidatePath("/admin");
+  redirect("/admin");
+}
