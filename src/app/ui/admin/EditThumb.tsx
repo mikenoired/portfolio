@@ -33,7 +33,12 @@ export default function EditThumb({ thumb }: { thumb: ThumbType }) {
             className='w-full relative min-h-[300px] mb-5 cursor-pointer'
             onClick={() => setToggleManager(true)}
           >
-            <Image src={`/upload/${preview}`} fill objectFit='contain' alt='' />
+            <Image
+              src={`/upload/${preview}`}
+              fill
+              className='object-cover'
+              alt=''
+            />
           </div>
           <input type='text' hidden name='url' value={image[0]} />
           <button

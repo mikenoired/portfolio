@@ -17,7 +17,7 @@ export function Header({
         src={`/upload/${thumb as string}`}
         alt='thumb'
         fill
-        objectFit='cover'
+        className='object-cover'
       />
     </div>
   );
