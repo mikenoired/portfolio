@@ -5,6 +5,7 @@ import { WorkCat } from "@/app/lib/definitions";
 import ImageManager from "@/app/ui/admin/ImageManager";
 import Image from "next/image";
 import { useState } from "react";
+import { DeleteModal } from "./DeleteModal";
 
 export const EditForm = ({ data }: { data: WorkCat }) => {
   const editWorkCat = updateWorkCat.bind(null, data.url);
@@ -13,6 +14,7 @@ export const EditForm = ({ data }: { data: WorkCat }) => {
   const [preview, setPreview] = useState(`/upload/${data.thumbnail}`);
   const [images, setImages] = useState(data.images);
   const [toggleManager, setToggleManager] = useState(false);
+  const [toggleDelete, setToggleDelete] = useState(false);
 
   return (
     <>
@@ -23,6 +25,7 @@ export const EditForm = ({ data }: { data: WorkCat }) => {
           active={setToggleManager}
         />
       )}
+      {toggleDelete && <DeleteModal toggleModal={setToggleDelete} url={url} />}
       <div className='flex'>
         <div>
           <h1 className='text-2xl font-bold mb-3'>Edit work category</h1>
@@ -100,6 +103,13 @@ export const EditForm = ({ data }: { data: WorkCat }) => {
             onClick={() => setToggleManager(!toggleManager)}
           >
             Change gallery
+          </button>
+          <button
+            onClick={() => setToggleDelete(true)}
+            type='button'
+            className='w-full mt-5 h-10 bg-red text-black'
+          >
+            Delete category
           </button>
         </div>
       </div>

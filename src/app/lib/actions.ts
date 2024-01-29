@@ -159,6 +159,19 @@ export async function updateWorkCat(url: string, data: FormData) {
   redirect("/admin/works");
 }
 
+export async function deleteWorkByURL(data: FormData) {
+  const url = data.get("url") as string;
+
+  const res = await prisma.work.delete({
+    where: {
+      url,
+    },
+  });
+
+  revalidatePath("/admin/works");
+  redirect("/admin/works");
+}
+
 export async function loadImage(imageValue: FormDataEntryValue | null) {
   const image = imageValue as File;
   const arrayBuffer = await image.arrayBuffer();
