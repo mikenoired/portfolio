@@ -14,7 +14,6 @@ export default function EditThumb({ thumb }: { thumb: ThumbType }) {
   const saveHandler = (image: string[]) => {
     setImage(image);
     setPreview(image[0]);
-    console.log(preview);
   };
   return (
     <>
