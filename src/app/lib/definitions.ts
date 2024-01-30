@@ -43,6 +43,8 @@ export type ThumbType = {
 };
 
 export type SocLinksType = {
+  id: number;
+  personCardId: number;
   name: string;
   url: string;
 };

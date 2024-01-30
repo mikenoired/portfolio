@@ -39,18 +39,22 @@ model SocLink {
   name         String
   url          String
   PersonCard   PersonCard? @relation(fields: [personCardId], references: [id])
-  personCardId Int?
+  personCardId Int?        @default(1)
 }
 
 model PersonCard {
-  id      Int       @id @unique @default(autoincrement())
-  avatar  String
-  name    String
-  job     String
-  place   String
-  socials SocLink[]
+  id        Int         @id @unique @default(autoincrement())
+  avatar    String
+  name      String
+  job       String
+  place     String
+  socials   SocLink[]
+  AboutPage AboutPage[]
 }
 
 model AboutPage {
-  content String @unique
+  id       Int        @id @unique @default(autoincrement())
+  personId Int        @default(1)
+  person   PersonCard @relation(fields: [personId], references: [id])
+  content  String
 }
