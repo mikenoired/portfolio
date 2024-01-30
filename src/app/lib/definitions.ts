@@ -54,3 +54,8 @@ export type PersonType = {
   place: string;
   socials: SocLinksType[];
 };
+
+export type AboutType = {
+  person: PersonType;
+  content: string;
+};

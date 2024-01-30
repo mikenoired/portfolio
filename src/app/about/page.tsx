@@ -1,4 +1,5 @@
 import { PersonType } from "@/app/lib/definitions";
+import Content from "@/app/ui/about/Content";
 import Person from "@/app/ui/about/Person";
 import { Header } from "@/app/ui/header";
 
@@ -30,6 +31,7 @@ export default async function Page() {
       <main className='md:pt-12 pt-10'>
         <div className='md:p-8 p-4 w-full flex'>
           <Person data={personalData} />
+          <Content />
         </div>
       </main>
     </>
