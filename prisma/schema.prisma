@@ -33,3 +33,24 @@ model SiteThumbnail {
   id    Int    @id @unique @default(autoincrement())
   media String
 }
+
+model SocLink {
+  id           Int         @id @unique @default(autoincrement())
+  name         String
+  url          String
+  PersonCard   PersonCard? @relation(fields: [personCardId], references: [id])
+  personCardId Int?
+}
+
+model PersonCard {
+  id      Int       @id @unique @default(autoincrement())
+  avatar  String
+  name    String
+  job     String
+  place   String
+  socials SocLink[]
+}
+
+model AboutPage {
+  content String @unique
+}
