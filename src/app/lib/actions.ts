@@ -234,3 +234,15 @@ export async function updateThumb(data: FormData) {
   revalidatePath("/admin");
   redirect("/admin");
 }
+
+export async function fetchPersonCard() {
+  noStore();
+  const res = prisma.personCard.findFirst();
+  return res;
+}
+
+export async function fetchAboutContent() {
+  noStore();
+  const res = prisma.aboutPage.findFirst();
+  return res;
+}

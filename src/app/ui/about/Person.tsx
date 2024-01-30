@@ -10,23 +10,24 @@ export default function Person({ data }: { data: PersonType }) {
       <div className='text-2xl font-semibold mt-3'>{data.job}</div>
       <div className='text-xl font-semibold mt-3'>{data.place}</div>
       <div className='mt-6 flex flex-col'>
-        {data.socials.map((link, index) => (
-          <div key={index} className='mb-3'>
-            <Link
-              className='text-xl font-semibold relative pr-6'
-              href={link.url}
-            >
-              {link.name}
-              <Icon
-                className='absolute top-[4px] right-[0]'
-                type='link'
-                width={14}
-                height={14}
-                dark={false}
-              />
-            </Link>
-          </div>
-        ))}
+        {data.socials &&
+          data.socials.map((link, index) => (
+            <div key={index} className='mb-3'>
+              <Link
+                className='text-xl font-semibold relative pr-6'
+                href={link.url}
+              >
+                {link.name}
+                <Icon
+                  className='absolute top-[4px] right-[0]'
+                  type='link'
+                  width={14}
+                  height={14}
+                  dark={false}
+                />
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );

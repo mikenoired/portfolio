@@ -48,6 +48,7 @@ export type SocLinksType = {
 };
 
 export type PersonType = {
+  id: number;
   avatar: string;
   name: string;
   job: string;
