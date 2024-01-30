@@ -8,7 +8,16 @@ export default async function Page() {
     <main className='flex flex-col items-center mt-10'>
       <h1 className='text-4xl font-bold mb-4'>Admin panel</h1>
       <div className='grid-cols-2 grid w-full p-6'>
-        <EditThumb thumb={thumb} />
+        {thumb ? (
+          <EditThumb thumb={thumb} />
+        ) : (
+          <EditThumb
+            thumb={{
+              id: 1,
+              media: "placeholder.jpg",
+            }}
+          />
+        )}
       </div>
     </main>
   );
