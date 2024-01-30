@@ -59,6 +59,8 @@ export type PersonType = {
 };
 
 export type AboutType = {
+  id: number;
   person: PersonType;
+  personId: number;
   content: string;
 };
