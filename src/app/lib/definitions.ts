@@ -41,3 +41,16 @@ export type ThumbType = {
   id: number;
   media: string;
 };
+
+export type SocLinksType = {
+  name: string;
+  url: string;
+};
+
+export type PersonType = {
+  avatar: string;
+  name: string;
+  job: string;
+  place: string;
+  socials: SocLinksType[];
+};

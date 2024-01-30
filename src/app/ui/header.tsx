@@ -27,7 +27,9 @@ export function Header({ transparent }: { transparent: Boolean }) {
           <Link href='/admin' className='pl-5'>
             ADMIN
           </Link>
-          <div className='pl-5 cursor-pointer'>ABOUT</div>
+          <Link href='/about' className='pl-5'>
+            ABOUT
+          </Link>
         </nav>
         <div
           className='md:hidden absolute right-8'
