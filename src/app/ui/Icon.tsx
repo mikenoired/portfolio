@@ -7,16 +7,18 @@ export default function Icon({
   dark,
   width,
   height,
+  className,
 }: {
   type: string;
   dark: boolean;
   width: number;
   height: number;
+  className?: string;
 }) {
   const [iconTheme] = useState(dark ? "#101010" : "#ebebeb");
   return (
     <div
-      className='flex justify-center items-center'
+      className={`flex justify-center items-center ${className}`}
       style={{ width: `${width}px`, height: `${height}px` }}
     >
       {(() => {
@@ -69,6 +71,17 @@ export default function Icon({
               <svg viewBox='0 0 13 10' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   d='M6.96692 10L0.966918 1.04907e-06L12.9669 0L6.96692 10Z'
+                  fill={iconTheme}
+                />
+              </svg>
+            );
+          case "link":
+            return (
+              <svg viewBox='0 0 14 13' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M3.30963 0.0639649L12.3096 0.0639642C12.8619 0.0639638 13.3096 0.511679 13.3096 1.06396L13.3096 10.064C13.3096 10.6162 12.8619 11.064 12.3096 11.064C11.7573 11.064 11.3096 10.6162 11.3096 10.064L11.3096 3.47818L2.00015 12.7877L0.585938 11.3734L9.89542 2.06396L3.30963 2.06396C2.75734 2.06396 2.30963 1.61625 2.30963 1.06396C2.30963 0.51168 2.75734 0.0639646 3.30963 0.0639649Z'
                   fill={iconTheme}
                 />
               </svg>
