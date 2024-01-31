@@ -1,5 +1,6 @@
 "use client";
 
+import Icon from "@/app/ui/Icon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -28,15 +29,17 @@ export default function Header() {
     <header className='h-12 flex relative items-center justify-center border-b mb-8'>
       <div className='absolute left-[30px] flex'>
         <div
-          className='text-xl font-semibold cursor-pointer mr-4'
+          className='flex items-center cursor-pointer mr-4'
           onClick={() => router.back()}
-        >{`<- Back`}</div>
-        <div
-          className='text-xl font-semibold cursor-pointer'
-          onClick={() => router.push("/admin")}
         >
-          Dashboard
+          <Icon dark={false} width={22} height={22} type='back' />
         </div>
+      </div>
+      <div
+        className='text-2xl font-semibold pr-4 last:pl-[0px] cursor-pointer'
+        onClick={() => router.push("/admin")}
+      >
+        Dashboard
       </div>
       {routes.map((route, index) => (
         <Link
