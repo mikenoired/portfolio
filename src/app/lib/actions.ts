@@ -115,15 +115,13 @@ export async function loadImage(imageValue: FormDataEntryValue | null) {
 }
 
 export async function newWorkCat(data: FormData) {
-  const loadedImage = await loadImage(data.get("thumbnail"));
-
   const createCat = newWorkCatData.parse({
     title: data.get("title"),
     url: data.get("url"),
-    thumbnail: loadedImage.url,
+    thumbnail: data.get("thumbnail"),
   });
 
-  const action = await prisma.work.create({
+  const res = await prisma.work.create({
     data: createCat,
   });
 
@@ -149,39 +147,24 @@ export async function fetchWorks() {
 }
 
 export async function updateWorkCat(url: string, data: FormData) {
-  const loadedThumb = await loadImage(data.get("thumbnail"));
-
   const editCat = WorksType.parse({
     title: data.get("title"),
     url: data.get("url"),
-    thumbnail: loadedThumb.url,
+    thumbnail: data.get("thumbnail"),
     images: JSON.parse(data.get("images") as string).data,
   });
 
-  if (loadedThumb.url !== "") {
-    const res = await prisma.work.update({
-      where: {
-        url,
-      },
-      data: {
-        title: editCat.title,
-        url: editCat.url,
-        thumbnail: editCat.thumbnail,
-        images: editCat.images,
-      },
-    });
-  } else {
-    const res = await prisma.work.update({
-      where: {
-        url,
-      },
-      data: {
-        title: editCat.title,
-        url: editCat.url,
-        images: editCat.images,
-      },
-    });
-  }
+  const res = await prisma.work.update({
+    where: {
+      url,
+    },
+    data: {
+      title: editCat.title,
+      url: editCat.url,
+      thumbnail: editCat.thumbnail,
+      images: editCat.images,
+    },
+  });
 
   revalidatePath("/admin/works");
   redirect("/admin/works");

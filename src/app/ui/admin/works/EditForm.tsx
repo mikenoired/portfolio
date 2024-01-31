@@ -11,19 +11,28 @@ export function EditForm({ data }: { data: WorkCat }) {
   const editWorkCat = updateWorkCat.bind(null, data.url);
   const [title, setTitle] = useState(data.title);
   const [url, setUrl] = useState(data.url);
-  const [preview, setPreview] = useState(`/upload/${data.thumbnail}`);
+  const [preview, setPreview] = useState([data.thumbnail]);
   const [images, setImages] = useState(data.images);
-  const [toggleManager, setToggleManager] = useState(false);
+  const [togglePreviewManager, setTogglePreviewManager] = useState(false);
+  const [toggleImagesManager, setToggleImagesManager] = useState(false);
   const [toggleDelete, setToggleDelete] = useState(false);
 
   return (
     <>
-      {toggleManager && (
+      {toggleImagesManager && (
         <ImageManager
           saveHandler={setImages}
           initSelected={images}
-          active={setToggleManager}
+          active={setTogglePreviewManager}
           multiple={true}
+        />
+      )}
+      {togglePreviewManager && (
+        <ImageManager
+          saveHandler={setPreview}
+          initSelected={preview}
+          active={setTogglePreviewManager}
+          multiple={false}
         />
       )}
       {toggleDelete && <DeleteModal toggleModal={setToggleDelete} url={url} />}
@@ -63,21 +72,14 @@ export function EditForm({ data }: { data: WorkCat }) {
               />
             </div>
             <div className='flex flex-col mt-4'>
-              <label className='text-xl font-medium mb-3'>Thumbnail</label>
-              <input
-                className='border bg-black p-3'
-                type='file'
-                name='thumbnail'
-                accept='image/*'
-                onChange={(e) => {
-                  if (e.target.files?.[0]) {
-                    const reader = new FileReader();
-                    reader.onloadend = () =>
-                      setPreview(reader.result as string);
-                    reader.readAsDataURL(e.target.files[0]);
-                  }
-                }}
-              />
+              <input type='text' name='thumbnail' hidden value={preview} />
+              <button
+                type='button'
+                className='w-full h-9 bg-white text-black font-medium text-base mt-3'
+                onClick={() => setTogglePreviewManager(true)}
+              >
+                Select thumbnail
+              </button>
             </div>
             <button
               className='w-full mt-5 h-10 bg-white text-black'
@@ -91,7 +93,10 @@ export function EditForm({ data }: { data: WorkCat }) {
           <h1 className='text-2xl font-bold mb-3'>Preview</h1>
           <div
             className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full'
-            style={{ backgroundImage: preview ? `url(${preview})` : "none" }}
+            style={{
+              backgroundImage:
+                preview[0] !== "" ? `url('/upload/${preview}')` : "none",
+            }}
           >
             <div className='absolute px-8 text-[64px] font-bold h-full z-[1]'>
               {title}
@@ -101,7 +106,7 @@ export function EditForm({ data }: { data: WorkCat }) {
           <button
             type='button'
             className='w-full mt-5 h-10 bg-white text-black'
-            onClick={() => setToggleManager(!toggleManager)}
+            onClick={() => setToggleImagesManager(true)}
           >
             Change gallery
           </button>
