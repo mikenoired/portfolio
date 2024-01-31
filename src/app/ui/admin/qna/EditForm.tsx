@@ -1,6 +1,6 @@
 "use client";
 
-import { editQNA } from "@/app/lib/actions";
+import { deleteQNAById, editQNA } from "@/app/lib/actions";
 import { QNAForm } from "@/app/lib/definitions";
 import { useState } from "react";
 import Markdown from "react-markdown";
@@ -46,6 +46,12 @@ export default function EditForm({
             type='submit'
           >
             Update
+          </button>
+        </form>
+        <form action={deleteQNAById}>
+          <input type='text' hidden name='id' value={block.id} />
+          <button className='w-full mt-5 h-10 bg-red text-black' type='submit'>
+            Delete
           </button>
         </form>
       </div>

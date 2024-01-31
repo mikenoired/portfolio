@@ -50,10 +50,10 @@ export async function editQNA(id: number, data: FormData) {
   redirect("/admin/qna");
 }
 
-export async function deleteQNAById(currentId: number) {
+export async function deleteQNAById(data: FormData) {
   const action = await prisma.answerBlock.delete({
     where: {
-      id: currentId,
+      id: Number(data.get("id")),
     },
   });
 

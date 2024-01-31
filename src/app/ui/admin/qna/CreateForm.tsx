@@ -37,7 +37,6 @@ export function CreateForm() {
           <button
             className='w-full mt-5 h-10 bg-white text-black'
             type='submit'
-            value='Upload'
           >
             Upload
           </button>

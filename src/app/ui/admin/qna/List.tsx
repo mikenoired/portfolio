@@ -1,4 +1,4 @@
-import { deleteQNAById } from "@/app/lib/actions";
+import Icon from "@/app/ui/Icon";
 import { AnswerBlock } from "@prisma/client";
 import Link from "next/link";
 
@@ -10,17 +10,17 @@ export default async function List({ qnas }: { qnas: AnswerBlock[] }) {
           <div key={index} className='flex p-5 border justify-between mb-5'>
             <div className='max-w-fit'>{block.title}</div>
             <div className='flex'>
-              <div
-                className='pl-4 cursor-pointer'
-                onClick={() => deleteQNAById(block.id)}
-              >
-                Delete
-              </div>
               <Link
                 href={`qna/${block.id}/edit`}
                 className='pl-4 cursor-pointer'
               >
-                Edit
+                <Icon
+                  className='-mt-[3px]'
+                  width={25}
+                  height={25}
+                  type='edit'
+                  dark={false}
+                />
               </Link>
             </div>
           </div>
