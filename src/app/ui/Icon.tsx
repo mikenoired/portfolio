@@ -78,11 +78,11 @@ export default function Icon({
             );
           case "edit":
             return (
-              <svg viewBox='0 0 15 15' xmlns='http://www.w3.org/2000/svg'>
+              <svg viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   fillRule='evenodd'
                   clipRule='evenodd'
-                  d='M0 0H15V2H0V0ZM0 6.5H15V8.5H0V6.5ZM15 13H0V15H15V13Z'
+                  d='M14 0.5L17.5355 4.03553L15.7249 5.8462L12.1893 2.31067L14 0.5ZM10.6068 3.89317L14.1424 7.42871L8.53546 13.0356L5.01547 13.0355V9.48454L10.6068 3.89317ZM15 9.36324L13.125 11.2382V16.125H1.875V4.875H6.76154L8.63654 3H0V18H15V9.36324Z'
                   fill={iconTheme}
                 />
               </svg>
