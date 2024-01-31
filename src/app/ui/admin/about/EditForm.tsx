@@ -33,6 +33,7 @@ export default function EditForm({
           multiple={false}
           saveHandler={setAvatar}
           initSelected={avatar as string[]}
+          fileType='image'
         />
       )}
       <form action={updateAboutPage}>

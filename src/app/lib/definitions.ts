@@ -11,7 +11,7 @@ export type WorkCat = {
   images: string[];
 };
 
-export type ImageType = {
+export type MediaType = {
   id: number;
   url: string;
   caption: string;
@@ -21,20 +21,12 @@ export type ImageType = {
 };
 
 export type ContextType = {
-  managerActive: boolean;
-  loadedImages: ImageType[];
-  selectedImages: string[];
-  currentModify: ImageType;
-  modifiedImages: ImageType[];
-  deletedImages: string[];
-  addedImages: File[];
-  setLoadedImages: (images: ImageType[]) => void;
-  setSelectedImages: (url: string[]) => void;
-  setCurrentModify: (image: ImageType) => void;
-  setModifiedImages: (image: ImageType[]) => void;
-  setDeletedImages: (url: string[]) => void;
-  setAddedImages: (file: File[]) => void;
-  setManagerActive: (open: boolean) => void;
+  loadedImages: MediaType[];
+  selectedMedia: string[];
+  currentModify: MediaType;
+  setLoadedImages: (images: MediaType[]) => void;
+  setSelectedMedia: (url: string[]) => void;
+  setCurrentModify: (image: MediaType) => void;
 };
 
 export type ThumbType = {
@@ -64,3 +56,7 @@ export type AboutType = {
   personId: number;
   content: string;
 };
+
+export interface FileType {
+  type: "image" | "video" | "audio" | "icon";
+}

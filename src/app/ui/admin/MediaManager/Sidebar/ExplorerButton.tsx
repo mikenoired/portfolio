@@ -1,15 +1,11 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useManagerContext } from "../ManagerContext";
 
-export default function ExplorerButton() {
+export default function ExplorerButton({ fileType }: { fileType: string }) {
   const [fileList, setFileList] = useState<FileList | null>(null);
   const { setLoadedImages } = useManagerContext();
 
   const files = fileList ? [...fileList] : [];
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFileList(e.target.files);
-  };
 
   const handleUploadClick = async () => {
     if (!fileList) {
@@ -26,11 +22,11 @@ export default function ExplorerButton() {
       body: data,
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
       .catch((err) => console.error(err));
 
-    await fetch("http://localhost:3000/api/getImages", {
-      method: "GET",
+    await fetch("http://localhost:3000/api/getMedia", {
+      method: "POST",
+      body: JSON.stringify({ type: fileType }),
     })
       .then((r) => r.json())
       .then((loadedImages) => {
@@ -52,7 +48,7 @@ export default function ExplorerButton() {
         className='hidden'
         accept='image/jpeg'
         multiple
-        onChange={handleFileChange}
+        onChange={(e) => setFileList(e.target.files)}
       />
       {files.length >= 1 && (
         <button

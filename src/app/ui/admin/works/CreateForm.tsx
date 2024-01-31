@@ -18,6 +18,7 @@ export function CreateForm() {
           initSelected={preview}
           saveHandler={setPreview}
           multiple={false}
+          fileType='image'
         />
       )}
       <div className='flex'>
@@ -54,7 +55,12 @@ export function CreateForm() {
               />
             </div>
             <div className='flex flex-col mt-4'>
-              <input type='text' name='thumbnail' hidden value={preview} />
+              <input
+                type='text'
+                name='thumbnail'
+                hidden
+                defaultValue={preview}
+              />
               <button
                 type='button'
                 className='w-full h-9 bg-white text-black font-medium text-base mt-3'

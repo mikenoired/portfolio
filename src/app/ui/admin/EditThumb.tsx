@@ -25,6 +25,7 @@ export default function EditThumb({ thumb }: { thumb: ThumbType }) {
           initSelected={image}
           active={setToggleManager}
           multiple={false}
+          fileType='image'
         />
       )}
       <div>
@@ -48,7 +49,7 @@ export default function EditThumb({ thumb }: { thumb: ThumbType }) {
               alt=''
             />
           </div>
-          <input type='text' hidden name='url' value={image[0]} />
+          <input type='text' hidden name='url' defaultValue={image[0]} />
           {changed && (
             <button
               className='mt-5 w-full block p-4 border hover:bg-white hover:text-black font-medium text-lg'

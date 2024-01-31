@@ -1,3 +1,4 @@
+import { FileType } from "@/app/lib/definitions";
 import { useEffect } from "react";
 import Grid from "./Grid";
 import { ManagerProvider } from "./ManagerContext";
@@ -8,11 +9,13 @@ export default function MediaManager({
   initSelected,
   saveHandler,
   multiple,
+  fileType,
 }: {
   active: (active: boolean) => void;
   initSelected: string[];
-  saveHandler: (selectedImages: string[]) => void;
+  saveHandler: (selectedMedia: string[]) => void;
   multiple: boolean;
+  fileType: FileType["type"];
 }) {
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
@@ -25,8 +28,16 @@ export default function MediaManager({
     <ManagerProvider>
       <div className='w-full h-full fixed z-20 bg-black bg-opacity-50 top-[0px] p-6'>
         <div className='w-full h-full border bg-black flex'>
-          <Sidebar toggleManager={active} saveHandler={saveHandler} />
-          <Grid multiple={multiple} initSelected={initSelected} />
+          <Sidebar
+            fileType={fileType}
+            toggleManager={active}
+            saveHandler={saveHandler}
+          />
+          <Grid
+            fileType={fileType}
+            multiple={multiple}
+            initSelected={initSelected}
+          />
         </div>
       </div>
     </ManagerProvider>
