@@ -3,7 +3,7 @@
 import { updateAboutPage } from "@/app/lib/actions";
 import { AboutType, PersonType } from "@/app/lib/definitions";
 import Icon from "@/app/ui/Icon";
-import ImageManager from "@/app/ui/admin/ImageManager";
+import MediaManager from "@/app/ui/admin/MediaManager";
 import Image from "next/image";
 import { useState } from "react";
 import Markdown from "react-markdown";
@@ -28,7 +28,7 @@ export default function EditForm({
   return (
     <>
       {toggleManager && (
-        <ImageManager
+        <MediaManager
           active={setToggleManager}
           multiple={false}
           saveHandler={setAvatar}

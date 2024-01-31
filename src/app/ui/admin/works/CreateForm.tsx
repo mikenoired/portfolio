@@ -1,7 +1,7 @@
 "use client";
 
 import { newWorkCat } from "@/app/lib/actions";
-import ImageManager from "@/app/ui/admin/ImageManager";
+import MediaManager from "@/app/ui/admin/MediaManager";
 import { useState } from "react";
 
 export function CreateForm() {
@@ -13,7 +13,7 @@ export function CreateForm() {
   return (
     <>
       {toggleManager && (
-        <ImageManager
+        <MediaManager
           active={setToggleManager}
           initSelected={preview}
           saveHandler={setPreview}

@@ -2,7 +2,7 @@ import Grid from "./Grid";
 import { ManagerProvider } from "./ManagerContext";
 import Sidebar from "./Sidebar";
 
-export default function ImageManager({
+export default function MediaManager({
   active,
   initSelected,
   saveHandler,

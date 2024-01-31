@@ -2,7 +2,7 @@
 
 import { updateWorkCat } from "@/app/lib/actions";
 import { WorkCat } from "@/app/lib/definitions";
-import ImageManager from "@/app/ui/admin/ImageManager";
+import MediaManager from "@/app/ui/admin/MediaManager";
 import Image from "next/image";
 import { useState } from "react";
 import { DeleteModal } from "./DeleteModal";
@@ -20,7 +20,7 @@ export function EditForm({ data }: { data: WorkCat }) {
   return (
     <>
       {toggleImagesManager && (
-        <ImageManager
+        <MediaManager
           saveHandler={setImages}
           initSelected={images}
           active={setTogglePreviewManager}
@@ -28,7 +28,7 @@ export function EditForm({ data }: { data: WorkCat }) {
         />
       )}
       {togglePreviewManager && (
-        <ImageManager
+        <MediaManager
           saveHandler={setPreview}
           initSelected={preview}
           active={setTogglePreviewManager}

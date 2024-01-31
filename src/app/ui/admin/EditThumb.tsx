@@ -4,7 +4,7 @@ import { updateThumb } from "@/app/lib/actions";
 import { ThumbType } from "@/app/lib/definitions";
 import Image from "next/image";
 import { useState } from "react";
-import ImageManager from "./ImageManager";
+import MediaManager from "./MediaManager";
 
 export default function EditThumb({ thumb }: { thumb: ThumbType }) {
   // const fileExt = /[^.]+$/.exec(thumb.media);
@@ -20,7 +20,7 @@ export default function EditThumb({ thumb }: { thumb: ThumbType }) {
   return (
     <>
       {toggleManager && (
-        <ImageManager
+        <MediaManager
           saveHandler={saveHandler}
           initSelected={image}
           active={setToggleManager}
