@@ -1,5 +1,11 @@
 import { fetchThumb, fetchWorks } from "@/app/lib/actions";
 import { Header } from "@/app/ui/header";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mike Noired",
+  description: "Mike Noired's Portfolio",
+};
 
 export default async function Home() {
   const thumb = await fetchThumb();
