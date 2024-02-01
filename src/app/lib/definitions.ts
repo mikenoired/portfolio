@@ -64,10 +64,20 @@ export interface FileType {
 export interface MetaSettings {
   title: string;
   description: string;
-  locale: "en_US" | "ru_RU";
+  locale: [
+    {
+      data: "ru_RU";
+      selected: false;
+    },
+    {
+      data: "en_US";
+      selected: true;
+    }
+  ];
   category: string;
-  keywords: string[];
+  keywords: string;
   creator: string;
+  manifest: string;
   robots: {
     index: boolean;
     follow: boolean;
@@ -76,38 +86,79 @@ export interface MetaSettings {
       index: boolean;
       follow: boolean;
       noimageindex: boolean;
-      maxVideoPreview: 0 | -1;
-      maxImagePreview: "none" | "standart" | "large";
-      maxSnippet: 0 | -1;
+      maxVideoPreview: [
+        {
+          data: 0;
+          selected: false;
+        },
+        {
+          data: -1;
+          selected: true;
+        }
+      ];
+      maxImagePreview: [
+        {
+          data: "none";
+          selected: false;
+        },
+        {
+          data: "standart";
+          selected: true;
+        },
+        {
+          data: "large";
+          selected: false;
+        }
+      ];
+      maxSnippet: [
+        {
+          data: 0;
+          selected: false;
+        },
+        {
+          data: -1;
+          selected: true;
+        }
+      ];
     };
   };
   icons: {
     icon: string;
-    shortcut: string;
     apple: string;
     other: {
       rel: string;
       url: string;
     };
   };
-  manifest: string;
   appleWebApp: {
     title: string;
-    statusBarStyle: "default" | "black-translucent" | "black";
-    startupImage: [
-      string,
+    statusBarStyle: [
       {
-        url: string;
-        media: "(device-width: 768px) and (device-height: 1024px)";
+        data: "default";
+        selected: true;
+      },
+      {
+        data: "black-translucent";
+        selected: false;
+      },
+      {
+        data: "black";
+        selected: false;
       }
     ];
+    startupImage: {
+      base: string;
+      device: {
+        url: string;
+        media: "(device-width: 768px) and (device-height: 1024px)";
+      };
+    };
   };
-}
-
-export interface ViewportSettings {
-  themeColor: "black";
-  width: string;
-  initialScale: number;
-  maximumScale: number;
-  userScalable: boolean;
+  viewport: {
+    themeColor: string;
+    width: string;
+    initialScale: number;
+    maximumScale: number;
+    userScalable: boolean;
+  };
 }

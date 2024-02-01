@@ -1,10 +1,12 @@
+import { MetaSettings } from "@/app/lib/definitions.js";
 import Checkbox from "@/app/ui/settings/Checkbox";
 import File from "@/app/ui/settings/File";
 import Input from "@/app/ui/settings/Input";
 import Select from "@/app/ui/settings/Select";
-import { metaSettings, viewportSettings } from "./data.js";
+import { settings } from "./data.js";
 
 export default async function Page() {
+  const metaSettings = JSON.parse(settings) as MetaSettings;
   return (
     <main className='grid grid-cols-4 px-6 gap-6 relative'>
       <div className='col-start-1 col-end-2 fixed overflow-y-scroll'>
@@ -99,7 +101,6 @@ export default async function Page() {
           <h2 className='text-4xl font-bold'>Icons</h2>
           <div className='flex flex-wrap w-full mb-5'>
             <File name='icon' title='Icon' />
-            <File name='shortcut' title='Shortcut' />
             <File name='apple' title='Apple' />
           </div>
           <h3 className='text-2xl font-bold'>Other</h3>
@@ -142,21 +143,25 @@ export default async function Page() {
             <Input
               name='themeColor'
               title='Theme color'
-              value={viewportSettings.themeColor}
+              value={metaSettings.viewport.themeColor}
             />
-            <Input name='width' title='Width' value={viewportSettings.width} />
+            <Input
+              name='width'
+              title='Width'
+              value={metaSettings.viewport.width}
+            />
             <Input
               name='initialScale'
               title='Init scale'
-              value={viewportSettings.initialScale}
+              value={metaSettings.viewport.initialScale}
             />
             <Input
               name='maximumScale'
               title='Max scale'
-              value={viewportSettings.maximumScale}
+              value={metaSettings.viewport.maximumScale}
             />
             <Checkbox
-              value={viewportSettings.userScalable}
+              value={metaSettings.viewport.userScalable}
               title='Scalable'
               name='userScalable'
             />
