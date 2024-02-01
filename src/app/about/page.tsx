@@ -20,7 +20,6 @@ export default async function Page() {
         url: cat.url,
       });
     });
-    console.log(links);
   };
   workCats();
   return (

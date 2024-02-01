@@ -124,8 +124,6 @@ export async function loadMedia(imageValue: FormDataEntryValue | null) {
       }
     };
 
-    console.log(image.type);
-
     const data = {
       url: filename,
       caption: "",

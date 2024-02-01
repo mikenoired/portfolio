@@ -16,7 +16,6 @@ export default async function SlugPage({
         url: cat.url,
       });
     });
-    console.log(links);
   };
   workCats();
   return (
