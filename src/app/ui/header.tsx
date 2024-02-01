@@ -11,7 +11,7 @@ export function Header({ transparent }: { transparent: Boolean }) {
   return (
     <header
       className={clsx(
-        "flex flex-col w-full fixed z-10",
+        "flex flex-col w-full fixed z-10 mix-blend-difference contrast-100",
         !transparent && "bg-black"
       )}
     >
