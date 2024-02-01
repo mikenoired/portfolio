@@ -5,7 +5,13 @@ import Link from "next/link";
 import { useState } from "react";
 import Icon from "./Icon";
 
-export function Header({ transparent }: { transparent: Boolean }) {
+export function Header({
+  transparent,
+  subMenu,
+}: {
+  transparent: Boolean;
+  subMenu: { title: string; url: string }[];
+}) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
   return (
@@ -62,14 +68,23 @@ export function Header({ transparent }: { transparent: Boolean }) {
             toggleCat ? "flex" : "hidden"
           )}
         >
-          <div className='pr-5 text-white text-xl font-medium uppercase'>
+          {/* <div className='pr-5 text-white text-xl font-medium uppercase'>
             Studio
           </div>
           <div className='pr-5 text-white text-xl font-medium uppercase'>
             Street
           </div>
           <div className='pr-5 text-xl font-medium uppercase'>Landscape</div>
-          <div className='text-xl font-medium uppercase'>Print</div>
+          <div className='text-xl font-medium uppercase'>Print</div> */}
+          {subMenu.map((link, index) => (
+            <Link
+              className='pr-5 text-xl font-medium uppercase'
+              href={`works/${link.url}`}
+              key={index}
+            >
+              {link.title}
+            </Link>
+          ))}
         </div>
       </div>
     </header>

@@ -4,9 +4,21 @@ import { fetchWorks } from "../lib/actions";
 
 export default async function Page() {
   const data = await fetchWorks();
+  const fetchWorksCats = await fetchWorks();
+  let links: { title: string; url: string }[] = [];
+  const workCats = () => {
+    fetchWorksCats.map((cat) => {
+      links.push({
+        title: cat.title,
+        url: cat.url,
+      });
+    });
+    console.log(links);
+  };
+  workCats();
   return (
     <>
-      <Header transparent={false} />
+      <Header subMenu={links} transparent={false} />
       <main className='md:pt-[200px] pt-[180px] flex flex-col items-end'>
         {data.map((link, index) => (
           <NavButton

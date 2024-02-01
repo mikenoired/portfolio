@@ -1,12 +1,24 @@
 import { Header } from "@/app/ui/header";
 import { Block } from "@/app/ui/qna/block";
-import { fetchQNA } from "../lib/actions";
+import { fetchQNA, fetchWorks } from "../lib/actions";
 
 export default async function Page() {
   const blocks = await fetchQNA();
+  const fetchWorksCats = await fetchWorks();
+  let links: { title: string; url: string }[] = [];
+  const workCats = () => {
+    fetchWorksCats.map((cat) => {
+      links.push({
+        title: cat.title,
+        url: cat.url,
+      });
+    });
+    console.log(links);
+  };
+  workCats();
   return (
     <>
-      <Header transparent={false} />
+      <Header subMenu={links} transparent={false} />
       <main className='md:pt-12 pt-10 flex flex-col items-center'>
         <div className='masonry sm:masonry md:masonry-sm pt-8 md:max-w-[1050px] pl-4 pr-4'>
           {blocks.map((block, index) => (
