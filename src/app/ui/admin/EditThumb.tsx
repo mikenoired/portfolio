@@ -2,18 +2,17 @@
 
 import { updateThumb } from "@/app/lib/actions";
 import { ThumbType } from "@/app/lib/definitions";
-import Image from "next/image";
 import { useState } from "react";
 import MediaManager from "./MediaManager";
 
 export default function EditThumb({ thumb }: { thumb: ThumbType }) {
   // const fileExt = /[^.]+$/.exec(thumb.media);
-  const [image, setImage] = useState([""]);
+  const [video, setVideo] = useState([""]);
   const [toggleManager, setToggleManager] = useState(false);
   const [preview, setPreview] = useState(thumb.media);
   const [changed, isChanged] = useState(false);
   const saveHandler = (image: string[]) => {
-    setImage(image);
+    setVideo(image);
     setPreview(image[0]);
     isChanged(true);
   };
@@ -22,9 +21,10 @@ export default function EditThumb({ thumb }: { thumb: ThumbType }) {
       {toggleManager && (
         <MediaManager
           saveHandler={saveHandler}
-          initSelected={image}
+          initSelected={video}
           active={setToggleManager}
           multiple={false}
+          fileType='video'
         />
       )}
       <div>
@@ -39,16 +39,18 @@ export default function EditThumb({ thumb }: { thumb: ThumbType }) {
             onClick={() => setToggleManager(true)}
           >
             <div className='absolute flex text-2xl font-bold items-center justify-center w-full h-full bg-black z-[1] bg-opacity-0 opacity-0 hover:bg-opacity-60 hover:opacity-100'>
-              Change image
+              Change video
             </div>
-            <Image
+            <video
+              autoPlay
+              controls={false}
+              muted
+              loop
               src={`/upload/${preview}`}
-              fill
               className='object-cover'
-              alt=''
             />
           </div>
-          <input type='text' hidden name='url' value={image[0]} />
+          <input type='text' hidden name='url' defaultValue={video[0]} />
           {changed && (
             <button
               className='mt-5 w-full block p-4 border hover:bg-white hover:text-black font-medium text-lg'

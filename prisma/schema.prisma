@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Image {
+model Media {
   id           Int    @id @unique @default(autoincrement())
   url          String @unique
   caption      String

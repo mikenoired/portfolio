@@ -1,8 +1,8 @@
 import { useManagerContext } from "../ManagerContext";
 
-export default function Caption() {
+export default function Caption({ fileType }: { fileType: string }) {
   const { currentModify, setCurrentModify } = useManagerContext();
-  const { setLoadedImages } = useManagerContext();
+  const { setLoadedMedia } = useManagerContext();
   return (
     <div className='mb-8'>
       <div className='text-white text-2xl font-semibold'>Caption</div>
@@ -28,12 +28,13 @@ export default function Caption() {
               caption: currentModify.caption,
             }),
           });
-          await fetch("http://localhost:3000/api/getImages", {
-            method: "GET",
+          await fetch("http://localhost:3000/api/getMedia", {
+            method: "POST",
+            body: JSON.stringify({ type: fileType }),
           })
             .then((r) => r.json())
-            .then((loadedImages) => {
-              setLoadedImages(loadedImages);
+            .then((loadedMedia) => {
+              setLoadedMedia(loadedMedia);
             });
         }}
       >

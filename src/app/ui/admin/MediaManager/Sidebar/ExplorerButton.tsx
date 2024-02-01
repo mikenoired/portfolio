@@ -1,15 +1,11 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useManagerContext } from "../ManagerContext";
 
-export default function ExplorerButton() {
+export default function ExplorerButton({ fileType }: { fileType: string }) {
   const [fileList, setFileList] = useState<FileList | null>(null);
-  const { setLoadedImages } = useManagerContext();
+  const { setLoadedMedia } = useManagerContext();
 
   const files = fileList ? [...fileList] : [];
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFileList(e.target.files);
-  };
 
   const handleUploadClick = async () => {
     if (!fileList) {
@@ -26,16 +22,29 @@ export default function ExplorerButton() {
       body: data,
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
       .catch((err) => console.error(err));
 
-    await fetch("http://localhost:3000/api/getImages", {
-      method: "GET",
+    await fetch("http://localhost:3000/api/getMedia", {
+      method: "POST",
+      body: JSON.stringify({ type: fileType }),
     })
       .then((r) => r.json())
-      .then((loadedImages) => {
-        setLoadedImages(loadedImages);
+      .then((loadedMedia) => {
+        setLoadedMedia(loadedMedia);
       });
+  };
+
+  const acceptFiles = (type: string) => {
+    switch (type) {
+      case "image":
+        return "image/jpeg,image/png,image/gif,image/webp";
+      case "icon":
+        return "image/x-icon";
+      case "video":
+        return "video/mpeg,video/mp4,video/webm";
+      case "audio":
+        return "audio/webm,audio/wav,audio/ogg,audio/mp4,audio/mp3,audio/mpeg,audio/flac";
+    }
   };
   return (
     <div className='w-full'>
@@ -50,9 +59,9 @@ export default function ExplorerButton() {
         required
         id='file-upload'
         className='hidden'
-        accept='image/jpeg'
+        accept={acceptFiles(fileType)}
         multiple
-        onChange={handleFileChange}
+        onChange={(e) => setFileList(e.target.files)}
       />
       {files.length >= 1 && (
         <button

@@ -7,15 +7,17 @@ import SaveButton from "./SaveButton";
 export default function Sidebar({
   saveHandler,
   toggleManager,
+  fileType,
 }: {
-  saveHandler: (selectedImages: string[]) => void;
+  saveHandler: (selectedMedia: string[]) => void;
   toggleManager: (open: boolean) => void;
+  fileType: string;
 }) {
   const { currentModify } = useManagerContext();
 
   return (
     <div className='w-[290px] h-full border-r overflow-y-scroll relative'>
-      <ExplorerButton />
+      <ExplorerButton fileType={fileType} />
       <div className='w-full p-6'>
         {Object.keys(currentModify).length !== 0 && (
           <>
@@ -24,7 +26,7 @@ export default function Sidebar({
               upd={currentModify.lastModified}
               type={currentModify.type}
             />
-            <Caption />
+            <Caption fileType={fileType} />
           </>
         )}
       </div>

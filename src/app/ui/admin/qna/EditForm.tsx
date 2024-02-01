@@ -49,7 +49,7 @@ export default function EditForm({
           </button>
         </form>
         <form action={deleteQNAById}>
-          <input type='text' hidden name='id' value={block.id} />
+          <input type='text' hidden name='id' defaultValue={block.id} />
           <button className='w-full mt-5 h-10 bg-red text-black' type='submit'>
             Delete
           </button>

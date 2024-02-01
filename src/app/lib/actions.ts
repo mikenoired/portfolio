@@ -87,26 +87,54 @@ const WorksType = z.object({
 
 const newWorkCatData = WorksType.omit({ images: true });
 
-export async function loadImage(imageValue: FormDataEntryValue | null) {
+export async function loadMedia(imageValue: FormDataEntryValue | null) {
   const image = imageValue as File;
   if (image.size !== 0) {
     const arrayBuffer = await image.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
 
-    const filename = `${Date.now()}-${image.name}`;
+    const filename = `${Date.now()}-${image.name.replaceAll(" ", "_")}`;
     const uploadDir = `./public/upload/${filename}`;
 
     writeFile(uploadDir, buffer);
+
+    const fileType = (type: string) => {
+      switch (type) {
+        case "image/jpeg":
+        case "image/png":
+        case "image/gif":
+        case "image/webp":
+          return "image";
+        case "image/x-icon":
+          return "icon";
+        case "video/mpeg":
+        case "video/mp4":
+        case "video/webm":
+          return "video";
+        case "audio/webm":
+        case "audio/wav":
+        case "audio/ogg":
+        case "audio/mp4":
+        case "audio/mp3":
+        case "audio/mpeg":
+        case "audio/flac":
+          return "audio";
+        default:
+          return "undefined";
+      }
+    };
+
+    console.log(image.type);
 
     const data = {
       url: filename,
       caption: "",
       size: String(image.size),
       lastModified: String(image.lastModified),
-      type: image.type,
+      type: fileType(image.type),
     };
 
-    const res = await prisma.image.create({ data });
+    const res = await prisma.media.create({ data });
 
     return data;
   } else {
@@ -183,14 +211,18 @@ export async function deleteWorkByURL(data: FormData) {
   redirect("/admin/works");
 }
 
-export async function fetchImages() {
+export async function fetchMedia(type: { type: "" }) {
   noStore();
-  const res = await prisma.image.findMany();
+  const res = await prisma.media.findMany({
+    where: {
+      type: type.type,
+    },
+  });
   return res;
 }
 
 export async function updateCaption(url: string, caption: string) {
-  const res = await prisma.image.update({
+  const res = await prisma.media.update({
     where: { url },
     data: {
       caption,

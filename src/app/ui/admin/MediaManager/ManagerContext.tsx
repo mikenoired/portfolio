@@ -1,47 +1,28 @@
-import { ContextType, ImageType } from "@/app/lib/definitions";
+import { ContextType, MediaType } from "@/app/lib/definitions";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 
 export const ManagerContext = createContext<ContextType | undefined>(undefined);
 
 export function ManagerProvider({ children }: PropsWithChildren<{}>) {
-  const [managerActive, setManagerActive] =
-    useState<ContextType["managerActive"]>(false);
-  const [loadedImages, setLoadedImages] = useState<ContextType["loadedImages"]>(
+  const [loadedMedia, setLoadedMedia] = useState<ContextType["loadedMedia"]>(
     []
   );
-  const [selectedImages, setSelectedImages] = useState<
-    ContextType["selectedImages"]
+  const [selectedMedia, setSelectedMedia] = useState<
+    ContextType["selectedMedia"]
   >([]);
   const [currentModify, setCurrentModify] = useState<
     ContextType["currentModify"]
-  >({} as ImageType);
-  const [modifiedImages, setModifiedImages] = useState<
-    ContextType["modifiedImages"]
-  >([]);
-  const [deletedImages, setDeletedImages] = useState<
-    ContextType["deletedImages"]
-  >([]);
-  const [addedImages, setAddedImages] = useState<ContextType["addedImages"]>(
-    []
-  );
+  >({} as MediaType);
 
   return (
     <ManagerContext.Provider
       value={{
-        managerActive,
-        loadedImages,
-        selectedImages,
+        loadedMedia,
+        selectedMedia,
         currentModify,
-        modifiedImages,
-        deletedImages,
-        addedImages,
-        setManagerActive,
-        setLoadedImages,
-        setSelectedImages,
+        setLoadedMedia,
+        setSelectedMedia,
         setCurrentModify,
-        setModifiedImages,
-        setDeletedImages,
-        setAddedImages,
       }}
     >
       {children}

@@ -1,6 +1,5 @@
 import { fetchThumb } from "@/app/lib/actions";
 import { Header } from "@/app/ui/header";
-import Image from "next/image";
 
 export default async function Home() {
   const thumb = await fetchThumb();
@@ -9,11 +8,13 @@ export default async function Home() {
       <Header transparent={true} />
       <main>
         <div className='w-screen h-screen relative'>
-          <Image
+          <video
             src={`/upload/${thumb?.media}`}
-            alt='Video preview'
-            className='object-cover'
-            fill
+            autoPlay
+            controls={false}
+            muted
+            loop
+            className='object-cover w-dvw h-dvh'
           />
         </div>
       </main>

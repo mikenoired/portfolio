@@ -23,8 +23,9 @@ export function EditForm({ data }: { data: WorkCat }) {
         <MediaManager
           saveHandler={setImages}
           initSelected={images}
-          active={setTogglePreviewManager}
+          active={setToggleImagesManager}
           multiple={true}
+          fileType='image'
         />
       )}
       {togglePreviewManager && (
@@ -33,6 +34,7 @@ export function EditForm({ data }: { data: WorkCat }) {
           initSelected={preview}
           active={setTogglePreviewManager}
           multiple={false}
+          fileType='image'
         />
       )}
       {toggleDelete && <DeleteModal toggleModal={setToggleDelete} url={url} />}
@@ -72,7 +74,12 @@ export function EditForm({ data }: { data: WorkCat }) {
               />
             </div>
             <div className='flex flex-col mt-4'>
-              <input type='text' name='thumbnail' hidden value={preview} />
+              <input
+                type='text'
+                name='thumbnail'
+                hidden
+                defaultValue={preview}
+              />
               <button
                 type='button'
                 className='w-full h-9 bg-white text-black font-medium text-base mt-3'
