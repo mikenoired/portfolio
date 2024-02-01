@@ -4,7 +4,7 @@ import { PropsWithChildren, createContext, useContext, useState } from "react";
 export const ManagerContext = createContext<ContextType | undefined>(undefined);
 
 export function ManagerProvider({ children }: PropsWithChildren<{}>) {
-  const [loadedImages, setLoadedImages] = useState<ContextType["loadedImages"]>(
+  const [loadedMedia, setLoadedMedia] = useState<ContextType["loadedMedia"]>(
     []
   );
   const [selectedMedia, setSelectedMedia] = useState<
@@ -17,10 +17,10 @@ export function ManagerProvider({ children }: PropsWithChildren<{}>) {
   return (
     <ManagerContext.Provider
       value={{
-        loadedImages,
+        loadedMedia,
         selectedMedia,
         currentModify,
-        setLoadedImages,
+        setLoadedMedia,
         setSelectedMedia,
         setCurrentModify,
       }}

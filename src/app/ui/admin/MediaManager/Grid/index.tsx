@@ -14,7 +14,7 @@ export default function Grid({
   multiple: boolean;
   fileType: string;
 }) {
-  const { loadedImages, setLoadedImages } = useManagerContext();
+  const { loadedMedia, setLoadedMedia } = useManagerContext();
   const { currentModify, setCurrentModify } = useManagerContext();
   const { selectedMedia, setSelectedMedia } = useManagerContext();
 
@@ -24,11 +24,11 @@ export default function Grid({
       body: JSON.stringify({ type: fileType }),
     })
       .then((r) => r.json())
-      .then((loadedImages) => {
-        setLoadedImages(loadedImages);
+      .then((loadedMedia) => {
+        setLoadedMedia(loadedMedia);
       });
     setSelectedMedia(initSelected);
-  }, [setLoadedImages, initSelected, setSelectedMedia, fileType]);
+  }, [setLoadedMedia, initSelected, setSelectedMedia, fileType]);
 
   const findObjectByStr = (
     arr: MediaType[],
@@ -37,53 +37,61 @@ export default function Grid({
     return arr.find((obj) => obj.url.includes(url));
   };
 
-  const handleSelection = (image: MediaType) => {
-    if (currentModify.url == image.url) {
+  const handleSelection = (media: MediaType) => {
+    if (currentModify.url == media.url) {
       setCurrentModify({} as MediaType);
     } else {
       multiple
-        ? setSelectedMedia([...selectedMedia, image.url])
-        : setSelectedMedia([image.url]);
-      setCurrentModify(findObjectByStr(loadedImages, image.url) as MediaType);
+        ? setSelectedMedia([...selectedMedia, media.url])
+        : setSelectedMedia([media.url]);
+      setCurrentModify(findObjectByStr(loadedMedia, media.url) as MediaType);
     }
   };
 
-  const removeSelection = (image: MediaType) => {
-    setSelectedMedia(selectedMedia.filter((e) => e !== image.url));
+  const removeSelection = (media: MediaType) => {
+    setSelectedMedia(selectedMedia.filter((e) => e !== media.url));
     setCurrentModify({} as MediaType);
   };
 
   return (
     <div className='w-full h-full p-6 overflow-y-scroll'>
-      {loadedImages.length == 0 && "There's no loaded images in website :/"}
+      {loadedMedia.length == 0 && "There's no loaded images in website :/"}
       <div className='masonry-sm sm:masonry-md md:masonry-xl w-full'>
-        {loadedImages.map((image) => (
+        {loadedMedia.map((media) => (
           <div
-            key={image.id}
+            key={media.id}
             className={clsx(
-              selectedMedia.indexOf(image.url) > -1 && "border-2 border-green",
-              image.url == currentModify?.url && "border-orange",
+              selectedMedia.indexOf(media.url) > -1 && "border-2 border-green",
+              media.url == currentModify?.url && "border-orange",
               "box-border mb-6 break-inside relative cursor-pointer"
             )}
           >
-            {selectedMedia.indexOf(image.url) > -1 && (
+            {selectedMedia.indexOf(media.url) > -1 && (
               <div
                 className={clsx(
                   "w-8 h-8 flex items-center justify-center absolute right-[0px]",
-                  image.url == currentModify?.url ? "bg-orange" : "bg-green"
+                  media.url == currentModify?.url ? "bg-orange" : "bg-green"
                 )}
-                onClick={() => removeSelection(image)}
+                onClick={() => removeSelection(media)}
               >
                 <Icon type='done' dark={true} width={20} height={20} />
               </div>
             )}
-            <Image
-              alt={image.caption}
-              width={300}
-              height={300}
-              src={`/upload/${image.url}`}
-              onClick={() => handleSelection(image)}
-            />
+            {fileType == "image" && (
+              <Image
+                alt={media.caption}
+                width={300}
+                height={300}
+                src={`/upload/${media.url}`}
+                onClick={() => handleSelection(media)}
+              />
+            )}
+            {fileType == "video" && (
+              <video
+                src={`/upload/${media.url}`}
+                onClick={() => handleSelection(media)}
+              />
+            )}
           </div>
         ))}
       </div>

@@ -2,7 +2,7 @@ import { useManagerContext } from "../ManagerContext";
 
 export default function Caption({ fileType }: { fileType: string }) {
   const { currentModify, setCurrentModify } = useManagerContext();
-  const { setLoadedImages } = useManagerContext();
+  const { setLoadedMedia } = useManagerContext();
   return (
     <div className='mb-8'>
       <div className='text-white text-2xl font-semibold'>Caption</div>
@@ -33,8 +33,8 @@ export default function Caption({ fileType }: { fileType: string }) {
             body: JSON.stringify({ type: fileType }),
           })
             .then((r) => r.json())
-            .then((loadedImages) => {
-              setLoadedImages(loadedImages);
+            .then((loadedMedia) => {
+              setLoadedMedia(loadedMedia);
             });
         }}
       >

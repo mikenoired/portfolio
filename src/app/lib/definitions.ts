@@ -21,10 +21,10 @@ export type MediaType = {
 };
 
 export type ContextType = {
-  loadedImages: MediaType[];
+  loadedMedia: MediaType[];
   selectedMedia: string[];
   currentModify: MediaType;
-  setLoadedImages: (images: MediaType[]) => void;
+  setLoadedMedia: (images: MediaType[]) => void;
   setSelectedMedia: (url: string[]) => void;
   setCurrentModify: (image: MediaType) => void;
 };

@@ -93,39 +93,45 @@ export async function loadMedia(imageValue: FormDataEntryValue | null) {
     const arrayBuffer = await image.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
 
-    const filename = `${Date.now()}-${image.name}`;
+    const filename = `${Date.now()}-${image.name.replaceAll(" ", "_")}`;
     const uploadDir = `./public/upload/${filename}`;
 
     writeFile(uploadDir, buffer);
 
-    let type = "";
-    switch (image.type) {
-      case "image/jpeg" || "image/png" || "image/gif" || "image/webp":
-        type = "image";
-        break;
-      case "image/x-icon":
-        type = "icon";
-        break;
-      case "video/mpeg" || "video/mp4" || "video/webm":
-        type = "video";
-        break;
-      case "audio/webm" ||
-        "audio/wav" ||
-        "audio/ogg" ||
-        "audio/mp4" ||
-        "audio/mp3" ||
-        "audio/mpeg" ||
-        "audio/flac":
-        type = "audio";
-        break;
-    }
+    const fileType = (type: string) => {
+      switch (type) {
+        case "image/jpeg":
+        case "image/png":
+        case "image/gif":
+        case "image/webp":
+          return "image";
+        case "image/x-icon":
+          return "icon";
+        case "video/mpeg":
+        case "video/mp4":
+        case "video/webm":
+          return "video";
+        case "audio/webm":
+        case "audio/wav":
+        case "audio/ogg":
+        case "audio/mp4":
+        case "audio/mp3":
+        case "audio/mpeg":
+        case "audio/flac":
+          return "audio";
+        default:
+          return "undefined";
+      }
+    };
+
+    console.log(image.type);
 
     const data = {
       url: filename,
       caption: "",
       size: String(image.size),
       lastModified: String(image.lastModified),
-      type: type,
+      type: fileType(image.type),
     };
 
     const res = await prisma.media.create({ data });
