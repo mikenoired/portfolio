@@ -60,3 +60,54 @@ export type AboutType = {
 export interface FileType {
   type: "image" | "video" | "audio" | "icon";
 }
+
+export interface MetaSettings {
+  title: string;
+  description: string;
+  locale: "en_US" | "ru_RU";
+  category: string;
+  keywords: string[];
+  creator: string;
+  robots: {
+    index: boolean;
+    follow: boolean;
+    nocache: boolean;
+    googleBot: {
+      index: boolean;
+      follow: boolean;
+      noimageindex: boolean;
+      maxVideoPreview: 0 | -1;
+      maxImagePreview: "none" | "standart" | "large";
+      maxSnippet: 0 | -1;
+    };
+  };
+  icons: {
+    icon: string;
+    shortcut: string;
+    apple: string;
+    other: {
+      rel: string;
+      url: string;
+    };
+  };
+  manifest: string;
+  appleWebApp: {
+    title: string;
+    statusBarStyle: "default" | "black-translucent" | "black";
+    startupImage: [
+      string,
+      {
+        url: string;
+        media: "(device-width: 768px) and (device-height: 1024px)";
+      }
+    ];
+  };
+}
+
+export interface ViewportSettings {
+  themeColor: "black";
+  width: string;
+  initialScale: number;
+  maximumScale: number;
+  userScalable: boolean;
+}
