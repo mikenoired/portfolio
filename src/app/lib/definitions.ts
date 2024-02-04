@@ -195,3 +195,54 @@ export interface ISettingsForm {
   maximumScale: string;
   userScalable: "on" | "off";
 }
+
+export interface ISettings {
+  metadata: {
+    title: string;
+    description: string;
+    locale: string;
+    category: string;
+    keywords: string[];
+    creator: string;
+    manifest: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+      nocache: boolean;
+      googleBot: {
+        index: boolean;
+        follow: boolean;
+        noimageindex: boolean;
+        "max-video-preview": number;
+        "max-image-preview": string;
+        "max-snippet": number;
+      };
+    };
+    icons: {
+      icon: string;
+      apple: string;
+      other: {
+        rel: string;
+        url: string;
+      };
+    };
+    appleWebApp: {
+      title: string;
+      statusBarStyle: string;
+      startupImage: [
+        string,
+        {
+          url: string;
+          media: string;
+        }
+      ];
+    };
+  };
+  viewport: {
+    themeColor: string;
+    width: string;
+    initialScale: number;
+    maximumScale: number;
+    userScalable: boolean;
+  };
+}

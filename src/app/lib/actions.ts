@@ -5,7 +5,7 @@ import { writeFile } from "fs/promises";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { ISettingsForm, SocLinksType } from "./definitions";
+import { ISettings, ISettingsForm, SocLinksType } from "./definitions";
 
 const QNASchema = z.object({
   id: z.number(),
@@ -307,11 +307,12 @@ export async function updateAboutPage(data: FormData) {
 
 export async function updateSettings(data: {}) {
   const s = data as ISettingsForm;
-  const onOff = (toggle: "on" | "off") => {
+  const onOff = (toggle: "on" | "off"): boolean => {
     if (toggle == "on") return true;
     if (toggle == "off") return false;
+    else return false;
   };
-  const settings = {
+  const settings: ISettings = {
     metadata: {
       title: s.title,
       description: s.description,
