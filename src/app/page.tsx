@@ -1,11 +1,18 @@
-import { fetchThumb, fetchWorks } from "@/app/lib/actions";
+import { fetchSettings, fetchThumb, fetchWorks } from "@/app/lib/actions";
 import { Header } from "@/app/ui/header";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Mike Noired",
-  description: "Mike Noired's Portfolio",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await fetchSettings();
+  const settings = JSON.parse(data?.settings as string);
+  return settings.metadata;
+}
+
+export async function generateViewport() {
+  const data = await fetchSettings();
+  const settings = JSON.parse(data?.settings as string);
+  return settings.viewport;
+}
 
 export default async function Home() {
   const thumb = await fetchThumb();

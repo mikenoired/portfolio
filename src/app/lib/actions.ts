@@ -311,45 +311,47 @@ export async function updateSettings(data: {}) {
     if (toggle == "on") return true;
     if (toggle == "off") return false;
   };
-  const metadata = {
-    title: s.title,
-    description: s.description,
-    locale: s.locale,
-    category: s.category,
-    keywords: s.keywords.split(" "),
-    creator: s.creator,
-    manifest: s.manifest,
-    robots: {
-      index: onOff(s.robots_index),
-      follow: onOff(s.robots_follow),
-      nocache: onOff(s.robots_nocache),
-      googleBot: {
-        index: onOff(s.googleBot_index),
-        follow: onOff(s.googleBot_follow),
-        noimageindex: onOff(s.googleBot_noImageIndex),
-        "max-video-preview": Number(s.googleBot_maxVideoPreview),
-        "max-image-preview": s.googleBot_maxImagePreview,
-        "max-snippet": Number(s.googleBot_maxSnippet),
-      },
-    },
-    icons: {
-      icon: s.icons_icon,
-      apple: s.icons_apple,
-      other: {
-        rel: s.icons_other_rel,
-        url: s.icons_other_url,
-      },
-    },
-    appleWebApp: {
-      title: s.appleWebApp_title,
-      statusBarStyle: s.appleWebApp_statusBarStyle,
-      startupImage: [
-        s.appleWebApp_startupImage_base,
-        {
-          url: s.appleWebApp_startupImage_device_url,
-          media: s.appleWebApp_startupImage_device_media,
+  const settings = {
+    metadata: {
+      title: s.title,
+      description: s.description,
+      locale: s.locale,
+      category: s.category,
+      keywords: s.keywords.split(" "),
+      creator: s.creator,
+      manifest: s.manifest,
+      robots: {
+        index: onOff(s.robots_index),
+        follow: onOff(s.robots_follow),
+        nocache: onOff(s.robots_nocache),
+        googleBot: {
+          index: onOff(s.googleBot_index),
+          follow: onOff(s.googleBot_follow),
+          noimageindex: onOff(s.googleBot_noImageIndex),
+          "max-video-preview": Number(s.googleBot_maxVideoPreview),
+          "max-image-preview": s.googleBot_maxImagePreview,
+          "max-snippet": Number(s.googleBot_maxSnippet),
         },
-      ],
+      },
+      icons: {
+        icon: s.icons_icon,
+        apple: s.icons_apple,
+        other: {
+          rel: s.icons_other_rel,
+          url: s.icons_other_url,
+        },
+      },
+      appleWebApp: {
+        title: s.appleWebApp_title,
+        statusBarStyle: s.appleWebApp_statusBarStyle,
+        startupImage: [
+          s.appleWebApp_startupImage_base,
+          {
+            url: s.appleWebApp_startupImage_device_url,
+            media: s.appleWebApp_startupImage_device_media,
+          },
+        ],
+      },
     },
     viewport: {
       themeColor: s.themeColor,
@@ -365,7 +367,12 @@ export async function updateSettings(data: {}) {
       id: 1,
     },
     data: {
-      settings: JSON.stringify(metadata),
+      settings: JSON.stringify(settings),
     },
   });
+}
+
+export async function fetchSettings() {
+  const res = await prisma.siteSettings.findFirst();
+  return res;
 }
