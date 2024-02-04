@@ -162,3 +162,36 @@ export interface MetaSettings {
     userScalable: boolean;
   };
 }
+
+export interface ISettingsForm {
+  title: string;
+  description: string;
+  locale: "en_US" | "ru_RU";
+  category: string;
+  keywords: string;
+  creator: string;
+  manifest: string;
+  robots_index: "on" | "off";
+  robots_follow: "on" | "off";
+  robots_nocache: "on" | "off";
+  googleBot_index: "on" | "off";
+  googleBot_follow: "on" | "off";
+  googleBot_noImageIndex: "on" | "off";
+  googleBot_maxVideoPreview: "-1" | "0";
+  googleBot_maxImagePreview: "standart" | "none" | "large";
+  googleBot_maxSnippet: "-1" | "0";
+  icons_icon: string;
+  icons_apple: string;
+  icons_other_rel: string;
+  icons_other_url: string;
+  appleWebApp_title: string;
+  appleWebApp_statusBarStyle: "default" | "black-translucent" | "black";
+  appleWebApp_startupImage_base: string;
+  appleWebApp_startupImage_device_url: string;
+  appleWebApp_startupImage_device_media: string;
+  themeColor: string;
+  width: string;
+  initialScale: string;
+  maximumScale: string;
+  userScalable: "on" | "off";
+}

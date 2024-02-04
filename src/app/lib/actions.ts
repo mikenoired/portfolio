@@ -5,7 +5,7 @@ import { writeFile } from "fs/promises";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { SocLinksType } from "./definitions";
+import { ISettingsForm, SocLinksType } from "./definitions";
 
 const QNASchema = z.object({
   id: z.number(),
@@ -303,4 +303,69 @@ export async function updateAboutPage(data: FormData) {
       });
     }
   );
+}
+
+export async function updateSettings(data: {}) {
+  const s = data as ISettingsForm;
+  const onOff = (toggle: "on" | "off") => {
+    if (toggle == "on") return true;
+    if (toggle == "off") return false;
+  };
+  const metadata = {
+    title: s.title,
+    description: s.description,
+    locale: s.locale,
+    category: s.category,
+    keywords: s.keywords.split(" "),
+    creator: s.creator,
+    manifest: s.manifest,
+    robots: {
+      index: onOff(s.robots_index),
+      follow: onOff(s.robots_follow),
+      nocache: onOff(s.robots_nocache),
+      googleBot: {
+        index: onOff(s.googleBot_index),
+        follow: onOff(s.googleBot_follow),
+        noimageindex: onOff(s.googleBot_noImageIndex),
+        "max-video-preview": Number(s.googleBot_maxVideoPreview),
+        "max-image-preview": s.googleBot_maxImagePreview,
+        "max-snippet": Number(s.googleBot_maxSnippet),
+      },
+    },
+    icons: {
+      icon: s.icons_icon,
+      apple: s.icons_apple,
+      other: {
+        rel: s.icons_other_rel,
+        url: s.icons_other_url,
+      },
+    },
+    appleWebApp: {
+      title: s.appleWebApp_title,
+      statusBarStyle: s.appleWebApp_statusBarStyle,
+      startupImage: [
+        s.appleWebApp_startupImage_base,
+        {
+          url: s.appleWebApp_startupImage_device_url,
+          media: s.appleWebApp_startupImage_device_media,
+        },
+      ],
+    },
+    viewport: {
+      themeColor: s.themeColor,
+      width: s.width,
+      initialScale: Number(s.initialScale),
+      maximumScale: Number(s.maximumScale),
+      userScalable: onOff(s.userScalable),
+    },
+  };
+
+  const res = await prisma.siteSettings.update({
+    where: {
+      id: 1,
+    },
+    data: {
+      settings: JSON.stringify(metadata),
+    },
+  });
 }
