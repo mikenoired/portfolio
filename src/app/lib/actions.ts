@@ -371,9 +371,13 @@ export async function updateSettings(data: {}) {
       settings: JSON.stringify(settings),
     },
   });
+
+  revalidatePath("/admin/settings");
+  redirect("/admin/settings");
 }
 
 export async function fetchSettings() {
+  noStore();
   const res = await prisma.siteSettings.findFirst();
   return res;
 }
