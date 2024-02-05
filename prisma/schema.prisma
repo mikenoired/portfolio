@@ -60,6 +60,6 @@ model AboutPage {
 }
 
 model SiteSettings {
-  id       Int    @id @unique @default(1)
-  settings String
+  id       Int  @id @unique @default(1)
+  settings Json
 }
