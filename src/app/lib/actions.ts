@@ -306,18 +306,7 @@ export async function updateAboutPage(data: FormData) {
 }
 
 export async function updateSettings(data: any) {
-  const toggleStatus = (toggle: "on" | "off"): boolean => {
-    console.log(`Toggle status: ${toggle}`);
-    return toggle === "on";
-  };
-
-  const getSelected = (
-    data: { data: string | number; selected: boolean }[]
-  ) => {
-    console.log("Getting selected data:", data);
-    return data.find((item) => item.selected)?.data;
-  };
-
+  const toggleStatus = (toggle: "on" | "off"): boolean => toggle === "on";
   const settings: ISettings = {
     metadata: {
       title: data["metadata.title"],
@@ -373,18 +362,12 @@ export async function updateSettings(data: any) {
     },
   };
 
-  const del = await prisma.siteSettings.delete({
-    where: {
-      id: 1,
-    },
-  });
+  const del = await prisma.siteSettings.deleteMany();
   const create = await prisma.siteSettings.create({
     data: {
       settings: JSON.stringify(settings),
     },
   });
-
-  console.log("Site settings created:", create);
   revalidatePath("/admin/settings");
   redirect("/admin/settings");
 }
@@ -395,6 +378,5 @@ export async function fetchSettings() {
     id: 1;
     settings: {};
   };
-  console.log("Site settings fetched:", res?.settings);
   return res?.settings;
 }

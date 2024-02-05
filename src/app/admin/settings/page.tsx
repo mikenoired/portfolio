@@ -17,9 +17,7 @@ export default async function Page() {
         <div className='font-semibold text-xl'>Viewport</div>
       </div>
       <div className='col-start-2 col-end-5'>
-        {data && (
-          <Form metaSettings={JSON.parse(data as string) as ISettings} />
-        )}
+        {data && <Form s={JSON.parse(data as string) as ISettings} />}
       </div>
     </main>
   );
