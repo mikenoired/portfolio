@@ -5,7 +5,7 @@ import { writeFile } from "fs/promises";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { ISettings, ISettingsForm, SocLinksType } from "./definitions";
+import { ISettings, SocLinksType } from "./definitions";
 
 const QNASchema = z.object({
   id: z.number(),
@@ -305,79 +305,96 @@ export async function updateAboutPage(data: FormData) {
   );
 }
 
-export async function updateSettings(data: {}) {
-  const s = data as ISettingsForm;
-  const onOff = (toggle: "on" | "off"): boolean => {
-    if (toggle == "on") return true;
-    if (toggle == "off") return false;
-    else return false;
+export async function updateSettings(data: any) {
+  const toggleStatus = (toggle: "on" | "off"): boolean => {
+    console.log(`Toggle status: ${toggle}`);
+    return toggle === "on";
   };
+
+  const getSelected = (
+    data: { data: string | number; selected: boolean }[]
+  ) => {
+    console.log("Getting selected data:", data);
+    return data.find((item) => item.selected)?.data;
+  };
+
   const settings: ISettings = {
     metadata: {
-      title: s.title,
-      description: s.description,
-      locale: s.locale,
-      category: s.category,
-      keywords: s.keywords.split(" "),
-      creator: s.creator,
-      manifest: s.manifest,
+      title: data["metadata.title"],
+      description: data["metadata.description"],
+      locale: data["metadata.locale"],
+      category: data["metadata.category"],
+      keywords: data["metadata.keywords"].split(","),
+      creator: data["metadata.creator"],
+      manifest: data["metadata.manifest"],
       robots: {
-        index: onOff(s.robots_index),
-        follow: onOff(s.robots_follow),
-        nocache: onOff(s.robots_nocache),
+        index: toggleStatus(data["metadata.robots.index"]),
+        follow: toggleStatus(data["metadata.robots.follow"]),
+        nocache: toggleStatus(data["metadata.robots.nocache"]),
         googleBot: {
-          index: onOff(s.googleBot_index),
-          follow: onOff(s.googleBot_follow),
-          noimageindex: onOff(s.googleBot_noImageIndex),
-          "max-video-preview": Number(s.googleBot_maxVideoPreview),
-          "max-image-preview": s.googleBot_maxImagePreview,
-          "max-snippet": Number(s.googleBot_maxSnippet),
+          index: toggleStatus(data["metadata.robots.googleBot.index"]),
+          follow: toggleStatus(data["metadata.robots.googleBot.follow"]),
+          noimageindex: toggleStatus(
+            data["metadata.robots.googleBot.noimageindex"]
+          ),
+          "max-video-preview":
+            data['metadata.robots.googleBot["max-video-preview"]'],
+          "max-image-preview":
+            data['metadata.robots.googleBot["max-image-preview"]'],
+          "max-snippet": data['metadata.robots.googleBot["max-snippet"]'],
         },
       },
       icons: {
-        icon: s.icons_icon,
-        apple: s.icons_apple,
+        icon: data["metadata.icons.icon"],
+        apple: data["metadata.icons.apple"],
         other: {
-          rel: s.icons_other_rel,
-          url: s.icons_other_url,
+          rel: data["metadata.icons.other.rel"],
+          url: data["metadata.icons.other.url"],
         },
       },
       appleWebApp: {
-        title: s.appleWebApp_title,
-        statusBarStyle: s.appleWebApp_statusBarStyle,
+        title: data["metadata.appleWebApp.title"],
+        statusBarStyle: data["metadata.appleWebApp.statusBarStyle"],
         startupImage: [
-          s.appleWebApp_startupImage_base,
+          data["metadata.appleWebApp.startupImage[0]"],
           {
-            url: s.appleWebApp_startupImage_device_url,
-            media: s.appleWebApp_startupImage_device_media,
+            url: data["metadata.appleWebApp.startupImage[1].url"],
+            media: data["metadata.appleWebApp.startupImage[1].media"],
           },
         ],
       },
     },
     viewport: {
-      themeColor: s.themeColor,
-      width: s.width,
-      initialScale: Number(s.initialScale),
-      maximumScale: Number(s.maximumScale),
-      userScalable: onOff(s.userScalable),
+      themeColor: data["viewport.themeColor"],
+      width: data["viewport.width"],
+      initialScale: Number(data["viewport.initialScale"]),
+      maximumScale: Number(data["viewport.maximumScale"]),
+      userScalable: toggleStatus(data["viewport.userScalable"]),
     },
   };
 
-  const res = await prisma.siteSettings.update({
+  const del = await prisma.siteSettings.delete({
     where: {
       id: 1,
     },
+  });
+  const create = await prisma.siteSettings.create({
     data: {
       settings: JSON.stringify(settings),
     },
   });
 
+  console.log("Site settings created:", create);
   revalidatePath("/admin/settings");
   redirect("/admin/settings");
 }
 
 export async function fetchSettings() {
   noStore();
-  const res = await prisma.siteSettings.findFirst();
-  return res;
+  const res = (await prisma.siteSettings.findFirst()) as {
+    id: 1;
+    settings: {};
+  };
+  console.log("Site settings fetched:", res?.settings);
+  return res?.settings;
 }

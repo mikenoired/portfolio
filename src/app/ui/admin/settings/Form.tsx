@@ -1,171 +1,209 @@
 "use client";
 
 import { updateSettings } from "@/app/lib/actions";
-import { MetaSettings } from "@/app/lib/definitions.js";
+import { ISettings } from "@/app/lib/definitions";
 import Checkbox from "@/app/ui/admin/settings/Checkbox";
 import File from "@/app/ui/admin/settings/File";
 import Input from "@/app/ui/admin/settings/Input";
 import Select from "@/app/ui/admin/settings/Select";
 
-export default function Form({ metaSettings }: { metaSettings: MetaSettings }) {
+export default function Form({ metaSettings }: { metaSettings: ISettings }) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data = Object.fromEntries(formData.entries());
+      await updateSettings(data as ISettings);
+      console.log("Data:", data);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
   return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        // @ts-ignore
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData.entries());
-        await updateSettings(data);
-      }}
-      className='w-full'
-    >
+    <form onSubmit={handleSubmit} className='w-full'>
       <h2 className='text-4xl font-bold'>Main</h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
-        <Input name='title' title='Site title' value={metaSettings.title} />
         <Input
-          name='description'
+          name='metadata.title'
+          title='Site title'
+          value={metaSettings.metadata.title}
+        />
+        <Input
+          name='metadata.description'
           title='Description'
-          value={metaSettings.description}
+          value={metaSettings.metadata.description}
           big
         />
-        <Select value={metaSettings.locale} title='Locale' name='locale' />
-        <Input name='category' title='Category' value={metaSettings.category} />
+        <Select
+          value={JSON.parse(metaSettings.metadata.locale)}
+          title='Locale'
+          name='metadata.locale'
+        />
         <Input
-          name='keywords'
+          name='metadata.category'
+          title='Category'
+          value={metaSettings.metadata.category}
+        />
+        <Input
+          name='metadata.keywords'
           big
           title='Keywords'
-          value={metaSettings.keywords}
+          value={metaSettings.metadata.keywords.join(" ")}
         />
         <Input
-          name='creator'
+          name='metadata.creator'
           title='Creator name'
-          value={metaSettings.creator}
+          value={metaSettings.metadata.creator}
         />
-        <File value={metaSettings.manifest} title='Manifest' name='manifest' />
+        <File
+          value={metaSettings.metadata.manifest}
+          title='Manifest'
+          name='metadata.manifest'
+        />
       </div>
       <h2 className='text-4xl font-bold'>Robots</h2>
       <div className='flex flex-wrap w-full mb-5'>
         <Checkbox
-          value={metaSettings.robots.index}
+          value={metaSettings.metadata.robots.index}
           title='Index'
-          name='robots_index'
+          name='metadata.robots.index'
         />
         <Checkbox
-          value={metaSettings.robots.follow}
+          value={metaSettings.metadata.robots.follow}
           title='Follow'
-          name='robots_follow'
+          name='metadata.robots.follow'
         />
         <Checkbox
-          value={metaSettings.robots.nocache}
+          value={metaSettings.metadata.robots.nocache}
           title='No-cache'
-          name='robots_nocache'
+          name='metadata.robots.nocache'
         />
       </div>
       <h3 className='text-2xl font-bold'>Google Bot</h3>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Checkbox
-          value={metaSettings.robots.googleBot.index}
+          value={metaSettings.metadata.robots.googleBot.index}
           title='Index'
-          name='googleBot_index'
+          name='metadata.robots.googleBot.index'
         />
         <Checkbox
-          value={metaSettings.robots.googleBot.follow}
+          value={metaSettings.metadata.robots.googleBot.follow}
           title='Follow'
-          name='googleBot_follow'
+          name='metadata.robots.googleBot.follow'
         />
         <Checkbox
-          value={metaSettings.robots.googleBot.noimageindex}
+          value={metaSettings.metadata.robots.googleBot.noimageindex}
           title='No image index'
-          name='googleBot_noImageIndex'
+          name='metadata.robots.googleBot.noimageindex'
         />
         <Select
-          value={metaSettings.robots.googleBot.maxVideoPreview}
+          value={JSON.parse(
+            metaSettings.metadata.robots.googleBot[
+              "max-video-preview"
+            ] as string
+          )}
           title='Max video preview'
-          name='googleBot_maxVideoPreview'
+          name='metadata.robots.googleBot["max-video-preview"]'
         />
         <Select
-          value={metaSettings.robots.googleBot.maxImagePreview}
+          value={JSON.parse(
+            metaSettings.metadata.robots.googleBot[
+              "max-image-preview"
+            ] as string
+          )}
           title='Max image preview'
-          name='googleBot_maxImagePreview'
+          name='metadata.robots.googleBot["max-image-preview"]'
         />
         <Select
-          value={metaSettings.robots.googleBot.maxSnippet}
+          value={JSON.parse(
+            metaSettings.metadata.robots.googleBot["max-snippet"] as string
+          )}
           title='Max snippet'
-          name='googleBot_maxSnippet'
+          name='metadata.robots.googleBot["max-snippet"]'
         />
       </div>
       <h2 className='text-4xl font-bold'>Icons</h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
-        <File value={metaSettings.icons.icon} name='icons_icon' title='Icon' />
         <File
-          value={metaSettings.icons.apple}
-          name='icons_apple'
+          value={metaSettings.metadata.icons.icon}
+          name='metadata.icons.icon'
+          title='Icon'
+        />
+        <File
+          value={metaSettings.metadata.icons.apple}
+          name='metadata.icons.apple'
           title='Apple'
         />
       </div>
       <h3 className='text-2xl font-bold'>Other</h3>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Input
-          name='icons_other_rel'
+          name='metadata.icons.other.rel'
           title='Rel'
-          value={metaSettings.icons.other.rel}
+          value={metaSettings.metadata.icons.other.rel}
         />
         <File
-          value={metaSettings.icons.other.url}
-          name='icons_other_url'
+          value={metaSettings.metadata.icons.other.url}
+          name='metadata.icons.other.url'
           title='Icon'
         />
       </div>
       <h2 className='text-4xl font-bold'>Apple Web App</h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Input
-          name='appleWebApp_title'
+          name='metadata.appleWebApp.title'
           title='Title'
-          value={metaSettings.appleWebApp.title}
+          value={metaSettings.metadata.appleWebApp.title}
         />
         <Select
-          value={metaSettings.appleWebApp.statusBarStyle}
+          value={JSON.parse(
+            metaSettings.metadata.appleWebApp.statusBarStyle as string
+          )}
           title='Status bar style'
-          name='appleWebApp_statusBarStyle'
+          name='metadata.appleWebApp.statusBarStyle'
         />
       </div>
       <h3 className='text-2xl font-bold'>Startup Image</h3>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <File
-          value={metaSettings.appleWebApp.startupImage.base}
-          name='appleWebApp_startupImage_base'
+          value={metaSettings.metadata.appleWebApp.startupImage[0]}
+          name='metadata.appleWebApp.startupImage[0]'
           title='Base'
         />
       </div>
       <h4 className='text-xl font-bold'>Device</h4>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <File
-          value={metaSettings.appleWebApp.startupImage.device.url}
-          name='appleWebApp_startupImage_device_url'
+          value={metaSettings.metadata.appleWebApp.startupImage[1].url}
+          name='metadata.appleWebApp.startupImage[1].url'
           title='Url'
         />
         <Input
-          name='appleWebApp_startupImage_device_media'
+          name='metadata.appleWebApp.startupImage[1].media'
           title='Media'
-          value={metaSettings.appleWebApp.startupImage.device.media}
+          value={metaSettings.metadata.appleWebApp.startupImage[1].media}
         />
       </div>
       <h2 className='text-4xl font-bold'>Viewport</h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Input
-          name='themeColor'
+          name='viewport.themeColor'
           title='Theme color'
           value={metaSettings.viewport.themeColor}
         />
-        <Input name='width' title='Width' value={metaSettings.viewport.width} />
         <Input
-          name='initialScale'
+          name='viewport.width'
+          title='Width'
+          value={metaSettings.viewport.width}
+        />
+        <Input
+          name='viewport.initialScale'
           title='Init scale'
           numeric
           value={metaSettings.viewport.initialScale}
         />
         <Input
-          name='maximumScale'
+          name='viewport.maximumScale'
           title='Max scale'
           numeric
           value={metaSettings.viewport.maximumScale}
@@ -173,7 +211,7 @@ export default function Form({ metaSettings }: { metaSettings: MetaSettings }) {
         <Checkbox
           value={metaSettings.viewport.userScalable}
           title='Scalable'
-          name='userScalable'
+          name='viewport.userScalable'
         />
       </div>
       <button
