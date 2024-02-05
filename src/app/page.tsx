@@ -12,7 +12,10 @@ export async function generateMetadata(): Promise<Metadata> {
     return items.find((item) => item.selected)?.data;
   };
   return {
-    title: s.metadata.title,
+    title: {
+      template: `%s | ${s.metadata.title}`,
+      default: s.metadata.title,
+    },
     description: s.metadata.description,
     keywords: s.metadata.keywords,
     category: s.metadata.category,
