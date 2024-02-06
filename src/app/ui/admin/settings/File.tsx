@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import MediaManager from "../MediaManager";
 
@@ -33,7 +34,17 @@ export default function File({
         >
           Change {title}
         </button>
-        {file[0]}
+        {["jpg", "png", "jpeg"].includes(
+          file[0].split(".").pop() as string
+        ) && (
+          <Image
+            src={`/upload/${file[0]}`}
+            alt={title}
+            width={100}
+            height={100}
+            className='inline-block ml-7'
+          />
+        )}
       </div>
     </>
   );
