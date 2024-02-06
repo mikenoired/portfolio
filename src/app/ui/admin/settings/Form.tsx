@@ -20,7 +20,9 @@ export default function Form({ s }: { s: ISettings }) {
   };
   return (
     <form onSubmit={handleSubmit} className='w-full'>
-      <h2 className='text-4xl font-bold'>Main</h2>
+      <h2 id='main' className='text-4xl font-bold'>
+        Main
+      </h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Input
           name='metadata.title'
@@ -60,7 +62,9 @@ export default function Form({ s }: { s: ISettings }) {
           name='metadata.manifest'
         />
       </div>
-      <h2 className='text-4xl font-bold'>Robots</h2>
+      <h2 id='robots' className='text-4xl font-bold'>
+        Robots
+      </h2>
       <div className='flex flex-wrap w-full mb-5'>
         <Checkbox
           value={s.metadata.robots.index}
@@ -78,7 +82,9 @@ export default function Form({ s }: { s: ISettings }) {
           name='metadata.robots.nocache'
         />
       </div>
-      <h3 className='text-2xl font-bold'>Google Bot</h3>
+      <h3 id='google' className='text-2xl font-bold'>
+        Google Bot
+      </h3>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Checkbox
           value={s.metadata.robots.googleBot.index}
@@ -117,7 +123,9 @@ export default function Form({ s }: { s: ISettings }) {
           name='metadata.robots.googleBot["max-snippet"]'
         />
       </div>
-      <h2 className='text-4xl font-bold'>Icons</h2>
+      <h2 id='icons' className='text-4xl font-bold'>
+        Icons
+      </h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <File
           value={s.metadata.icons.icon}
@@ -143,7 +151,9 @@ export default function Form({ s }: { s: ISettings }) {
           title='Icon'
         />
       </div>
-      <h2 className='text-4xl font-bold'>Apple Web App</h2>
+      <h2 id='apple' className='text-4xl font-bold'>
+        Apple Web App
+      </h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Input
           name='metadata.appleWebApp.title'
@@ -177,7 +187,9 @@ export default function Form({ s }: { s: ISettings }) {
           value={s.metadata.appleWebApp.startupImage[1].media}
         />
       </div>
-      <h2 className='text-4xl font-bold'>Viewport</h2>
+      <h2 id='viewport' className='text-4xl font-bold'>
+        Viewport
+      </h2>
       <div className='flex flex-wrap items-center w-full mb-5'>
         <Input
           name='viewport.themeColor'
