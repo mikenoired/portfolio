@@ -1,5 +1,5 @@
-import { fetchThumb } from "@/app/lib/actions";
 import { ThumbType } from "@/app/lib/definitions";
+import { fetchThumb } from "@/app/server/thumbnail";
 import EditThumb from "@/app/ui/admin/EditThumb";
 
 export default async function Page() {

@@ -1,5 +1,5 @@
-import { fetchSettings } from "@/app/lib/actions";
 import { ISettings } from "@/app/lib/definitions";
+import { fetchSettings } from "@/app/server/settings";
 import Form from "@/app/ui/admin/settings/Form";
 
 export default async function Page() {
