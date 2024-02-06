@@ -1,6 +1,6 @@
 "use client";
 
-import { newQNA } from "@/app/lib/actions";
+import { newQNA } from "@/app/server/pages/QNA";
 import { useState } from "react";
 import Markdown from "react-markdown";
 

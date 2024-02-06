@@ -1,7 +1,7 @@
 "use client";
 
-import { updateWorkCat } from "@/app/lib/actions";
 import { WorkCat } from "@/app/lib/definitions";
+import { updateWorkCat } from "@/app/server/pages/works";
 import MediaManager from "@/app/ui/admin/MediaManager";
 import Image from "next/image";
 import { useState } from "react";

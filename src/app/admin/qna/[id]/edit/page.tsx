@@ -1,5 +1,5 @@
-import { fetchQNAById } from "@/app/lib/actions";
 import { QNAForm } from "@/app/lib/definitions";
+import { fetchQNAById } from "@/app/server/pages/QNA";
 import EditForm from "@/app/ui/admin/qna/EditForm";
 
 export default async function Page({ params }: { params: { id: number } }) {

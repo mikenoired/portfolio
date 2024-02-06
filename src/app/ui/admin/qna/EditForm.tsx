@@ -1,7 +1,7 @@
 "use client";
 
-import { deleteQNAById, editQNA } from "@/app/lib/actions";
 import { QNAForm } from "@/app/lib/definitions";
+import { deleteQNAById, editQNA } from "@/app/server/pages/QNA";
 import { useState } from "react";
 import Markdown from "react-markdown";
 

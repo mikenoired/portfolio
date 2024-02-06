@@ -1,4 +1,4 @@
-import { fetchQNA } from "@/app/lib/actions";
+import { fetchQNA } from "@/app/server/pages/QNA";
 import List from "@/app/ui/admin/qna/List";
 
 export default async function Page() {

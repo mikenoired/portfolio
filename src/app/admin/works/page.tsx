@@ -1,4 +1,4 @@
-import { fetchWorks } from "@/app/lib/actions";
+import { fetchWorks } from "@/app/server/pages/works";
 import List from "@/app/ui/admin/works/List";
 
 export default async function Page() {

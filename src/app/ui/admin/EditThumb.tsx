@@ -1,7 +1,7 @@
 "use client";
 
-import { updateThumb } from "@/app/lib/actions";
 import { ThumbType } from "@/app/lib/definitions";
+import { updateThumb } from "@/app/server/thumbnail";
 import { useState } from "react";
 import MediaManager from "./MediaManager";
 

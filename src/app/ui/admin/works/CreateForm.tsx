@@ -1,6 +1,6 @@
 "use client";
 
-import { newWorkCat } from "@/app/lib/actions";
+import { newWorkCat } from "@/app/server/pages/works";
 import MediaManager from "@/app/ui/admin/MediaManager";
 import { useState } from "react";
 

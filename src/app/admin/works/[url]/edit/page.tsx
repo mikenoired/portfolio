@@ -1,5 +1,5 @@
-import { fetchWorkCat } from "@/app/lib/actions";
 import { WorkCat } from "@/app/lib/definitions";
+import { fetchWorkCat } from "@/app/server/pages/works";
 import { EditForm } from "@/app/ui/admin/works/EditForm";
 
 export default async function Page({ params }: { params: { url: string } }) {

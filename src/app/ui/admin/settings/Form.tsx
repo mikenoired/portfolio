@@ -1,7 +1,7 @@
 "use client";
 
-import { updateSettings } from "@/app/lib/actions";
 import { ISettings } from "@/app/lib/definitions";
+import { updateSettings } from "@/app/server/settings";
 import Checkbox from "@/app/ui/admin/settings/Checkbox";
 import File from "@/app/ui/admin/settings/File";
 import Input from "@/app/ui/admin/settings/Input";

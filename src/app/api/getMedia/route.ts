@@ -1,4 +1,4 @@
-import { fetchMedia } from "@/app/lib/actions";
+import { fetchMedia } from "@/app/server/media";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {

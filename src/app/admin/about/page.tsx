@@ -1,5 +1,5 @@
-import { fetchAboutContent, fetchPersonCard } from "@/app/lib/actions";
 import { AboutType, PersonType } from "@/app/lib/definitions";
+import { fetchAboutContent, fetchPersonCard } from "@/app/server/pages/about";
 import EditForm from "@/app/ui/admin/about/EditForm";
 
 export default async function Page() {

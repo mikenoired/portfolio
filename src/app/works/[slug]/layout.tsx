@@ -1,4 +1,4 @@
-import { fetchWorks } from "@/app/lib/actions";
+import { fetchWorks } from "@/app/server/pages/works";
 import { Header } from "@/app/ui/header";
 import { Sidebar } from "@/app/ui/works/sidebar";
 

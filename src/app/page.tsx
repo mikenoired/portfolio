@@ -1,4 +1,6 @@
-import { fetchSettings, fetchThumb, fetchWorks } from "@/app/lib/actions";
+import { fetchWorks } from "@/app/server/pages/works";
+import { fetchSettings } from "@/app/server/settings";
+import { fetchThumb } from "@/app/server/thumbnail";
 import { Header } from "@/app/ui/header";
 import type { Metadata } from "next";
 import { ISettings } from "./lib/definitions";

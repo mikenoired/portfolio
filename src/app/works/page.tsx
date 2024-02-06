@@ -1,6 +1,6 @@
+import { fetchWorks } from "@/app/server/pages/works";
 import { Header } from "@/app/ui/header";
 import { NavButton } from "@/app/ui/works/nav-button";
-import { fetchWorks } from "../lib/actions";
 
 export default async function Page() {
   const data = await fetchWorks();

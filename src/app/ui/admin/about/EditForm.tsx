@@ -1,7 +1,7 @@
 "use client";
 
-import { updateAboutPage } from "@/app/lib/actions";
 import { AboutType, PersonType } from "@/app/lib/definitions";
+import { updateAboutPage } from "@/app/server/pages/about";
 import Icon from "@/app/ui/Icon";
 import MediaManager from "@/app/ui/admin/MediaManager";
 import Image from "next/image";
