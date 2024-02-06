@@ -1,17 +1,11 @@
 "use client";
 
 import grain from "@/app/lib/grain";
-import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import { MutableRefObject, useEffect, useRef } from "react";
 import "./globals.css";
 
 const archivo = Archivo({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Mike Noired",
-  description: "Mike Noired's Portfolio",
-};
 
 export default function RootLayout({
   children,

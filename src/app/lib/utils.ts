@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { useEffect, useRef } from "react";
 
 const prismaClientSingleton = () => {
   return new PrismaClient();
@@ -10,22 +9,6 @@ declare global {
 const prisma = globalThis.prisma ?? prismaClientSingleton();
 export default prisma;
 if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
-
-export function useOutsideClick(callback: () => void) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        callback();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [callback]);
-
-  return ref;
-}
 
 export function formatBytes(bytes: number, decimals = 2) {
   if (!+bytes) return "0 B";

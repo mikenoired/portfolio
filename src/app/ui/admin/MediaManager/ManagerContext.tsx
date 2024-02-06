@@ -1,3 +1,5 @@
+"use client";
+
 import { ContextType, MediaType } from "@/app/lib/definitions";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 

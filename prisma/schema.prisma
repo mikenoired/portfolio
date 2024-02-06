@@ -58,3 +58,8 @@ model AboutPage {
   person   PersonCard @relation(fields: [personId], references: [id])
   content  String
 }
+
+model SiteSettings {
+  id       Int  @id @unique @default(1)
+  settings Json
+}
