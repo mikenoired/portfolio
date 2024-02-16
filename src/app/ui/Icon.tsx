@@ -11,7 +11,9 @@ interface IconProps {
     | "link"
     | "edit"
     | "back"
-    | "right";
+    | "right"
+    | "zoomIn"
+    | "zoomOut";
   dark: boolean;
   width: number;
   height: number;
@@ -115,6 +117,28 @@ export default function Icon({
                   fillRule='evenodd'
                   clipRule='evenodd'
                   d='M13.5857 8.91226L7.49808 14.9999L6.08386 13.5857L11.1716 8.49802L5.68416e-07 8.49802L7.43262e-07 6.49802L11.1714 6.49802L6.08765 1.41421L7.50186 -6.55508e-07L13.5858 6.0838L15 7.49802L13.5857 8.91226Z'
+                  fill={iconTheme}
+                />
+              </svg>
+            );
+          case "zoomIn":
+            return (
+              <svg viewBox='0 0 15 15' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                  d='M10 6C10 8.20914 8.20914 10 6 10C3.79086 10 2 8.20914 2 6C2 3.79086 3.79086 2 6 2C8.20914 2 10 3.79086 10 6ZM9.47649 10.8908C8.49568 11.5892 7.29581 12 6 12C2.68629 12 0 9.31371 0 6C0 2.68629 2.68629 0 6 0C9.31371 0 12 2.68629 12 6C12 7.29585 11.5892 8.49576 10.8907 9.47659L15.0039 13.5898L13.5897 15.004L9.47649 10.8908ZM7 5H9V7H7V9H5V7H3V5H5V3H7V5Z'
+                  fill={iconTheme}
+                />
+              </svg>
+            );
+          case "zoomOut":
+            return (
+              <svg viewBox='0 0 15 15' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                  d='M6 10C8.20914 10 10 8.20914 10 6C10 3.79086 8.20914 2 6 2C3.79086 2 2 3.79086 2 6C2 8.20914 3.79086 10 6 10ZM6 12C7.29581 12 8.49567 11.5892 9.47647 10.8908L13.5897 15.004L15.0039 13.5898L10.8907 9.47659C11.5892 8.49576 12 7.29586 12 6C12 2.68629 9.31372 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12ZM9 5H3V7H9V5Z'
                   fill={iconTheme}
                 />
               </svg>
