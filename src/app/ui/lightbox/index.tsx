@@ -1,5 +1,6 @@
 "use client";
 
+import { mobileSwipe } from "@/app/lib/mobileSwipe";
 import Icon from "@/app/ui/Icon";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -28,6 +29,12 @@ export default function Lightbox({
       }
     };
     document.addEventListener("keydown", handleKeyPress);
+    mobileSwipe(
+      () => leftImage(),
+      () => rightImage(),
+      () => toggleLightbox(),
+      () => toggleLightbox()
+    );
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
