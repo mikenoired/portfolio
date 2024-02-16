@@ -3,7 +3,15 @@
 import { useState } from "react";
 
 interface IconProps {
-  type: "close" | "done" | "menu" | "arrowDown" | "link" | "edit" | "back";
+  type:
+    | "close"
+    | "done"
+    | "menu"
+    | "arrowDown"
+    | "link"
+    | "edit"
+    | "back"
+    | "right";
   dark: boolean;
   width: number;
   height: number;
@@ -96,6 +104,17 @@ export default function Icon({
                   fillRule='evenodd'
                   clipRule='evenodd'
                   d='M1.41431 6.08963L7.50192 0.00195312L8.91614 1.41617L3.82843 6.50388H15V8.50388H3.82855L8.91235 13.5877L7.49814 15.0019L1.41422 8.91809L0 7.50388L1.41431 6.08963Z'
+                  fill={iconTheme}
+                />
+              </svg>
+            );
+          case "right":
+            return (
+              <svg viewBox='0 0 15 15' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                  d='M13.5857 8.91226L7.49808 14.9999L6.08386 13.5857L11.1716 8.49802L5.68416e-07 8.49802L7.43262e-07 6.49802L11.1714 6.49802L6.08765 1.41421L7.50186 -6.55508e-07L13.5858 6.0838L15 7.49802L13.5857 8.91226Z'
                   fill={iconTheme}
                 />
               </svg>
