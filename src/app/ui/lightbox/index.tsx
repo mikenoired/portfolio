@@ -2,7 +2,7 @@
 
 import Icon from "@/app/ui/Icon";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Lightbox({
   urls,
@@ -13,6 +13,25 @@ export default function Lightbox({
   active: (toggle: boolean) => void;
   currentImage: string;
 }) {
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "Escape":
+          active(false);
+          break;
+        case "ArrowLeft":
+          leftImage();
+          break;
+        case "ArrowRight":
+          rightImage();
+          break;
+      }
+    };
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  });
   const toggleLightbox = () => {
     active(!active);
   };
