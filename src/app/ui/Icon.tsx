@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 
+interface IconProps {
+  type: "close" | "done" | "menu" | "arrowDown" | "link" | "edit" | "back";
+  dark: boolean;
+  width: number;
+  height: number;
+  className?: string;
+}
+
 export default function Icon({
   type,
   dark,
   width,
   height,
   className,
-}: {
-  type: string;
-  dark: boolean;
-  width: number;
-  height: number;
-  className?: string;
-}) {
+}: IconProps) {
   const [iconTheme] = useState(dark ? "#101010" : "#ebebeb");
   return (
     <div
