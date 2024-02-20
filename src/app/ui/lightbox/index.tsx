@@ -6,14 +6,6 @@ import Icon from "@/app/ui/Icon";
 import { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 
-function windowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-  };
-}
-
 export default function Lightbox({
   urls,
   active,
@@ -149,13 +141,9 @@ export default function Lightbox({
           <img
             src={`/upload/${current}`}
             alt=''
-            className='z-[100] absolute'
+            className='z-[100] absolute max-w-full max-h-full top-1/2 left-1/2'
             draggable={false}
             style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              top: "50%",
-              left: "50%",
               cursor: dragging ? "grabbing" : "grab",
             }}
           />
