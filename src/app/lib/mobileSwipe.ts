@@ -1,8 +1,8 @@
 export const mobileSwipe = (
-  moveRight: () => void,
-  moveLeft: () => void,
-  moveUp: () => void,
-  moveDown: () => void
+  right: () => void,
+  left: () => void,
+  up: () => void,
+  down: () => void
 ) => {
   let startX: number;
   let startY: number;
@@ -24,9 +24,9 @@ export const mobileSwipe = (
     const deltaY = endY - startY;
 
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      deltaX > 0 ? moveLeft() : moveRight();
+      deltaX > 0 ? left() : right();
     } else {
-      deltaY > 0 ? moveUp() : moveDown();
+      deltaY > 0 ? up() : down();
     }
   };
 
