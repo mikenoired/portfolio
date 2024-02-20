@@ -32,6 +32,9 @@ export default function Lightbox({
         case "ArrowRight":
           rightImage();
           break;
+        case "z":
+          zoomImage();
+          break;
       }
     };
     document.addEventListener("keydown", handleKeyPress);
