@@ -23,20 +23,12 @@ export default function Lightbox({
   active: (toggle: boolean) => void;
   currentImage: string;
 }) {
-  const [dimensions, setDimensions] = useState(windowDimensions());
-  const [imageDimensions, setImageDimensions] = useState({
-    width: 0,
-    height: 0,
-  });
   const [current, setCurrent] = useState<string>(currentImage);
   const [zoom, setZoom] = useState(false);
   const [activeDrags, setActiveDrags] = useState(0);
   const [dragging, isDragging] = useState(false);
+  const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   useEffect(() => {
-    function handleResize() {
-      setDimensions(windowDimensions());
-    }
-    window.addEventListener("resize", handleResize);
     const handleKeyPress = (e: KeyboardEvent) => {
       switch (e.key) {
         case "Escape":
@@ -58,7 +50,6 @@ export default function Lightbox({
       () => toggleLightbox()
     );
     return () => {
-      window.removeEventListener("resize", handleResize);
       document.removeEventListener("keydown", handleKeyPress);
     };
   });
@@ -76,14 +67,19 @@ export default function Lightbox({
 
   const dragHandlers = { onStart: onDragStart, onStop: onDragEnd };
 
+  const resetImage = () => {
+    setZoom(false);
+    isDragging(false);
+    setDragPos({ x: 0, y: 0 });
+  };
+
   const leftImage = () => {
     if (current == urls[0]) {
       setCurrent(urls[urls.length - 1]);
     } else {
       setCurrent(urls[urls.indexOf(current) - 1]);
     }
-    setZoom(false);
-    isDragging(false);
+    resetImage();
   };
   const rightImage = () => {
     if (current == urls[urls.length - 1]) {
@@ -91,11 +87,13 @@ export default function Lightbox({
     } else {
       setCurrent(urls[urls.indexOf(current) + 1]);
     }
-    setZoom(false);
-    isDragging(false);
+    resetImage();
   };
 
   const zoomImage = () => {
+    if (zoom) {
+      setDragPos({ x: 0, y: 0 });
+    }
     setZoom(!zoom);
   };
   return (
@@ -138,31 +136,22 @@ export default function Lightbox({
           disabled={!zoom}
           {...dragHandlers}
           positionOffset={{ x: "-50%", y: "-50%" }}
+          position={dragPos}
           onStart={() => {
             isDragging(true);
           }}
-          onStop={() => {
+          onStop={(e, pos) => {
+            setDragPos({ x: pos.x, y: pos.y });
             isDragging(false);
           }}
           scale={zoom ? 2 : 1}
         >
           <img
-            onLoad={(e) => {
-              setImageDimensions({
-                width: e.currentTarget.width,
-                height: e.currentTarget.height,
-              });
-            }}
             src={`/upload/${current}`}
             alt=''
             className='z-[100] absolute'
             draggable={false}
             style={{
-              // transform: `translate3d(${
-              //   dimensions.width / 2 - imageDimensions.width / 2 + imagePos.x
-              // }px, ${
-              //   dimensions.height / 2 - imageDimensions.height / 2 + imagePos.y
-              // }px, 0)`,
               maxWidth: "100%",
               maxHeight: "100%",
               top: "50%",
