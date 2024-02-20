@@ -1,3 +1,5 @@
+"use client";
+
 import { deleteWorkByURL } from "@/app/server/pages/works";
 import Icon from "@/app/ui/Icon";
 import { useState } from "react";

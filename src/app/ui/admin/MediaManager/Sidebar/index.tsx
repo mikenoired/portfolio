@@ -1,3 +1,5 @@
+"use client";
+
 import { useManagerContext } from "../ManagerContext";
 import Caption from "./Caption";
 import ExplorerButton from "./ExplorerButton";

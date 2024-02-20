@@ -1,3 +1,5 @@
+"use server";
+
 import Icon from "@/app/ui/Icon";
 import { AnswerBlock } from "@prisma/client";
 import Link from "next/link";

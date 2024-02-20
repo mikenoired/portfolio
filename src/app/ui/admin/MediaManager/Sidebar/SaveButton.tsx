@@ -1,3 +1,5 @@
+"use client";
+
 import { useManagerContext } from "../ManagerContext";
 
 export default function SaveButton({

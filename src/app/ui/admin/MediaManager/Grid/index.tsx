@@ -1,3 +1,5 @@
+"use client";
+
 import { MediaType } from "@/app/lib/definitions";
 import Icon from "@/app/ui/Icon";
 import clsx from "clsx";

@@ -1,3 +1,5 @@
+"use client";
+
 import { formatBytes, formatDate } from "@/app/lib/utils";
 
 export default function ImageData({
