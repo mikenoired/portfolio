@@ -1,9 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { mobileSwipe } from "@/app/lib/mobileSwipe";
 import Icon from "@/app/ui/Icon";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import Draggable from "react-draggable";
+
+function windowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
 
 export default function Lightbox({
   urls,
@@ -14,7 +23,20 @@ export default function Lightbox({
   active: (toggle: boolean) => void;
   currentImage: string;
 }) {
+  const [dimensions, setDimensions] = useState(windowDimensions());
+  const [imageDimensions, setImageDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
+  const [current, setCurrent] = useState<string>(currentImage);
+  const [zoom, setZoom] = useState(false);
+  const [activeDrags, setActiveDrags] = useState(0);
+  const [dragging, isDragging] = useState(false);
   useEffect(() => {
+    function handleResize() {
+      setDimensions(windowDimensions());
+    }
+    window.addEventListener("resize", handleResize);
     const handleKeyPress = (e: KeyboardEvent) => {
       switch (e.key) {
         case "Escape":
@@ -36,14 +58,23 @@ export default function Lightbox({
       () => toggleLightbox()
     );
     return () => {
+      window.removeEventListener("resize", handleResize);
       document.removeEventListener("keydown", handleKeyPress);
     };
   });
   const toggleLightbox = () => {
     active(!active);
   };
-  const [current, setCurrent] = useState<string>(currentImage);
-  const [zoom, setZoom] = useState(false);
+
+  const onDragStart = () => {
+    setActiveDrags(activeDrags + 1);
+  };
+
+  const onDragEnd = () => {
+    setActiveDrags(activeDrags - 1);
+  };
+
+  const dragHandlers = { onStart: onDragStart, onStop: onDragEnd };
 
   const leftImage = () => {
     if (current == urls[0]) {
@@ -51,6 +82,7 @@ export default function Lightbox({
     } else {
       setCurrent(urls[urls.indexOf(current) - 1]);
     }
+    setZoom(false);
   };
   const rightImage = () => {
     if (current == urls[urls.length - 1]) {
@@ -58,6 +90,7 @@ export default function Lightbox({
     } else {
       setCurrent(urls[urls.indexOf(current) + 1]);
     }
+    setZoom(false);
   };
 
   const zoomImage = () => {
@@ -95,18 +128,47 @@ export default function Lightbox({
           </div>
         </div>
       </div>
-      <div className='w-screen h-screen z-30 absolute'>
-        <div className='w-full h-full'>
-          <Image
+      <div
+        className='w-screen h-screen z-30 absolute transition-all'
+        style={{ scale: zoom ? 1.5 : 1 }}
+      >
+        <Draggable
+          disabled={!zoom}
+          {...dragHandlers}
+          positionOffset={{ x: "-50%", y: "-50%" }}
+          onStart={() => {
+            isDragging(true);
+          }}
+          onStop={() => {
+            isDragging(false);
+          }}
+          scale={zoom ? 1.5 : 1}
+        >
+          <img
+            onLoad={(e) => {
+              setImageDimensions({
+                width: e.currentTarget.width,
+                height: e.currentTarget.height,
+              });
+            }}
             src={`/upload/${current}`}
             alt=''
-            fill
-            className='object-contain z-[100]'
+            className='z-[100] absolute'
+            draggable={false}
             style={{
-              transform: zoom ? "scale(2)" : "scale(1)",
+              // transform: `translate3d(${
+              //   dimensions.width / 2 - imageDimensions.width / 2 + imagePos.x
+              // }px, ${
+              //   dimensions.height / 2 - imageDimensions.height / 2 + imagePos.y
+              // }px, 0)`,
+              maxWidth: "100%",
+              maxHeight: "100%",
+              top: "50%",
+              left: "50%",
+              cursor: dragging ? "grabbing" : "grab",
             }}
           />
-        </div>
+        </Draggable>
       </div>
     </div>
   );
