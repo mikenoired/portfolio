@@ -83,6 +83,7 @@ export default function Lightbox({
       setCurrent(urls[urls.indexOf(current) - 1]);
     }
     setZoom(false);
+    isDragging(false);
   };
   const rightImage = () => {
     if (current == urls[urls.length - 1]) {
@@ -91,6 +92,7 @@ export default function Lightbox({
       setCurrent(urls[urls.indexOf(current) + 1]);
     }
     setZoom(false);
+    isDragging(false);
   };
 
   const zoomImage = () => {
@@ -130,7 +132,7 @@ export default function Lightbox({
       </div>
       <div
         className='w-screen h-screen z-30 absolute transition-all'
-        style={{ scale: zoom ? 1.5 : 1 }}
+        style={{ scale: zoom ? 2 : 1 }}
       >
         <Draggable
           disabled={!zoom}
@@ -142,7 +144,7 @@ export default function Lightbox({
           onStop={() => {
             isDragging(false);
           }}
-          scale={zoom ? 1.5 : 1}
+          scale={zoom ? 2 : 1}
         >
           <img
             onLoad={(e) => {
