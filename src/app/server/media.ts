@@ -55,7 +55,7 @@ export async function loadMedia(imageValue: FormDataEntryValue | null) {
   }
 }
 
-export async function fetchMedia(type: { type: "" }) {
+export async function fetchMediaByType(type: { type: "" }) {
   noStore();
   const res = await prisma.media.findMany({
     where: {
@@ -72,5 +72,19 @@ export async function updateCaption(url: string, caption: string) {
       caption,
     },
   });
+  return res;
+}
+
+export async function fetchMediaByURLs(url: string[]) {
+  noStore();
+  console.log(url);
+  const res = await prisma.media.findMany({
+    where: {
+      url: {
+        in: url,
+      },
+    },
+  });
+  console.log(res);
   return res;
 }

@@ -1,9 +1,10 @@
 "use client";
 
+import { MediaType } from "@/app/lib/definitions";
 import Lightbox from "@/app/ui/lightbox";
 import { useState } from "react";
 
-export function ImagesGrid({ images }: { images: string[] }) {
+export function ImagesGrid({ images }: { images: MediaType[] }) {
   const [activeLightbox, setActive] = useState(false);
   const [currentImage, setCurrentImage] = useState<string>("");
   return (
@@ -12,7 +13,7 @@ export function ImagesGrid({ images }: { images: string[] }) {
         <Lightbox
           currentImage={currentImage}
           active={setActive}
-          urls={images}
+          urls={images.map((image) => `/upload/${image.url}`)}
         />
       )}
       <div className='w-full p-8 masonry-sm'>
@@ -20,12 +21,12 @@ export function ImagesGrid({ images }: { images: string[] }) {
           <div
             onClick={() => {
               setActive(true);
-              setCurrentImage(image);
+              setCurrentImage(images[index].url);
             }}
             key={index}
             className='mb-5 relative w-full h-full cursor-pointer'
           >
-            <img src={`/upload/${image}`} alt='' />
+            <img src={`/upload/${image.url}`} alt='' />
           </div>
         ))}
       </div>

@@ -20,6 +20,7 @@ export default function Lightbox({
   const [activeDrags, setActiveDrags] = useState(0);
   const [dragging, isDragging] = useState(false);
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
+  const [caption, setCaption] = useState("");
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       switch (e.key) {
@@ -37,6 +38,17 @@ export default function Lightbox({
           break;
       }
     };
+
+    const getCaption = async () => {
+      const res = await fetch(`http://localhost:3000/api/getCaption`, {
+        method: "POST",
+        body: JSON.stringify({ url: caption }),
+      })
+        .then((r) => r.json())
+        .then((caption) => setCaption(caption));
+    };
+    getCaption();
+
     document.addEventListener("keydown", handleKeyPress);
     mobileSwipe(
       () => leftImage(),
@@ -47,7 +59,7 @@ export default function Lightbox({
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  });
+  }, [current]);
   const toggleLightbox = () => {
     active(!active);
   };
@@ -94,7 +106,7 @@ export default function Lightbox({
   return (
     <div className='w-full h-full fixed z-20 bg-black backdrop-blur-sm bg-opacity-50 top-[0px] left-[0px]'>
       <div className='w-full h-full absolute select-none'>
-        <div className='absolute right-[0] px-6 top-[20px] flex justify-between w-full opacity-0 hover:opacity-100 pb-[50px] z-[60]'>
+        <div className='absolute right-[0] px-6 top-[20px] flex justify-between w-full opacity-0 hover:opacity-100 pb-[50px] z-[60] transition-opacity'>
           <span className='relative font-medium text-lg'>
             {urls.indexOf(current) + 1}/{urls.length}
           </span>
@@ -112,16 +124,21 @@ export default function Lightbox({
             </div>
           </div>
         </div>
-        <div className='absolute opacity-0 pl-6 flex items-center hover:opacity-100 w-[350px] h-full z-[50]'>
+        <div className='absolute opacity-0 pl-6 flex items-center hover:opacity-100 w-[350px] h-full z-[50] transition-opacity'>
           <div onClick={leftImage} className='cursor-pointer'>
             <Icon type='back' dark={false} width={25} height={25} />
           </div>
         </div>
-        <div className='absolute right-[0px] pr-6 flex items-center justify-end opacity-0 hover:opacity-100 w-[350px] h-full z-[50]'>
+        <div className='absolute right-[0px] pr-6 flex items-center justify-end opacity-0 hover:opacity-100 w-[350px] h-full z-[50] transition-opacity'>
           <div onClick={rightImage} className='cursor-pointer'>
             <Icon type='right' dark={false} width={25} height={25} />
           </div>
         </div>
+        {caption !== "" && (
+          <div className='w-full h-12 flex items-center justify-center bottom-[0px] z-50 absolute bg-gradient-to-t from-black from-10% opacity-0 hover:opacity-100 transition-opacity'>
+            <p className='text-white text-xl'>{caption}</p>
+          </div>
+        )}
       </div>
       <div
         className='w-screen h-screen z-30 absolute transition-all'
