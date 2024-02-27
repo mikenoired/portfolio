@@ -7,20 +7,25 @@ import { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 
 export default function Lightbox({
-  urls,
   active,
   currentImage,
+  currentCaption,
+  medias,
 }: {
-  urls: string[];
   active: (toggle: boolean) => void;
   currentImage: string;
+  currentCaption: string;
+  medias: {
+    url: string;
+    caption: string;
+  }[];
 }) {
   const [current, setCurrent] = useState<string>(currentImage);
   const [zoom, setZoom] = useState(false);
   const [activeDrags, setActiveDrags] = useState(0);
   const [dragging, isDragging] = useState(false);
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
-  const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState(currentCaption);
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       switch (e.key) {
@@ -39,16 +44,6 @@ export default function Lightbox({
       }
     };
 
-    const getCaption = async () => {
-      const res = await fetch(`http://localhost:3000/api/getCaption`, {
-        method: "POST",
-        body: JSON.stringify({ url: caption }),
-      })
-        .then((r) => r.json())
-        .then((caption) => setCaption(caption));
-    };
-    getCaption();
-
     document.addEventListener("keydown", handleKeyPress);
     mobileSwipe(
       () => leftImage(),
@@ -59,7 +54,7 @@ export default function Lightbox({
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [current]);
+  });
   const toggleLightbox = () => {
     active(!active);
   };
@@ -80,19 +75,27 @@ export default function Lightbox({
     setDragPos({ x: 0, y: 0 });
   };
 
+  const getMediaIndexByURL = (url: string) => {
+    return medias.findIndex((media) => media.url === url);
+  };
+
   const leftImage = () => {
-    if (current == urls[0]) {
-      setCurrent(urls[urls.length - 1]);
+    if (current == medias[0].url) {
+      setCurrent(medias[medias.length - 1].url);
+      setCaption(medias[medias.length - 1].caption);
     } else {
-      setCurrent(urls[urls.indexOf(current) - 1]);
+      setCurrent(medias[getMediaIndexByURL(current) - 1].url);
+      setCaption(medias[getMediaIndexByURL(current) - 1].caption);
     }
     resetImage();
   };
   const rightImage = () => {
-    if (current == urls[urls.length - 1]) {
-      setCurrent(urls[0]);
+    if (current == medias[medias.length - 1].url) {
+      setCurrent(medias[0].url);
+      setCaption(medias[0].caption);
     } else {
-      setCurrent(urls[urls.indexOf(current) + 1]);
+      setCurrent(medias[getMediaIndexByURL(current) + 1].url);
+      setCaption(medias[getMediaIndexByURL(current) + 1].caption);
     }
     resetImage();
   };
@@ -108,7 +111,7 @@ export default function Lightbox({
       <div className='w-full h-full absolute select-none'>
         <div className='absolute right-[0] px-6 top-[20px] flex justify-between w-full opacity-0 hover:opacity-100 pb-[50px] z-[60] transition-opacity'>
           <span className='relative font-medium text-lg'>
-            {urls.indexOf(current) + 1}/{urls.length}
+            {getMediaIndexByURL(current) + 1}/{medias.length}
           </span>
           <div className='flex gap-8'>
             <div onClick={zoomImage} className='cursor-pointer'>
