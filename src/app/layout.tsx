@@ -35,7 +35,7 @@ export default function RootLayout({
           ref={grainedCont}
           id='container'
           className='w-dvw h-dvh fixed top-[0px] -z-50'
-        />
+        /> 
       </body>
     </html>
   );

@@ -16,7 +16,7 @@ export default function SaveButton({
         saveHandler(selectedMedia);
         toggleManager(false);
       }}
-      className='w-full h-[50px] absolute bg-green text-black bottom-[0px] flex items-center justify-center text-xl font-semibold cursor-pointer'
+      className='w-[290px] h-[50px] fixed bg-green text-black bottom-[20px] grow-0 flex items-center justify-center text-xl font-semibold cursor-pointer'
     >
       Save
     </div>
