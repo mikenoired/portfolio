@@ -2,6 +2,7 @@ import { fetchQNA } from "@/app/server/pages/QNA";
 import { fetchWorks } from "@/app/server/pages/works";
 import { Header } from "@/app/ui/header";
 import { Block } from "@/app/ui/qna/block";
+import Main from "../ui/Main";
 
 export default async function Page() {
   const blocks = await fetchQNA();
@@ -18,14 +19,16 @@ export default async function Page() {
   workCats();
   return (
     <>
-      <Header subMenu={links} transparent={false} />
-      <main className='md:pt-12 pt-10 flex flex-col items-center'>
-        <div className='masonry sm:masonry md:masonry-sm pt-8 md:max-w-[1050px] pl-4 pr-4'>
-          {blocks.map((block, index) => (
-            <Block key={index} data={block} />
-          ))}
+      <Header subMenu={links} transparent={true} />
+      <Main>
+        <div className="flex flex-col items-center">
+          <div className="masonry sm:masonry md:masonry-sm pl-4 pr-4 pt-8 md:max-w-[1050px]">
+            {blocks.map((block, index) => (
+              <Block key={index} data={block} />
+            ))}
+          </div>
         </div>
-      </main>
+      </Main>
     </>
   );
 }

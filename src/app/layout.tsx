@@ -28,14 +28,16 @@ export default function RootLayout({
     grain(grainedCont.current, options);
   });
   return (
-    <html lang='en'>
-      <body className={archivo.className + " bg-black text-white"}>
+    <html lang="en">
+      <body
+        className={archivo.className + " overflow-y-hidden bg-black text-white"}
+      >
         {children}
         <div
           ref={grainedCont}
-          id='container'
-          className='w-dvw h-dvh fixed top-[0px] -z-50'
-        /> 
+          id="container"
+          className="fixed top-[0px] -z-50 h-dvh w-dvw"
+        />
       </body>
     </html>
   );
