@@ -2,7 +2,6 @@
 
 import { useManagerContext } from "../ManagerContext";
 import Caption from "./Caption";
-import Delete from "./Delete";
 import ExplorerButton from "./ExplorerButton";
 import ImageData from "./ImageData";
 import SaveButton from "./SaveButton";
@@ -11,7 +10,6 @@ export default function Sidebar({
   saveHandler,
   toggleManager,
   fileType,
-  deleteHandler,
 }: {
   saveHandler: (selectedMedia: string[]) => void;
   toggleManager: (open: boolean) => void;
@@ -21,9 +19,9 @@ export default function Sidebar({
   const { currentModify } = useManagerContext();
 
   return (
-    <div className='w-[290px] shrink-0 h-full border-r overflow-y-scroll pb-[70px]'>
+    <div className="h-full w-[290px] shrink-0 overflow-y-scroll border-r pb-[70px]">
       <ExplorerButton fileType={fileType} />
-      <div className='w-full p-6'>
+      <div className="w-full p-6">
         {Object.keys(currentModify).length !== 0 && (
           <>
             <ImageData
@@ -32,10 +30,6 @@ export default function Sidebar({
               type={currentModify.type}
             />
             <Caption fileType={fileType} />
-            <Delete
-              deleteHandler={deleteHandler}
-              selectedMedia={currentModify.url}
-            />
           </>
         )}
       </div>

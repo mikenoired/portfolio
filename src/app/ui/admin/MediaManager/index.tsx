@@ -16,6 +16,7 @@ export default function MediaManager({
   active: (active: boolean) => void;
   initSelected: string[];
   saveHandler: (selectedMedia: string[]) => void;
+  deleteHandler: (selectedMedia: string) => void;
   multiple: boolean;
   fileType: FileType["type"];
 }) {
@@ -28,8 +29,8 @@ export default function MediaManager({
   });
   return (
     <ManagerProvider>
-      <div className='w-full h-full fixed z-20 bg-black bg-opacity-50 top-[0px] left-[0px] p-6'>
-        <div className='w-full h-full border bg-black flex'>
+      <div className="fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 p-6">
+        <div className="flex h-full w-full border bg-black">
           <Sidebar
             fileType={fileType}
             toggleManager={active}
