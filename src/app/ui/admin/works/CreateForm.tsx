@@ -86,7 +86,9 @@ export function CreateForm() {
                 preview[0] !== "" ? `url('/upload/${preview}')` : "none",
             }}
           >
-            <div className="z-1 h-full px-8 text-[64px] font-bold">{title}</div>
+            <div className="z-1 h-full px-8 text-[64px] font-bold mix-blend-difference">
+              {title}
+            </div>
             <div className="absolute h-[88px] w-full bg-black opacity-15"></div>
           </div>
         </div>
