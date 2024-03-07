@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useState } from "react";
 import Icon from "./Icon";
+import { useSession } from "next-auth/react";
 
 export function Header({
   transparent,
@@ -16,6 +17,7 @@ export function Header({
 }) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
+  const { data: session, status } = useSession();
   return (
     <header
       className={clsx(
@@ -34,6 +36,11 @@ export function Header({
         </Link>
         <nav className="hidden items-center text-xl md:flex">
           <Link href="/works">WORKS</Link>
+          {session?.user.role == "admin" && (
+            <Link className="pl-5" href="/admin">
+              ADMIN
+            </Link>
+          )}
           <Link href="/qna" className="pl-5">
             Q/A
           </Link>
