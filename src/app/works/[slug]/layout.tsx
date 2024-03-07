@@ -21,7 +21,7 @@ export default async function SlugPage({
   workCats();
   return (
     <>
-      <Header subMenu={links} transparent={true} />
+      <Header subMenu={links} transparent border />
       <Main>
         <div className="flex">
           <Sidebar data={urlData} />

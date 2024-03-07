@@ -22,7 +22,7 @@ export default async function Page() {
   workCats();
   return (
     <>
-      <Header subMenu={links} transparent={true} />
+      <Header subMenu={links} transparent border />
       <Main>
         <div className="flex w-full p-4 md:p-8">
           <Person data={personData as PersonType} />

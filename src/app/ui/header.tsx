@@ -8,9 +8,11 @@ import Icon from "./Icon";
 export function Header({
   transparent,
   subMenu,
+  border,
 }: {
-  transparent: Boolean;
+  transparent: boolean;
   subMenu: { title: string; url: string }[];
+  border?: boolean;
 }) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
@@ -21,7 +23,12 @@ export function Header({
         !transparent && "bg-black",
       )}
     >
-      <div className="relative flex h-10 w-full items-center border-b border-white pl-8 pr-8 md:h-12 md:justify-between">
+      <div
+        className={clsx(
+          "relative flex h-10 w-full items-center pl-8 pr-8 md:h-12 md:justify-between",
+          border && "border-b border-white",
+        )}
+      >
         <Link href="/" className="text-2xl font-semibold uppercase">
           Mikenoired
         </Link>
