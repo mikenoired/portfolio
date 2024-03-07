@@ -1,7 +1,7 @@
 "use server";
 
-import { fetchMediaByURLs } from "@/app/server/media";
-import { fetchWorkCat } from "@/app/server/pages/works";
+import { fetchMediaByURLs } from "@/server/media";
+import { fetchWorkCat } from "@/server/pages/works";
 import { Header } from "@/app/ui/works/Header";
 import { ImagesGrid } from "@/app/ui/works/ImagesGrid";
 

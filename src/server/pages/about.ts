@@ -1,5 +1,5 @@
 import { SocLinksType } from "@/app/lib/definitions";
-import prisma from "@/app/lib/utils";
+import prisma from "@/server/prisma";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchPersonCard() {
@@ -54,6 +54,6 @@ export async function updateAboutPage(data: FormData) {
           url: link.url,
         },
       });
-    }
+    },
   );
 }

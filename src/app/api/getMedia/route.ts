@@ -1,4 +1,4 @@
-import { fetchMediaByType } from "@/app/server/media";
+import { fetchMediaByType } from "@/server/media";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {

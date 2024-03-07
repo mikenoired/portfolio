@@ -1,4 +1,4 @@
-import { updateCaption } from "@/app/server/media";
+import { updateCaption } from "@/server/media";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request): Promise<NextResponse> {

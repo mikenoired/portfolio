@@ -1,4 +1,4 @@
-import prisma from "@/app/lib/utils";
+import prisma from "@/server/prisma";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";

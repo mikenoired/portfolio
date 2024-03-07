@@ -6,21 +6,21 @@ import Link from "next/link";
 
 export default async function List({ qnas }: { qnas: AnswerBlock[] }) {
   return (
-    <div className='md:w-[700px] w-full px-4'>
+    <div className="w-full px-4 md:w-[700px]">
       {qnas.length !== 0 ? (
         qnas.map((block, index) => (
-          <div key={index} className='flex p-5 border justify-between mb-5'>
-            <div className='max-w-fit'>{block.title}</div>
-            <div className='flex'>
+          <div key={index} className="mb-5 flex justify-between border p-5">
+            <div className="max-w-fit">{block.title}</div>
+            <div className="flex">
               <Link
                 href={`qna/${block.id}/edit`}
-                className='pl-4 cursor-pointer'
+                className="cursor-pointer pl-4"
               >
                 <Icon
-                  className='-mt-[3px]'
+                  className="-mt-[3px]"
                   width={25}
                   height={25}
-                  type='edit'
+                  type="edit"
                   dark={false}
                 />
               </Link>
@@ -28,13 +28,13 @@ export default async function List({ qnas }: { qnas: AnswerBlock[] }) {
           </div>
         ))
       ) : (
-        <div className='text-center text-2xl font-bold py-5'>
+        <div className="py-5 text-center text-2xl font-bold">
           There is no blocks :(
         </div>
       )}
       <Link
-        href='qna/new'
-        className='flex p-5 border justify-center hover:bg-white hover:text-black'
+        href="qna/new"
+        className="flex justify-center border p-5 hover:bg-white hover:text-black"
       >
         Add new
       </Link>

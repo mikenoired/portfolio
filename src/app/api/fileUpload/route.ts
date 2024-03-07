@@ -1,4 +1,4 @@
-import { loadMedia } from "@/app/server/media";
+import { loadMedia } from "@/server/media";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request): Promise<NextResponse> {

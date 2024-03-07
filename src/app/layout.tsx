@@ -1,6 +1,6 @@
 "use client";
 
-import grain from "@/app/lib/grain";
+import grain from "@/app/ui/grain";
 import { Archivo } from "next/font/google";
 import { MutableRefObject, useEffect, useRef } from "react";
 import "./globals.css";

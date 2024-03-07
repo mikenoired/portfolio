@@ -1,6 +1,6 @@
 import { PersonType } from "@/app/lib/definitions";
-import { fetchAboutContent, fetchPersonCard } from "@/app/server/pages/about";
-import { fetchWorks } from "@/app/server/pages/works";
+import { fetchAboutContent, fetchPersonCard } from "@/server/pages/about";
+import { fetchWorks } from "@/server/pages/works";
 import Content from "@/app/ui/about/Content";
 import Person from "@/app/ui/about/Person";
 import { Header } from "@/app/ui/Header";

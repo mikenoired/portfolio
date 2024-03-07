@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/app/lib/utils";
+import prisma from "@/server/prisma";
 import { writeFile } from "fs/promises";
 import { unstable_noStore as noStore } from "next/cache";
 

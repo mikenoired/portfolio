@@ -1,4 +1,4 @@
-import { fetchWorks } from "@/app/server/pages/works";
+import { fetchWorks } from "@/server/pages/works";
 import { Header } from "@/app/ui/Header";
 import { NavButton } from "@/app/ui/works/NavButton";
 import Main from "../ui/Main";

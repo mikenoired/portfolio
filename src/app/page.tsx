@@ -1,6 +1,6 @@
-import { fetchWorks } from "@/app/server/pages/works";
-import { fetchSettings } from "@/app/server/settings";
-import { fetchThumb } from "@/app/server/thumbnail";
+import { fetchWorks } from "@/server/pages/works";
+import { fetchSettings } from "@/server/settings";
+import { fetchThumb } from "@/server/thumbnail";
 import { Header } from "@/app/ui/Header";
 import type { Metadata } from "next";
 import { ISettings } from "./lib/definitions";

@@ -1,6 +1,6 @@
 "use client";
 
-import { newWorkCat } from "@/app/server/pages/works";
+import { newWorkCat } from "@/server/pages/works";
 import MediaManager from "@/app/ui/admin/MediaManager";
 import { useState } from "react";
 
@@ -18,76 +18,76 @@ export function CreateForm() {
           initSelected={preview}
           saveHandler={setPreview}
           multiple={false}
-          fileType='image'
+          fileType="image"
         />
       )}
-      <div className='flex'>
+      <div className="flex">
         <div>
-          <h1 className='text-2xl font-bold mb-3'>Add new work category</h1>
+          <h1 className="mb-3 text-2xl font-bold">Add new work category</h1>
           <form
-            className='p-4 border flex flex-col w-[400px]'
+            className="flex w-[400px] flex-col border p-4"
             action={newWorkCat}
           >
-            <div className='flex flex-col'>
-              <label className='text-xl font-semibold mb-3'>Title</label>
+            <div className="flex flex-col">
+              <label className="mb-3 text-xl font-semibold">Title</label>
               <input
-                className='border bg-black p-3'
-                type='text'
-                name='title'
-                placeholder='Print, urban, B&W, or smth else'
+                className="border bg-black p-3"
+                type="text"
+                name="title"
+                placeholder="Print, urban, B&W, or smth else"
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
                 autoFocus
               />
             </div>
-            <div className='flex flex-col mt-4'>
-              <label className='text-xl font-semibold mb-3'>
+            <div className="mt-4 flex flex-col">
+              <label className="mb-3 text-xl font-semibold">
                 Custom address
               </label>
               <input
-                className='border bg-black p-3'
-                type='text'
-                name='url'
+                className="border bg-black p-3"
+                type="text"
+                name="url"
                 placeholder='Example: "print" eqals /works/print'
                 onChange={(e) => setUrl(e.target.value)}
                 value={url}
                 autoFocus
               />
             </div>
-            <div className='flex flex-col mt-4'>
+            <div className="mt-4 flex flex-col">
               <input
-                type='text'
-                name='thumbnail'
+                type="text"
+                name="thumbnail"
                 hidden
                 defaultValue={preview}
               />
               <button
-                type='button'
-                className='w-full h-9 bg-white text-black font-medium text-base mt-3'
+                type="button"
+                className="mt-3 h-9 w-full bg-white text-base font-medium text-black"
                 onClick={() => setToggleManager(true)}
               >
                 Select thumbnail
               </button>
             </div>
             <button
-              className='w-full mt-5 h-10 bg-white text-black font-semibold text-lg'
-              type='submit'
+              className="mt-5 h-10 w-full bg-white text-lg font-semibold text-black"
+              type="submit"
             >
               Upload
             </button>
           </form>
         </div>
-        <div className='w-[700px] ml-6'>
+        <div className="ml-6 w-[700px]">
           <h1>Preview</h1>
           <div
-            className='h-[90px] overflow-hidden w-full relative bg-cover bg-center bg-no-repeat'
+            className="relative h-[90px] w-full overflow-hidden bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage:
                 preview[0] !== "" ? `url('/upload/${preview}')` : "none",
             }}
           >
-            <div className='px-8 text-[64px] font-bold h-full z-1'>{title}</div>
-            <div className='bg-black absolute opacity-15 w-full h-[88px]'></div>
+            <div className="z-1 h-full px-8 text-[64px] font-bold">{title}</div>
+            <div className="absolute h-[88px] w-full bg-black opacity-15"></div>
           </div>
         </div>
       </div>

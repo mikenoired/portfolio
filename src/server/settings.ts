@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/app/lib/utils";
+import prisma from "@/server/prisma";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ISettings } from "../lib/definitions";
@@ -24,7 +24,7 @@ export async function updateSettings(data: any) {
           index: toggleStatus(data["metadata.robots.googleBot.index"]),
           follow: toggleStatus(data["metadata.robots.googleBot.follow"]),
           noimageindex: toggleStatus(
-            data["metadata.robots.googleBot.noimageindex"]
+            data["metadata.robots.googleBot.noimageindex"],
           ),
           "max-video-preview":
             data['metadata.robots.googleBot["max-video-preview"]'],
