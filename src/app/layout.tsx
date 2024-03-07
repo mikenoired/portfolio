@@ -4,6 +4,7 @@ import grain from "@/app/lib/grain";
 import { Archivo } from "next/font/google";
 import { MutableRefObject, useEffect, useRef } from "react";
 import "./globals.css";
+import { motion } from "framer-motion";
 
 const archivo = Archivo({ subsets: ["latin"] });
 
@@ -32,7 +33,13 @@ export default function RootLayout({
       <body
         className={archivo.className + " overflow-y-hidden bg-black text-white"}
       >
-        {children}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ease: "easeInOut", duration: 0.5 }}
+        >
+          {children}
+        </motion.div>
         <div
           ref={grainedCont}
           id="container"
