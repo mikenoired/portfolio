@@ -6,13 +6,15 @@ export const options = {
       profile(profile) {
         console.log("Profile GitHub: ", {
           ...profile,
-          role: profile?.email == process.env.GITHUB_EMAIL ? "admin" : "basic",
+          role: "basic",
         });
 
-        return {
-          ...profile,
-          role: profile?.email == process.env.GITHUB_EMAIL ? "admin" : "basic",
-        };
+        if (profile?.email == process.env.GITHUB_EMAIL) {
+          return {
+            ...profile,
+            role: "admin",
+          };
+        } else return null;
       },
       clientId: process.env.GITHUB_ID ?? "",
       clientSecret: process.env.GITHUB_SECRET ?? "",
