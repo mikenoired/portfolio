@@ -26,7 +26,7 @@ const routes = [
 export default function Header() {
   const router = useRouter();
   return (
-    <header className="relative mb-8 flex h-12 items-center justify-center border-b">
+    <header className="absolute mb-8 flex h-12 w-full items-center justify-center border-b">
       <div className="absolute left-[30px] flex">
         <div
           className="mr-4 flex cursor-pointer items-center"

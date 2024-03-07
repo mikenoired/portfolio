@@ -4,7 +4,7 @@ import { fetchWorks } from "@/server/pages/works";
 import Content from "@/app/ui/about/Content";
 import Person from "@/app/ui/about/Person";
 import { Header } from "@/app/ui/Header";
-import Main from "../ui/Main";
+import Main from "@/app/ui/Main";
 
 export default async function Page() {
   const personData = await fetchPersonCard();
@@ -23,11 +23,9 @@ export default async function Page() {
   return (
     <>
       <Header subMenu={links} transparent border />
-      <Main>
-        <div className="flex w-full p-4 md:p-8">
-          <Person data={personData as PersonType} />
-          <Content data={aboutContent?.content as string} />
-        </div>
+      <Main className="flex w-full p-4 md:p-8">
+        <Person data={personData as PersonType} />
+        <Content data={aboutContent?.content as string} />
       </Main>
     </>
   );

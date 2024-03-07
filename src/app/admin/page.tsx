@@ -1,11 +1,12 @@
 import { ThumbType } from "@/app/lib/definitions";
 import { fetchThumb } from "@/server/thumbnail";
 import EditThumb from "@/app/ui/admin/EditThumb";
+import Main from "@/app/ui/Main";
 
 export default async function Page() {
   const thumb = (await fetchThumb()) as ThumbType;
   return (
-    <main className="mt-10 flex flex-col items-center">
+    <Main className="mt-10 flex flex-col items-center">
       <h1 className="mb-4 text-4xl font-bold">Admin panel</h1>
       <div className="grid w-full grid-cols-2 p-6">
         {thumb ? (
@@ -19,6 +20,6 @@ export default async function Page() {
           />
         )}
       </div>
-    </main>
+    </Main>
   );
 }

@@ -19,17 +19,15 @@ export default async function Page() {
   return (
     <>
       <Header subMenu={links} transparent={true} />
-      <Main>
-        <div className="flex flex-col items-end pt-[140px] md:pt-[160px]">
-          {data.map((link, index) => (
-            <NavButton
-              key={index}
-              title={link.title}
-              thumb={link.thumbnail}
-              url={link.url}
-            />
-          ))}
-        </div>
+      <Main className="flex flex-col items-end pt-[140px] md:pt-[160px]">
+        {data.map((link, index) => (
+          <NavButton
+            key={index}
+            title={link.title}
+            thumb={link.thumbnail}
+            url={link.url}
+          />
+        ))}
       </Main>
     </>
   );
