@@ -49,7 +49,7 @@ export default function Lightbox({
       () => leftImage(),
       () => rightImage(),
       () => toggleLightbox(),
-      () => toggleLightbox()
+      () => toggleLightbox(),
     );
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
@@ -107,14 +107,14 @@ export default function Lightbox({
     setZoom(!zoom);
   };
   return (
-    <div className='w-full h-full fixed z-20 bg-black backdrop-blur-sm bg-opacity-50 top-[0px] left-[0px]'>
-      <div className='w-full h-full absolute select-none'>
-        <div className='absolute right-[0] px-6 top-[20px] flex justify-between w-full opacity-0 hover:opacity-100 pb-[50px] z-[60] transition-opacity'>
-          <span className='relative font-medium text-lg'>
+    <div className="fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm">
+      <div className="absolute h-full w-full select-none">
+        <div className="absolute right-[0] top-[20px] z-[60] flex w-full justify-between px-6 pb-[50px] opacity-0 transition-opacity hover:opacity-100">
+          <span className="relative text-lg font-medium">
             {getMediaIndexByURL(current) + 1}/{medias.length}
           </span>
-          <div className='flex gap-8'>
-            <div onClick={zoomImage} className='cursor-pointer'>
+          <div className="flex gap-8">
+            <div onClick={zoomImage} className="cursor-pointer">
               <Icon
                 type={zoom ? "zoomOut" : "zoomIn"}
                 dark={false}
@@ -122,29 +122,29 @@ export default function Lightbox({
                 height={25}
               />
             </div>
-            <div onClick={toggleLightbox} className='cursor-pointer'>
-              <Icon type='close' dark={false} width={25} height={25} />
+            <div onClick={toggleLightbox} className="cursor-pointer">
+              <Icon type="close" dark={false} width={25} height={25} />
             </div>
           </div>
         </div>
-        <div className='absolute opacity-0 pl-6 flex items-center hover:opacity-100 w-[350px] h-full z-[50] transition-opacity'>
-          <div onClick={leftImage} className='cursor-pointer'>
-            <Icon type='back' dark={false} width={25} height={25} />
+        <div className="absolute z-[50] flex h-full w-[350px] items-center pl-6 opacity-0 transition-opacity hover:opacity-100">
+          <div onClick={leftImage} className="cursor-pointer">
+            <Icon type="back" dark={false} width={25} height={25} />
           </div>
         </div>
-        <div className='absolute right-[0px] pr-6 flex items-center justify-end opacity-0 hover:opacity-100 w-[350px] h-full z-[50] transition-opacity'>
-          <div onClick={rightImage} className='cursor-pointer'>
-            <Icon type='right' dark={false} width={25} height={25} />
+        <div className="absolute right-[0px] z-[50] flex h-full w-[350px] items-center justify-end pr-6 opacity-0 transition-opacity hover:opacity-100">
+          <div onClick={rightImage} className="cursor-pointer">
+            <Icon type="right" dark={false} width={25} height={25} />
           </div>
         </div>
         {caption !== "" && (
-          <div className='w-full h-12 flex items-center justify-center bottom-[0px] z-50 absolute bg-gradient-to-t from-black from-10% opacity-0 hover:opacity-100 transition-opacity'>
-            <p className='text-white text-xl'>{caption}</p>
+          <div className="absolute bottom-[0px] z-50 flex h-12 w-full items-center justify-center bg-gradient-to-t from-black from-10% opacity-0 transition-opacity hover:opacity-100">
+            <p className="text-xl text-white">{caption}</p>
           </div>
         )}
       </div>
       <div
-        className='w-screen h-screen z-30 absolute transition-all'
+        className="absolute z-30 h-screen w-screen transition-all"
         style={{ scale: zoom ? 2 : 1 }}
       >
         <Draggable
@@ -163,8 +163,8 @@ export default function Lightbox({
         >
           <img
             src={`/upload/${current}`}
-            alt=''
-            className='z-[100] absolute max-w-full max-h-full top-1/2 left-1/2'
+            alt=""
+            className="absolute left-1/2 top-1/2 z-[100] max-h-full max-w-full"
             draggable={false}
             style={{
               cursor: dragging ? "grabbing" : "grab",
