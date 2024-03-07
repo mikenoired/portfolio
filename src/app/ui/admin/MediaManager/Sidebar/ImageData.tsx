@@ -1,6 +1,7 @@
 "use client";
 
-import { formatBytes, formatDate } from "@/app/lib/utils";
+import { formatDate } from "@/app/lib/utils";
+import { formatBytes } from "@/server/prisma";
 
 export default function ImageData({
   size,
