@@ -4,11 +4,6 @@ export const options = {
   providers: [
     GitHubProvider({
       profile(profile) {
-        console.log("Profile GitHub: ", {
-          ...profile,
-          role: "basic",
-        });
-
         if (profile?.email == process.env.GITHUB_EMAIL) {
           return {
             ...profile,
