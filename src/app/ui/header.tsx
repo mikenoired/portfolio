@@ -37,9 +37,6 @@ export function Header({
           <Link href="/qna" className="pl-5">
             Q/A
           </Link>
-          <Link href="/admin" className="pl-5">
-            ADMIN
-          </Link>
           <Link href="/about" className="pl-5">
             ABOUT
           </Link>
@@ -75,14 +72,6 @@ export function Header({
             toggleCat ? "flex" : "hidden",
           )}
         >
-          {/* <div className='pr-5 text-white text-xl font-medium uppercase'>
-            Studio
-          </div>
-          <div className='pr-5 text-white text-xl font-medium uppercase'>
-            Street
-          </div>
-          <div className='pr-5 text-xl font-medium uppercase'>Landscape</div>
-          <div className='text-xl font-medium uppercase'>Print</div> */}
           {subMenu.map((link, index) => (
             <Link
               className="pr-5 text-xl font-medium uppercase"
