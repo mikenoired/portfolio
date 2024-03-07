@@ -69,7 +69,6 @@ export async function fetchQNAById(id: number) {
 }
 
 export async function fetchQNA() {
-  noStore();
   const data = await prisma.answerBlock.findMany();
   return data;
 }

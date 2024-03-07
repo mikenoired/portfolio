@@ -3,7 +3,6 @@ import prisma from "@/server/prisma";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchPersonCard() {
-  noStore();
   const personData = await prisma.personCard.findFirst();
   const personLinks = await prisma.socLink.findMany({
     where: {
@@ -18,7 +17,6 @@ export async function fetchPersonCard() {
 }
 
 export async function fetchAboutContent() {
-  noStore();
   const res = await prisma.aboutPage.findFirst();
   return res;
 }

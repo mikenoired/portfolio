@@ -30,7 +30,6 @@ export async function newWorkCat(data: FormData) {
 }
 
 export async function fetchWorkCat(url: string) {
-  noStore();
   const data = await prisma.work.findUnique({
     where: {
       url,
@@ -41,7 +40,6 @@ export async function fetchWorkCat(url: string) {
 }
 
 export async function fetchWorks() {
-  noStore();
   const data = await prisma.work.findMany();
   return data;
 }

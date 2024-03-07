@@ -32,7 +32,7 @@ export default function grain(ele: HTMLDivElement, options: OptionsType) {
         }
       }
     }
-    return canvas.toDataURL("image/png");
+    return canvas.toDataURL("image/webp");
   };
   const noise = generateNoise();
 

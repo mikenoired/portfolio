@@ -73,7 +73,6 @@ export async function updateSettings(data: any) {
 }
 
 export async function fetchSettings() {
-  noStore();
   const res = (await prisma.siteSettings.findFirst()) as {
     id: 1;
     settings: {};

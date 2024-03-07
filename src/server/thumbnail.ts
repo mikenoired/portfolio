@@ -5,7 +5,6 @@ import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function fetchThumb() {
-  noStore();
   const res = prisma.siteThumbnail.findFirst();
   return res;
 }
