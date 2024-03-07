@@ -5,6 +5,7 @@ import { Archivo } from "next/font/google";
 import { MutableRefObject, useEffect, useRef } from "react";
 import "./globals.css";
 import { motion } from "framer-motion";
+import AuthProvider from "@/app/context/AuthProvider";
 
 const archivo = Archivo({ subsets: ["latin"] });
 
@@ -30,22 +31,26 @@ export default function RootLayout({
   });
   return (
     <html lang="en">
-      <body
-        className={archivo.className + " overflow-y-hidden bg-black text-white"}
-      >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ ease: "easeInOut", duration: 0.5 }}
+      <AuthProvider>
+        <body
+          className={
+            archivo.className + " overflow-y-hidden bg-black text-white"
+          }
         >
-          {children}
-        </motion.div>
-        <div
-          ref={grainedCont}
-          id="container"
-          className="fixed top-[0px] -z-50 h-dvh w-dvw"
-        />
-      </body>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ ease: "easeInOut", duration: 0.5 }}
+          >
+            {children}
+          </motion.div>
+          <div
+            ref={grainedCont}
+            id="container"
+            className="fixed top-[0px] -z-50 h-dvh w-dvw"
+          />
+        </body>
+      </AuthProvider>
     </html>
   );
 }

@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useState } from "react";
 import Icon from "./Icon";
+import { useSession } from "next-auth/react";
 
 export function Header({
   transparent,
@@ -16,6 +17,7 @@ export function Header({
 }) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
+  const { data: session, status } = useSession();
   return (
     <header
       className={clsx(
@@ -34,11 +36,13 @@ export function Header({
         </Link>
         <nav className="hidden items-center text-xl md:flex">
           <Link href="/works">WORKS</Link>
+          {session?.user.role == "admin" && (
+            <Link className="pl-5" href="/admin">
+              ADMIN
+            </Link>
+          )}
           <Link href="/qna" className="pl-5">
             Q/A
-          </Link>
-          <Link href="/admin" className="pl-5">
-            ADMIN
           </Link>
           <Link href="/about" className="pl-5">
             ABOUT
@@ -75,14 +79,6 @@ export function Header({
             toggleCat ? "flex" : "hidden",
           )}
         >
-          {/* <div className='pr-5 text-white text-xl font-medium uppercase'>
-            Studio
-          </div>
-          <div className='pr-5 text-white text-xl font-medium uppercase'>
-            Street
-          </div>
-          <div className='pr-5 text-xl font-medium uppercase'>Landscape</div>
-          <div className='text-xl font-medium uppercase'>Print</div> */}
           {subMenu.map((link, index) => (
             <Link
               className="pr-5 text-xl font-medium uppercase"
