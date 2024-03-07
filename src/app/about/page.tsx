@@ -3,7 +3,7 @@ import { fetchAboutContent, fetchPersonCard } from "@/app/server/pages/about";
 import { fetchWorks } from "@/app/server/pages/works";
 import Content from "@/app/ui/about/Content";
 import Person from "@/app/ui/about/Person";
-import { Header } from "@/app/ui/header";
+import { Header } from "@/app/ui/Header";
 import Main from "../ui/Main";
 
 export default async function Page() {

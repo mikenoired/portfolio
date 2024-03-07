@@ -10,16 +10,16 @@ export function Header({
   thumb: string | undefined;
 }) {
   return (
-    <div className='h-[90px] relative bg-center bg-no-repeat bg-cover overflow-hidden w-full border-b'>
-      <div className='absolute px-8 text-[64px] font-bold h-full z-[1]'>
+    <div className="relative h-[90px] w-full overflow-hidden border-b bg-cover bg-center bg-no-repeat">
+      <div className="absolute z-[1] h-full px-8 text-[64px] font-bold">
         {title}
       </div>
-      <div className='bg-black absolute opacity-15 w-full h-[88px]'></div>
+      <div className="absolute h-[88px] w-full bg-black opacity-15"></div>
       <Image
         src={`/upload/${thumb as string}`}
-        alt='thumb'
+        alt="thumb"
         fill
-        className='object-cover'
+        className="object-cover"
       />
     </div>
   );

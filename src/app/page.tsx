@@ -1,7 +1,7 @@
 import { fetchWorks } from "@/app/server/pages/works";
 import { fetchSettings } from "@/app/server/settings";
 import { fetchThumb } from "@/app/server/thumbnail";
-import { Header } from "@/app/ui/header";
+import { Header } from "@/app/ui/Header";
 import type { Metadata } from "next";
 import { ISettings } from "./lib/definitions";
 
@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const data = await fetchSettings();
   const s = JSON.parse(data as string) as ISettings;
   const getSelectedData = (
-    items: { data: string | number; selected: boolean }[]
+    items: { data: string | number; selected: boolean }[],
   ) => {
     return items.find((item) => item.selected)?.data;
   };
@@ -32,13 +32,13 @@ export async function generateMetadata(): Promise<Metadata> {
         follow: s.metadata.robots.googleBot.follow,
         noimageindex: s.metadata.robots.googleBot.noimageindex,
         "max-video-preview": getSelectedData(
-          JSON.parse(s.metadata.robots.googleBot["max-video-preview"])
+          JSON.parse(s.metadata.robots.googleBot["max-video-preview"]),
         ),
         "max-image-preview": getSelectedData(
-          JSON.parse(s.metadata.robots.googleBot["max-image-preview"])
+          JSON.parse(s.metadata.robots.googleBot["max-image-preview"]),
         ) as "none" | "standard" | "large",
         "max-snippet": getSelectedData(
-          JSON.parse(s.metadata.robots.googleBot["max-snippet"])
+          JSON.parse(s.metadata.robots.googleBot["max-snippet"]),
         ) as number,
       },
     },
@@ -53,7 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
     appleWebApp: {
       title: s.metadata.appleWebApp.title,
       statusBarStyle: getSelectedData(
-        JSON.parse(s.metadata.appleWebApp.statusBarStyle)
+        JSON.parse(s.metadata.appleWebApp.statusBarStyle),
       ) as "default" | "black" | "black-translucent",
       startupImage: [
         `/upload/${s.metadata.appleWebApp.startupImage[0]}`,
@@ -95,14 +95,14 @@ export default async function Home() {
     <>
       <Header subMenu={links} transparent={true} />
       <main>
-        <div className='w-screen h-screen relative'>
+        <div className="relative h-screen w-screen">
           <video
             src={`/upload/${thumb?.media}`}
             autoPlay
             controls={false}
             muted
             loop
-            className='object-cover w-dvw h-dvh'
+            className="h-dvh w-dvw object-cover"
           />
         </div>
       </main>
