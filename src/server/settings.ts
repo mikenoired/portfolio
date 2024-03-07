@@ -3,7 +3,7 @@
 import prisma from "@/server/prisma";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { ISettings } from "../lib/definitions";
+import { ISettings } from "@/app/lib/definitions";
 
 export async function updateSettings(data: any) {
   const toggleStatus = (toggle: "on" | "off"): boolean => toggle === "on";

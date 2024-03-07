@@ -3,6 +3,7 @@ import GitHubProvider from "next-auth/providers/github";
 export const options = {
   providers: [
     GitHubProvider({
+      //@ts-expect-error issue https://github.com/nextauthjs/next-auth/issues/6174
       profile(profile) {
         if (profile?.email == process.env.GITHUB_EMAIL) {
           return {
@@ -16,10 +17,12 @@ export const options = {
     }),
   ],
   callbacks: {
+    // @ts-ignore-next-line
     async jwt({ token, user }) {
       if (user) token.role = user.role;
       return token;
     },
+    // @ts-ignore-next-line
     async session({ session, token }) {
       if (session?.user) session.user.role = token.role;
       return session;

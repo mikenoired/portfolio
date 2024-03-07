@@ -36,7 +36,9 @@ export function Header({
         </Link>
         <nav className="hidden items-center text-xl md:flex">
           <Link href="/works">WORKS</Link>
-          {session?.user.role == "admin" && (
+          {/*
+          // @ts-ignore */}
+          {session?.user?.role == "admin" && (
             <Link className="pl-5" href="/admin">
               ADMIN
             </Link>

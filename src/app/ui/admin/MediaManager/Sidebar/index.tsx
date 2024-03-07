@@ -14,7 +14,6 @@ export default function Sidebar({
   saveHandler: (selectedMedia: string[]) => void;
   toggleManager: (open: boolean) => void;
   fileType: string;
-  deleteHandler: (selectedMedia: string) => void;
 }) {
   const { currentModify } = useManagerContext();
 

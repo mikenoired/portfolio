@@ -16,7 +16,6 @@ export default function MediaManager({
   active: (active: boolean) => void;
   initSelected: string[];
   saveHandler: (selectedMedia: string[]) => void;
-  deleteHandler: (selectedMedia: string) => void;
   multiple: boolean;
   fileType: FileType["type"];
 }) {
