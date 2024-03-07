@@ -57,6 +57,12 @@ export default function Header() {
         >
           Homepage
         </div>
+        <Link
+          className="pl-4 text-xl font-semibold"
+          href="/api/auth/signout?callbackUrl=/"
+        >
+          Logout
+        </Link>
       </div>
     </header>
   );
