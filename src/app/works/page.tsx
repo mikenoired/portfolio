@@ -1,6 +1,6 @@
 import { fetchWorks } from "@/app/server/pages/works";
 import { Header } from "@/app/ui/Header";
-import { NavButton } from "@/app/ui/works/nav-button";
+import { NavButton } from "@/app/ui/works/NavButton";
 import Main from "../ui/Main";
 
 export default async function Page() {

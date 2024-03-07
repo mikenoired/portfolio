@@ -1,6 +1,6 @@
 import { fetchWorks } from "@/app/server/pages/works";
 import { Header } from "@/app/ui/Header";
-import { Sidebar } from "@/app/ui/works/sidebar";
+import { Sidebar } from "@/app/ui/works/Sidebar";
 import Main from "@/app/ui/Main";
 
 export default async function SlugPage({

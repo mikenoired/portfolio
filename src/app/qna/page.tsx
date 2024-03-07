@@ -1,7 +1,7 @@
 import { fetchQNA } from "@/app/server/pages/QNA";
 import { fetchWorks } from "@/app/server/pages/works";
 import { Header } from "@/app/ui/Header";
-import { Block } from "@/app/ui/qna/block";
+import { Block } from "@/app/ui/qna/Block";
 import Main from "../ui/Main";
 
 export default async function Page() {
