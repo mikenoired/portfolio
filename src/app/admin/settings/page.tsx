@@ -12,9 +12,9 @@ export default async function Page() {
         </a>
         <a href="#robots" className="block text-xl font-semibold">
           Robots
-          <a href="#google" className="ml-6 block text-xl font-semibold">
-            Google Bot
-          </a>
+        </a>
+        <a href="#google" className="ml-6 block text-xl font-semibold">
+          Google Bot
         </a>
         <a href="#icons" className="block text-xl font-semibold">
           Icons
