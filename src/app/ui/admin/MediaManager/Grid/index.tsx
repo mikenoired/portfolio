@@ -34,7 +34,7 @@ export default function Grid({
 
   const findObjectByStr = (
     arr: MediaType[],
-    url: string
+    url: string,
   ): MediaType | undefined => {
     return arr.find((obj) => obj.url.includes(url));
   };
@@ -56,27 +56,28 @@ export default function Grid({
   };
 
   return (
-    <div className='w-full h-full p-6 overflow-y-scroll'>
-      {loadedMedia.length == 0 && "There's no loaded images in website :/"}
-      <div className='masonry-sm sm:masonry-md md:masonry-xl w-full'>
+    <div className="h-full w-full overflow-y-scroll p-6">
+      {loadedMedia.length == 0 &&
+        "There's no loaded media in website(fix it quickly!)"}
+      <div className="masonry-sm sm:masonry-md md:masonry-xl w-full">
         {loadedMedia.map((media) => (
           <div
             key={media.id}
             className={clsx(
-              selectedMedia.indexOf(media.url) > -1 && "border-2 border-green",
+              selectedMedia.indexOf(media.url) > -1 && "border-green border-2",
               media.url == currentModify?.url && "border-orange",
-              "box-border mb-6 break-inside relative cursor-pointer"
+              "break-inside relative mb-6 box-border cursor-pointer",
             )}
           >
             {selectedMedia.indexOf(media.url) > -1 && (
               <div
                 className={clsx(
-                  "w-8 h-8 flex items-center justify-center absolute right-[0px]",
-                  media.url == currentModify?.url ? "bg-orange" : "bg-green"
+                  "absolute right-[0px] flex h-8 w-8 items-center justify-center",
+                  media.url == currentModify?.url ? "bg-orange" : "bg-green",
                 )}
                 onClick={() => removeSelection(media)}
               >
-                <Icon type='done' dark={true} width={20} height={20} />
+                <Icon type="done" dark={true} width={20} height={20} />
               </div>
             )}
             {fileType == "image" && (

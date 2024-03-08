@@ -36,7 +36,7 @@ export default function Form({ s }: { s: ISettings }) {
           big
         />
         <Select
-          value={JSON.parse(s.metadata.locale)}
+          value={s.metadata.locale}
           title="Locale"
           name="metadata.locale"
         />
@@ -49,7 +49,7 @@ export default function Form({ s }: { s: ISettings }) {
           name="metadata.keywords"
           big
           title="Keywords"
-          value={s.metadata.keywords.join(" ")}
+          value={s.metadata.keywords}
         />
         <Input
           name="metadata.creator"
@@ -102,25 +102,19 @@ export default function Form({ s }: { s: ISettings }) {
           name="metadata.robots.googleBot.noimageindex"
         />
         <Select
-          value={JSON.parse(
-            s.metadata.robots.googleBot["max-video-preview"] as string,
-          )}
+          value={s.metadata.robots.googleBot.maxVideoPreview}
           title="Max video preview"
-          name='metadata.robots.googleBot["max-video-preview"]'
+          name="metadata.robots.googleBot.maxVideoPreview"
         />
         <Select
-          value={JSON.parse(
-            s.metadata.robots.googleBot["max-image-preview"] as string,
-          )}
+          value={s.metadata.robots.googleBot.maxImagePreview}
           title="Max image preview"
-          name='metadata.robots.googleBot["max-image-preview"]'
+          name="metadata.robots.googleBot.maxImagePreview"
         />
         <Select
-          value={JSON.parse(
-            s.metadata.robots.googleBot["max-snippet"] as string,
-          )}
+          value={s.metadata.robots.googleBot.maxSnippet}
           title="Max snippet"
-          name='metadata.robots.googleBot["max-snippet"]'
+          name="metadata.robots.googleBot.maxSnippet"
         />
       </div>
       <h2 id="icons" className="text-4xl font-bold">
@@ -161,7 +155,7 @@ export default function Form({ s }: { s: ISettings }) {
           value={s.metadata.appleWebApp.title}
         />
         <Select
-          value={JSON.parse(s.metadata.appleWebApp.statusBarStyle as string)}
+          value={s.metadata.appleWebApp.statusBarStyle}
           title="Status bar style"
           name="metadata.appleWebApp.statusBarStyle"
         />

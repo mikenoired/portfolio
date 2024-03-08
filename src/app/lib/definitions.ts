@@ -65,9 +65,9 @@ export interface ISettings {
   metadata: {
     title: string;
     description: string;
-    locale: string;
+    locale: { data: string | number; selected: boolean }[];
     category: string;
-    keywords: string[];
+    keywords: string;
     creator: string;
     manifest: string;
     robots: {
@@ -78,9 +78,9 @@ export interface ISettings {
         index: boolean;
         follow: boolean;
         noimageindex: boolean;
-        "max-video-preview": string;
-        "max-image-preview": string;
-        "max-snippet": string;
+        maxVideoPreview: { data: string | number; selected: boolean }[];
+        maxImagePreview: { data: string | number; selected: boolean }[];
+        maxSnippet: { data: string | number; selected: boolean }[];
       };
     };
     icons: {
@@ -93,13 +93,13 @@ export interface ISettings {
     };
     appleWebApp: {
       title: string;
-      statusBarStyle: string;
+      statusBarStyle: { data: string | number; selected: boolean }[];
       startupImage: [
         string,
         {
           url: string;
           media: string;
-        }
+        },
       ];
     };
   };

@@ -28,7 +28,7 @@ export default async function Page() {
         </a>
       </div>
       <div className="col-start-2 col-end-5">
-        {data && <Form s={JSON.parse(data as string) as ISettings} />}
+        {data && <Form s={data as ISettings} />}
       </div>
     </Main>
   );

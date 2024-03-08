@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/server/prisma";
-import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ISettings } from "@/app/lib/definitions";
 
@@ -11,7 +11,7 @@ export async function updateSettings(data: any) {
     metadata: {
       title: data["metadata.title"],
       description: data["metadata.description"],
-      locale: data["metadata.locale"],
+      locale: JSON.parse(data["metadata.locale"]),
       category: data["metadata.category"],
       keywords: data["metadata.keywords"].split(","),
       creator: data["metadata.creator"],
@@ -26,11 +26,13 @@ export async function updateSettings(data: any) {
           noimageindex: toggleStatus(
             data["metadata.robots.googleBot.noimageindex"],
           ),
-          "max-video-preview":
-            data['metadata.robots.googleBot["max-video-preview"]'],
-          "max-image-preview":
-            data['metadata.robots.googleBot["max-image-preview"]'],
-          "max-snippet": data['metadata.robots.googleBot["max-snippet"]'],
+          maxVideoPreview: JSON.parse(
+            data["metadata.robots.googleBot.maxVideoPreview"],
+          ),
+          maxImagePreview: JSON.parse(
+            data["metadata.robots.googleBot.maxImagePreview"],
+          ),
+          maxSnippet: JSON.parse(data["metadata.robots.googleBot.maxSnippet"]),
         },
       },
       icons: {
@@ -43,7 +45,7 @@ export async function updateSettings(data: any) {
       },
       appleWebApp: {
         title: data["metadata.appleWebApp.title"],
-        statusBarStyle: data["metadata.appleWebApp.statusBarStyle"],
+        statusBarStyle: JSON.parse(data["metadata.appleWebApp.statusBarStyle"]),
         startupImage: [
           data["metadata.appleWebApp.startupImage[0]"],
           {
@@ -65,7 +67,8 @@ export async function updateSettings(data: any) {
   const del = await prisma.siteSettings.deleteMany();
   const create = await prisma.siteSettings.create({
     data: {
-      settings: JSON.stringify(settings),
+      // @ts-ignore-next-line
+      settings,
     },
   });
   revalidatePath("/admin/settings");

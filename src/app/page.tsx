@@ -4,12 +4,13 @@ import { fetchThumb } from "@/server/thumbnail";
 import { Header } from "@/app/ui/Header";
 import type { Metadata } from "next";
 import { ISettings } from "./lib/definitions";
+import { number } from "zod";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await fetchSettings();
-  const s = JSON.parse(data as string) as ISettings;
+  const s = data as ISettings;
   const getSelectedData = (
-    items: { data: string | number; selected: boolean }[],
+    items: { data: string | number | undefined; selected: boolean }[],
   ) => {
     return items.find((item) => item.selected)?.data;
   };
@@ -32,14 +33,14 @@ export async function generateMetadata(): Promise<Metadata> {
         follow: s.metadata.robots.googleBot.follow,
         noimageindex: s.metadata.robots.googleBot.noimageindex,
         "max-video-preview": getSelectedData(
-          JSON.parse(s.metadata.robots.googleBot["max-video-preview"]),
+          s.metadata.robots.googleBot.maxVideoPreview,
         ),
         "max-image-preview": getSelectedData(
-          JSON.parse(s.metadata.robots.googleBot["max-image-preview"]),
+          s.metadata.robots.googleBot.maxSnippet,
         ) as "none" | "standard" | "large",
         "max-snippet": getSelectedData(
-          JSON.parse(s.metadata.robots.googleBot["max-snippet"]),
-        ) as number,
+          s.metadata.robots.googleBot.maxSnippet,
+        ) as number | undefined,
       },
     },
     icons: {
@@ -52,9 +53,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     appleWebApp: {
       title: s.metadata.appleWebApp.title,
-      statusBarStyle: getSelectedData(
-        JSON.parse(s.metadata.appleWebApp.statusBarStyle),
-      ) as "default" | "black" | "black-translucent",
+      statusBarStyle: getSelectedData(s.metadata.appleWebApp.statusBarStyle) as
+        | "default"
+        | "black"
+        | "black-translucent",
       startupImage: [
         `/upload/${s.metadata.appleWebApp.startupImage[0]}`,
         {
@@ -68,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export async function generateViewport() {
   const data = await fetchSettings();
-  const s = JSON.parse(data as string) as ISettings;
+  const s = data as ISettings;
   return {
     themeColor: s.viewport.themeColor,
     width: s.viewport.width,
