@@ -1,9 +1,9 @@
 "use server";
 
+import { ISettings } from "@/app/lib/definitions";
 import prisma from "@/server/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { ISettings } from "@/app/lib/definitions";
 
 export async function updateMeta(data: any) {
   const toggleStatus = (toggle: "on" | "off"): boolean => toggle === "on";
@@ -24,13 +24,13 @@ export async function updateMeta(data: any) {
           index: toggleStatus(data["metadata.robots.googleBot.index"]),
           follow: toggleStatus(data["metadata.robots.googleBot.follow"]),
           noimageindex: toggleStatus(
-            data["metadata.robots.googleBot.noimageindex"],
+            data["metadata.robots.googleBot.noimageindex"]
           ),
           maxVideoPreview: JSON.parse(
-            data["metadata.robots.googleBot.maxVideoPreview"],
+            data["metadata.robots.googleBot.maxVideoPreview"]
           ),
           maxImagePreview: JSON.parse(
-            data["metadata.robots.googleBot.maxImagePreview"],
+            data["metadata.robots.googleBot.maxImagePreview"]
           ),
           maxSnippet: JSON.parse(data["metadata.robots.googleBot.maxSnippet"]),
         },
@@ -84,6 +84,19 @@ export async function fetchMeta() {
 }
 
 export async function fetchPagesName() {
-  const res = await prisma.pageNamings.findFirst();
+  const res = await prisma.pageName.findMany();
   return res;
+}
+
+export async function updatePageNames(
+  data: {
+    name: string;
+    url: string;
+  }[]
+) {
+  const del = await prisma.pageName.deleteMany();
+  const create = await prisma.pageName.createMany({
+    data: data,
+  });
+  revalidatePath("/admin/settings");
 }

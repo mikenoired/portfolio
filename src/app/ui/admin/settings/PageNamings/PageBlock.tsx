@@ -1,32 +1,44 @@
-import Icon from "@/app/ui/Icon";
+"use client";
+
+import { Reorder, useMotionValue } from "framer-motion";
+import { Dispatch, SetStateAction } from "react";
 
 export default function PageBlock({
-  url,
-  name,
+  data,
+  onEdit,
 }: {
-  url: string;
-  name: string;
+  data: {
+    name: string;
+    url: string;
+  };
+  onEdit: Dispatch<SetStateAction<{ name: string; url: string }[]>>;
 }) {
+  const y = useMotionValue(0);
   return (
-    <div className="border">
+    <Reorder.Item
+      value={data}
+      id={data.url}
+      className='border'
+      as='div'
+      whileDrag={{ backgroundColor: "#101010" }}
+    >
       <input
-        className="block h-8 w-full border-0 bg-black bg-opacity-0 px-6 py-8 text-3xl font-semibold"
-        type="text"
-        defaultValue={name}
-        name=""
-        placeholder="Page name"
+        className='block h-8 w-full border-0 bg-black bg-opacity-0 px-6 py-8 text-3xl font-semibold'
+        type='text'
+        defaultValue={data.name}
+        name={data.url}
+        placeholder='Page name'
+        onChange={(e) =>
+          onEdit((prev) =>
+            prev.map((page) =>
+              page.url === data.url ? { ...page, name: e.target.value } : page
+            )
+          )
+        }
       />
-      <span className="block border-y bg-white bg-opacity-20 px-6 py-3">
-        /{url}
+      <span className='block border-t bg-white bg-opacity-20 px-6 py-3'>
+        /{data.url}
       </span>
-      <div className="flex h-8">
-        <button className="flex h-full w-1/2 items-center justify-center border-r bg-white bg-opacity-0 transition-all hover:bg-opacity-20">
-          <Icon dark={false} width={15} height={15} type="back" />
-        </button>
-        <button className="flex h-full w-1/2 items-center justify-center bg-white bg-opacity-0 transition-all hover:bg-opacity-20">
-          <Icon dark={false} width={15} height={15} type="right" />
-        </button>
-      </div>
-    </div>
+    </Reorder.Item>
   );
 }

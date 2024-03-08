@@ -64,10 +64,8 @@ model SiteSettings {
   settings Json
 }
 
-model PageNamings {
-  id    Int @id @unique @default(autoincrement())
-  about String
-  admin String
-  qna   String
-  works String
+model PageName {
+  id   Int    @id @unique @default(autoincrement())
+  name String
+  url  String
 }
