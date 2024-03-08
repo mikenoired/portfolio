@@ -1,13 +1,12 @@
 import { fetchWorks } from "@/server/pages/works";
-import { fetchSettings } from "@/server/settings";
+import { fetchMeta } from "@/server/settings";
 import { fetchThumb } from "@/server/thumbnail";
 import { Header } from "@/app/ui/Header";
 import type { Metadata } from "next";
 import { ISettings } from "./lib/definitions";
-import { number } from "zod";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await fetchSettings();
+  const data = await fetchMeta();
   const s = data as ISettings;
   const getSelectedData = (
     items: { data: string | number | undefined; selected: boolean }[],
@@ -69,7 +68,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export async function generateViewport() {
-  const data = await fetchSettings();
+  const data = await fetchMeta();
   const s = data as ISettings;
   return {
     themeColor: s.viewport.themeColor,

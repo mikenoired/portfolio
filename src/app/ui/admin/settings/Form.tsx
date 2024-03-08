@@ -1,7 +1,7 @@
 "use client";
 
 import { ISettings } from "@/app/lib/definitions";
-import { updateSettings } from "@/server/settings";
+import { updateMeta } from "@/server/settings";
 import Checkbox from "@/app/ui/admin/settings/Checkbox";
 import File from "@/app/ui/admin/settings/File";
 import Input from "@/app/ui/admin/settings/Input";
@@ -13,7 +13,7 @@ export default function Form({ s }: { s: ISettings }) {
     try {
       const formData = new FormData(e.currentTarget);
       const data = Object.fromEntries(formData.entries());
-      await updateSettings(data);
+      await updateMeta(data);
     } catch (error) {
       console.error("An error occurred:", error);
     }

@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ISettings } from "@/app/lib/definitions";
 
-export async function updateSettings(data: any) {
+export async function updateMeta(data: any) {
   const toggleStatus = (toggle: "on" | "off"): boolean => toggle === "on";
   const settings: ISettings = {
     metadata: {
@@ -75,10 +75,11 @@ export async function updateSettings(data: any) {
   redirect("/admin/settings");
 }
 
-export async function fetchSettings() {
+export async function fetchMeta() {
   const res = (await prisma.siteSettings.findFirst()) as {
     id: 1;
     settings: {};
   };
   return res?.settings;
 }
+
