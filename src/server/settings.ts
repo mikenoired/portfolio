@@ -83,3 +83,7 @@ export async function fetchMeta() {
   return res?.settings;
 }
 
+export async function fetchPagesName() {
+  const res = await prisma.pageNamings.findFirst();
+  return res;
+}
