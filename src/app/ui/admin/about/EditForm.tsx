@@ -15,7 +15,7 @@ export default function EditForm({
   personData: PersonType;
   aboutContent: AboutType;
 }) {
-  const [content, setContent] = useState(aboutContent.content);
+  const [content, setContent] = useState(aboutContent?.content);
   const [socials, setSocials] = useState(personData.socials);
   const [avatar, setAvatar] = useState([personData.avatar]);
   const [name, setName] = useState(personData.name);
@@ -69,18 +69,21 @@ export default function EditForm({
             <input type="text" hidden name="avatar" defaultValue={avatar} />
             <input
               name="name"
+              placeholder="Your name"
               className="mt-3 block w-full bg-white text-[28px] font-bold"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <input
               name="job"
+              placeholder="Add some job"
               className="mt-3 block w-full bg-white text-2xl font-semibold"
               value={job}
               onChange={(e) => setJob(e.target.value)}
             />
             <input
               name="place"
+              placeholder="Place of living or your job"
               className="mt-3 block w-full bg-white text-xl font-semibold"
               value={place}
               onChange={(e) => setPlace(e.target.value)}

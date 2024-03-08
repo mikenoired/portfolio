@@ -1,6 +1,7 @@
+"use server";
+
 import { SocLinksType } from "@/app/lib/definitions";
 import prisma from "@/server/prisma";
-import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchPersonCard() {
   const personData = await prisma.personCard.findFirst();
