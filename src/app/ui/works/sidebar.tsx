@@ -8,21 +8,21 @@ import { usePathname } from "next/navigation";
 export function Sidebar({ data }: { data: WorkCat[] }) {
   const pathname = usePathname();
   return (
-    <div className='h-screen fixed md:block hidden w-[250px]'>
-      <div className='flex w-full h-full flex-col p-6 border-r'>
+    <aside className="fixed hidden h-screen w-[250px] md:block">
+      <div className="flex h-full w-full flex-col border-r p-6">
         {data.map((link, index) => (
-          <Link key={index} href={link.url} className='pb-4 flex items-center'>
-            <span className='text-2xl font-semibold pr-4 text-nowrap'>
+          <Link key={index} href={link.url} className="flex items-center pb-4">
+            <span className="text-nowrap pr-4 text-2xl font-semibold">
               {link.title}
             </span>
             <div
-              className={clsx("w-full h-[3px] bg-white", {
+              className={clsx("h-[3px] w-full bg-white", {
                 "opacity-0": pathname !== "/works/" + link.url,
               })}
             ></div>
           </Link>
         ))}
       </div>
-    </div>
+    </aside>
   );
 }
