@@ -1,7 +1,7 @@
 import { fetchWorks } from "@/server/pages/works";
 import { Header } from "@/app/ui/Header";
 import { NavButton } from "@/app/ui/works/NavButton";
-import Main from "../ui/Main";
+import Main from "@/app/ui/Main";
 
 export default async function Page() {
   const data = await fetchWorks();

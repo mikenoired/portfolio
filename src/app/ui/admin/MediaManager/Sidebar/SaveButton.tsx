@@ -1,6 +1,6 @@
 "use client";
 
-import { useManagerContext } from "../ManagerContext";
+import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
 
 export default function SaveButton({
   saveHandler,
@@ -16,7 +16,7 @@ export default function SaveButton({
         saveHandler(selectedMedia);
         toggleManager(false);
       }}
-      className='w-[290px] h-[50px] fixed bg-green text-black bottom-[20px] grow-0 flex items-center justify-center text-xl font-semibold cursor-pointer'
+      className="bg-green fixed bottom-[20px] flex h-[50px] w-[290px] grow-0 cursor-pointer items-center justify-center text-xl font-semibold text-black"
     >
       Save
     </div>

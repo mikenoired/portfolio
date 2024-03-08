@@ -1,6 +1,6 @@
 "use client";
 
-import { useManagerContext } from "../ManagerContext";
+import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
 import Caption from "./Caption";
 import ExplorerButton from "./ExplorerButton";
 import ImageData from "./ImageData";

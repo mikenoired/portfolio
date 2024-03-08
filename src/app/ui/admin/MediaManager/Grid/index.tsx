@@ -5,7 +5,7 @@ import Icon from "@/app/ui/Icon";
 import clsx from "clsx";
 import Image from "next/image";
 import { useEffect } from "react";
-import { useManagerContext } from "../ManagerContext";
+import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
 
 export default function Grid({
   initSelected,
