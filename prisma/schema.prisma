@@ -63,3 +63,11 @@ model SiteSettings {
   id       Int  @id @unique @default(1)
   settings Json
 }
+
+model PageNamings {
+  id    Int @id @unique @default(autoincrement())
+  about String
+  admin String
+  qna   String
+  works String
+}
