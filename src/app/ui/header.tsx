@@ -1,7 +1,7 @@
 "use client";
 
 import { HeaderContext } from "@/app/context/HeaderProvider";
-import clsx from "clsx";
+import { cn } from "@/app/lib/utils";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext, useState } from "react";
@@ -22,13 +22,13 @@ export function Header({
   const { data: session, status } = useSession();
   return (
     <header
-      className={clsx(
+      className={cn(
         "absolute z-10 flex w-full flex-col mix-blend-difference contrast-100",
         !transparent && "bg-black"
       )}
     >
       <div
-        className={clsx(
+        className={cn(
           "relative flex h-10 w-full items-center pl-8 pr-8 md:h-12 md:justify-between",
           border && "border-b border-white"
         )}
@@ -60,7 +60,7 @@ export function Header({
           )}
         </div>
       </div>
-      <div className={clsx("flex-col", toggleMenu ? "flex" : "hidden")}>
+      <div className={cn("flex-col", toggleMenu ? "flex" : "hidden")}>
         <div className='flex w-full items-center border-b border-white pb-[14px] pl-8 pr-8  pt-[14px] md:h-12 md:justify-between'>
           <div
             className='inline-flex items-center justify-center gap-3'
@@ -73,7 +73,7 @@ export function Header({
           <div className='pl-5 text-xl font-medium'>CONTACTS</div>
         </div>
         <div
-          className={clsx(
+          className={cn(
             "w-full flex-wrap items-center border-b border-white pb-[14px] pl-8 pr-8 pt-[14px] md:justify-between",
             toggleCat ? "flex" : "hidden"
           )}

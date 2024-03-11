@@ -1,11 +1,11 @@
 "use client";
 
 import { MediaType } from "@/app/lib/definitions";
+import { cn } from "@/app/lib/utils";
 import Icon from "@/app/ui/Icon";
-import clsx from "clsx";
+import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
 import Image from "next/image";
 import { useEffect } from "react";
-import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
 
 export default function Grid({
   initSelected,
@@ -34,7 +34,7 @@ export default function Grid({
 
   const findObjectByStr = (
     arr: MediaType[],
-    url: string,
+    url: string
   ): MediaType | undefined => {
     return arr.find((obj) => obj.url.includes(url));
   };
@@ -56,28 +56,28 @@ export default function Grid({
   };
 
   return (
-    <div className="h-full w-full overflow-y-scroll p-6">
+    <div className='h-full w-full overflow-y-scroll p-6'>
       {loadedMedia.length == 0 &&
         "There's no loaded media in website(fix it quickly!)"}
-      <div className="masonry-sm sm:masonry-md md:masonry-xl w-full">
+      <div className='masonry-sm sm:masonry-md md:masonry-xl w-full'>
         {loadedMedia.map((media) => (
           <div
             key={media.id}
-            className={clsx(
+            className={cn(
               selectedMedia.indexOf(media.url) > -1 && "border-green border-2",
               media.url == currentModify?.url && "border-orange",
-              "break-inside relative mb-6 box-border cursor-pointer",
+              "break-inside relative mb-6 box-border cursor-pointer"
             )}
           >
             {selectedMedia.indexOf(media.url) > -1 && (
               <div
-                className={clsx(
+                className={cn(
                   "absolute right-[0px] flex h-8 w-8 items-center justify-center",
-                  media.url == currentModify?.url ? "bg-orange" : "bg-green",
+                  media.url == currentModify?.url ? "bg-orange" : "bg-green"
                 )}
                 onClick={() => removeSelection(media)}
               >
-                <Icon type="done" dark={true} width={20} height={20} />
+                <Icon type='done' dark={true} width={20} height={20} />
               </div>
             )}
             {fileType == "image" && (
