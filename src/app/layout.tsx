@@ -1,11 +1,11 @@
 "use client";
 
+import AuthProvider from "@/app/context/AuthProvider";
 import grain from "@/app/ui/grain";
 import { Archivo } from "next/font/google";
 import { MutableRefObject, useEffect, useRef } from "react";
+import HeaderProvider from "./context/HeaderProvider";
 import "./globals.css";
-import { motion } from "framer-motion";
-import AuthProvider from "@/app/context/AuthProvider";
 
 const archivo = Archivo({ subsets: ["latin"] });
 
@@ -30,20 +30,22 @@ export default function RootLayout({
     grain(grainedCont.current, options);
   });
   return (
-    <html lang="en">
+    <html lang='en'>
       <AuthProvider>
-        <body
-          className={
-            archivo.className + " overflow-y-hidden bg-black text-white"
-          }
-        >
-          {children}
-          <div
-            ref={grainedCont}
-            id="container"
-            className="fixed top-[0px] -z-50 h-dvh w-dvw"
-          />
-        </body>
+        <HeaderProvider>
+          <body
+            className={
+              archivo.className + " overflow-y-hidden bg-black text-white"
+            }
+          >
+            {children}
+            <div
+              ref={grainedCont}
+              id='container'
+              className='fixed top-[0px] -z-50 h-dvh w-dvw'
+            />
+          </body>
+        </HeaderProvider>
       </AuthProvider>
     </html>
   );
