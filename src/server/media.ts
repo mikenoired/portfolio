@@ -79,7 +79,6 @@ export async function updateCaption(url: string, caption: string) {
 
 export async function fetchMediaByURLs(url: string[]) {
   noStore();
-  console.log(url);
   const res = await prisma.media.findMany({
     where: {
       url: {
@@ -87,6 +86,5 @@ export async function fetchMediaByURLs(url: string[]) {
       },
     },
   });
-  console.log(res);
   return res;
 }
