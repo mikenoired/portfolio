@@ -39,7 +39,7 @@ export default function grain(ele: HTMLDivElement, options: OptionsType) {
   const addCSSRule = (
     sheet: CSSStyleSheet,
     selector: string,
-    rules: string,
+    rules: string
   ) => {
     let ins = "";
     selector.length ? (ins = `${selector}{${rules}}`) : (ins = rules);
@@ -78,7 +78,7 @@ export default function grain(ele: HTMLDivElement, options: OptionsType) {
     animation += "}";
   }
 
-  const animationAdded = document.getElementById("graineAnimation");
+  const animationAdded = document.getElementById("grainAnimation");
   if (animationAdded) {
     animationAdded.parentElement?.removeChild(animationAdded);
   }
@@ -87,13 +87,13 @@ export default function grain(ele: HTMLDivElement, options: OptionsType) {
   style.innerHTML = animation;
   document.body.appendChild(style);
 
-  const styleAdded = document.getElementById(`graineAnimation-"${ele.id}`);
+  const styleAdded = document.getElementById(`grainAnimation-"${ele.id}`);
   if (styleAdded) {
     styleAdded.parentElement?.removeChild(styleAdded);
   }
 
   style = document.createElement("style");
-  style.id = `graineAnimation-${ele.id}`;
+  style.id = `grainAnimation-${ele.id}`;
   document.body.appendChild(style);
 
   let rule = `background-image:url(${noise});position:absolute;content:"";height:300%;width:300%;left:-100%;top:-100%;`;

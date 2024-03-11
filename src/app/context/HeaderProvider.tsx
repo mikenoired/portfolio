@@ -20,6 +20,7 @@ export default function HeaderProvider({
   useEffect(() => {
     async function fetchData() {
       const data = await fetchPagesName();
+      // @ts-ignore-next-line
       if (session?.user?.role !== "admin") {
         setNames(data.filter((e) => e.url !== "admin"));
       } else setNames(data);
