@@ -4,6 +4,7 @@ import { HeaderContext } from "@/app/context/HeaderProvider";
 import { cn } from "@/app/lib/utils";
 import Icon from "@/app/ui/Icon";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useContext, useState } from "react";
 
 export function Header({
@@ -15,6 +16,7 @@ export function Header({
   subMenu: { title: string; url: string }[];
   border?: boolean;
 }) {
+  const pathname = usePathname();
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
   const names = useContext(HeaderContext);
@@ -39,7 +41,11 @@ export function Header({
             <Link
               key={index}
               href={`/${name.url}`}
-              className='ml-5 hover:text-white uppercase'
+              className={cn(
+                "ml-5 hover:text-white uppercase",
+                pathname == `/${name.url}` &&
+                  "underline underline-offset-8 pointer-events-none"
+              )}
             >
               {name.name}
             </Link>
