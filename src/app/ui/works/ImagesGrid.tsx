@@ -30,7 +30,11 @@ export function ImagesGrid({ images }: { images: MediaType[] }) {
             key={index}
             className='mb-5 relative w-full h-full cursor-pointer'
           >
-            <img src={`/upload/${image.url}`} alt={image.caption} />
+            <img
+              className='w-full'
+              src={`/upload/${image.url}`}
+              alt={image.caption}
+            />
           </div>
         ))}
       </div>
