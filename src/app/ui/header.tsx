@@ -2,10 +2,9 @@
 
 import { HeaderContext } from "@/app/context/HeaderProvider";
 import { cn } from "@/app/lib/utils";
-import { useSession } from "next-auth/react";
+import Icon from "@/app/ui/Icon";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import Icon from "./Icon";
 
 export function Header({
   transparent,
@@ -18,8 +17,7 @@ export function Header({
 }) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleCat, setToggleCat] = useState(false);
-  let names = useContext(HeaderContext);
-  const { data: session, status } = useSession();
+  const names = useContext(HeaderContext);
   return (
     <header
       className={cn(
@@ -40,7 +38,7 @@ export function Header({
           {names?.map((name, index) => (
             <Link
               key={index}
-              href={name.url}
+              href={`/${name.url}`}
               className='ml-5 hover:text-white uppercase'
             >
               {name.name}
