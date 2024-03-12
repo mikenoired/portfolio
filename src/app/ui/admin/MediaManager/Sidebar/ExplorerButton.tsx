@@ -1,16 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
+import { useState } from "react";
 
 export default function ExplorerButton({ fileType }: { fileType: string }) {
-  const [fileList, setFileList] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const { setLoadedMedia } = useManagerContext();
 
-  const files = fileList ? [...fileList] : [];
-
   const handleUploadClick = async () => {
-    if (!fileList) {
+    if (!files) {
       return;
     }
 
@@ -34,6 +32,8 @@ export default function ExplorerButton({ fileType }: { fileType: string }) {
       .then((loadedMedia) => {
         setLoadedMedia(loadedMedia);
       });
+
+    setFiles([]);
   };
 
   const acceptFiles = (type: string) => {
@@ -49,25 +49,25 @@ export default function ExplorerButton({ fileType }: { fileType: string }) {
     }
   };
   return (
-    <div className="w-full">
+    <div className='w-full'>
       <label
-        htmlFor="file-upload"
-        className="flex h-[50px] cursor-pointer flex-col items-center justify-center bg-white text-xl font-bold text-black"
+        htmlFor='file-upload'
+        className='flex h-[50px] cursor-pointer flex-col items-center justify-center bg-white text-xl font-bold text-black'
       >
         Open explorer
       </label>
       <input
-        type="file"
+        type='file'
         required
-        id="file-upload"
-        className="hidden"
+        id='file-upload'
+        className='hidden'
         accept={acceptFiles(fileType)}
         multiple
-        onChange={(e) => setFileList(e.target.files)}
+        onChange={(e) => setFiles(e.target.files ? [...e.target.files] : [])}
       />
       {files.length >= 1 && (
         <button
-          className="bg-orange flex h-[50px] w-full cursor-pointer items-center justify-center text-xl font-bold text-black"
+          className='bg-orange flex h-[50px] w-full cursor-pointer items-center justify-center text-xl font-bold text-black'
           onClick={handleUploadClick}
         >
           Upload
