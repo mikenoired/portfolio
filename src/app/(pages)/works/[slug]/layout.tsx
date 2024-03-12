@@ -1,7 +1,7 @@
-import { fetchWorks } from "@/server/pages/works";
-import { Header } from "@/app/ui/Header";
-import { Sidebar } from "@/app/ui/works/Sidebar";
+import Header from "@/app/ui/Header";
 import Main from "@/app/ui/Main";
+import { Sidebar } from "@/app/ui/works/Sidebar";
+import { fetchWorks } from "@/server/pages/works";
 
 export default async function SlugPage({
   children,
@@ -22,9 +22,9 @@ export default async function SlugPage({
   return (
     <>
       <Header subMenu={links} transparent border />
-      <Main className="flex">
+      <Main className='flex'>
         <Sidebar data={urlData} />
-        <div className="w-full md:pl-[250px]">{children}</div>
+        <div className='w-full md:pl-[250px]'>{children}</div>
       </Main>
     </>
   );

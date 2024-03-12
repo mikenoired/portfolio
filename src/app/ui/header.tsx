@@ -7,7 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext, useState } from "react";
 
-export function Header({
+export default function Header({
   transparent,
   subMenu,
   border,

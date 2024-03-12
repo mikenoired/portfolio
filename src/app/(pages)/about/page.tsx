@@ -1,5 +1,5 @@
 import { PersonType } from "@/app/lib/definitions";
-import { Header } from "@/app/ui/Header";
+import Header from "@/app/ui/Header";
 import Main from "@/app/ui/Main";
 import Content from "@/app/ui/about/Content";
 import Person from "@/app/ui/about/Person";

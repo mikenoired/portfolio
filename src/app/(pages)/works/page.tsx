@@ -1,7 +1,7 @@
-import { fetchWorks } from "@/server/pages/works";
-import { Header } from "@/app/ui/Header";
-import { NavButton } from "@/app/ui/works/NavButton";
+import Header from "@/app/ui/Header";
 import Main from "@/app/ui/Main";
+import { NavButton } from "@/app/ui/works/NavButton";
+import { fetchWorks } from "@/server/pages/works";
 
 export default async function Page() {
   const data = await fetchWorks();
@@ -19,7 +19,7 @@ export default async function Page() {
   return (
     <>
       <Header subMenu={links} transparent={true} />
-      <Main className="flex flex-col items-end pt-[140px] md:pt-[160px]">
+      <Main className='flex flex-col items-end pt-[140px] md:pt-[160px]'>
         {data.map((link, index) => (
           <NavButton
             key={index}

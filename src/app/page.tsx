@@ -1,7 +1,7 @@
+import Header from "@/app/ui/Header";
 import { fetchWorks } from "@/server/pages/works";
 import { fetchMeta } from "@/server/settings";
 import { fetchThumb } from "@/server/thumbnail";
-import { Header } from "@/app/ui/Header";
 import type { Metadata } from "next";
 import { ISettings } from "./lib/definitions";
 
@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const data = await fetchMeta();
   const s = data as ISettings;
   const getSelectedData = (
-    items: { data: string | number | undefined; selected: boolean }[],
+    items: { data: string | number | undefined; selected: boolean }[]
   ) => {
     return items.find((item) => item.selected)?.data;
   };
@@ -32,13 +32,13 @@ export async function generateMetadata(): Promise<Metadata> {
         follow: s.metadata.robots.googleBot.follow,
         noimageindex: s.metadata.robots.googleBot.noimageindex,
         "max-video-preview": getSelectedData(
-          s.metadata.robots.googleBot.maxVideoPreview,
+          s.metadata.robots.googleBot.maxVideoPreview
         ),
         "max-image-preview": getSelectedData(
-          s.metadata.robots.googleBot.maxSnippet,
+          s.metadata.robots.googleBot.maxSnippet
         ) as "none" | "standard" | "large",
         "max-snippet": getSelectedData(
-          s.metadata.robots.googleBot.maxSnippet,
+          s.metadata.robots.googleBot.maxSnippet
         ) as number | undefined,
       },
     },
@@ -96,14 +96,14 @@ export default async function Home() {
     <>
       <Header subMenu={links} transparent={true} />
       <main>
-        <div className="relative h-screen w-screen">
+        <div className='relative h-screen w-screen'>
           <video
             src={`/upload/${thumb?.media}`}
             autoPlay
             controls={false}
             muted
             loop
-            className="h-dvh w-dvw object-cover"
+            className='h-dvh w-dvw object-cover'
           />
         </div>
       </main>
