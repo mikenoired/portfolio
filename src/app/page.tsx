@@ -97,14 +97,17 @@ export default async function Home() {
       <Header subMenu={links} transparent={true} />
       <main>
         <div className='relative h-screen w-screen'>
-          <video
-            src={`/upload/${thumb?.media}`}
-            autoPlay
-            controls={false}
-            muted
-            loop
-            className='h-dvh w-dvw object-cover'
-          />
+          {thumb && (
+            <video
+              src={`/upload/${thumb?.media}`}
+              autoPlay
+              controls={false}
+              role='presentation'
+              muted
+              loop
+              className='h-dvh w-dvw object-cover'
+            />
+          )}
         </div>
       </main>
     </>
