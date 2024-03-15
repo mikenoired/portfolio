@@ -115,26 +115,30 @@ export default function Lightbox({
           {!isMobile && (
             <>
               {!swiperConfig.isEnd && (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    swiper?.slideNext();
-                  }}
-                  className='absolute right-[30px] top-[50%] z-50 cursor-pointer'
-                >
-                  <Icon type='right' dark={false} width={25} height={25} />
-                </button>
+                <div className='flex items-center justify-center absolute z-40 right-[0px] h-full px-8 opacity-0 hover:opacity-100 transition-opacity'>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      swiper?.slideNext();
+                    }}
+                    className='z-50 cursor-pointer'
+                  >
+                    <Icon type='right' dark={false} width={25} height={25} />
+                  </button>
+                </div>
               )}
               {!swiperConfig.isBeginning && (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    swiper?.slidePrev();
-                  }}
-                  className='absolute left-[30px] top-[50%] z-50 cursor-pointer'
-                >
-                  <Icon type='back' dark={false} width={25} height={25} />
-                </button>
+                <div className='flex items-center justify-center absolute z-40 left-[0px] h-full px-8 opacity-0 hover:opacity-100 transition-opacity'>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      swiper?.slidePrev();
+                    }}
+                    className='z-50 cursor-pointer'
+                  >
+                    <Icon type='back' dark={false} width={25} height={25} />
+                  </button>
+                </div>
               )}
             </>
           )}
