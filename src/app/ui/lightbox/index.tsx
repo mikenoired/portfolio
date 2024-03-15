@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/app/lib/utils";
 import Icon from "@/app/ui/Icon";
 import { isMobile } from "@/app/ui/lib/utils";
 import Image from "next/image";
@@ -36,6 +37,7 @@ export default function Lightbox({
     isBeginning: medias.findIndex((media) => media.url === currentImage) === 0,
     isEnd: activeIndex === (medias.length ?? 0) - 1,
   });
+  const [isCaptureToggled, setIsCaptureToggled] = useState(false);
   const toggleLightbox = () => {
     active(!active);
   };
@@ -136,7 +138,16 @@ export default function Lightbox({
             </>
           )}
           {caption !== "" && (
-            <div className='absolute bottom-[0px] z-50 flex h-12 w-full items-center justify-center bg-gradient-to-t from-black from-10% opacity-0 transition-opacity hover:opacity-100'>
+            <div
+              className={cn(
+                "absolute bottom-[0px] z-50 flex h-12 w-full items-center justify-center bg-gradient-to-t from-black from-10% transition-opacity",
+                isMobile
+                  ? isCaptureToggled
+                    ? "opacity-100"
+                    : "opacity-0"
+                  : "opacity-0 hover:opacity-100"
+              )}
+            >
               <p className='text-xl text-white'>{caption}</p>
             </div>
           )}
@@ -149,6 +160,7 @@ export default function Lightbox({
                 alt={image.caption}
                 objectFit='contain'
                 fill
+                onClick={() => setIsCaptureToggled(!isCaptureToggled)}
               />
             </div>
           </SwiperSlide>
