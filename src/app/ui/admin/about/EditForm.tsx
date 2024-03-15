@@ -48,7 +48,6 @@ export default function EditForm({
           <h1 className='text-3xl font-bold'>Edit about page</h1>
           <button
             type='submit'
-            onClick={() => setToggleCard(true)}
             className='absolute right-[0px] cursor-pointer text-xl font-semibold'
           >
             Save
@@ -148,7 +147,7 @@ export default function EditForm({
                 name='socials'
                 type='text'
                 hidden
-                defaultValue={JSON.stringify(socials)}
+                value={JSON.stringify(socials)}
               />
             </div>
           </div>
