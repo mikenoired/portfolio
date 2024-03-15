@@ -1,7 +1,7 @@
 "use client";
 
 import { MediaType } from "@/app/lib/definitions";
-import Lightbox from "@/app/ui/lightbox";
+import Lightbox from "@/app/ui/Lightbox";
 import { useState } from "react";
 
 export function ImagesGrid({ images }: { images: MediaType[] }) {
