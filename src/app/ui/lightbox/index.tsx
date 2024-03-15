@@ -1,10 +1,16 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { mobileSwipe } from "@/app/lib/mobileSwipe";
 import Icon from "@/app/ui/Icon";
+import { isMobile } from "@/app/ui/lib/utils";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import Draggable from "react-draggable";
+import type SwiperType from "swiper";
+import "swiper/css";
+import "swiper/css/effect-creative";
+import "swiper/css/navigation";
+import "swiper/css/zoom";
+import { Keyboard, Navigation, Zoom } from "swiper/modules";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
 export default function Lightbox({
   active,
@@ -20,158 +26,155 @@ export default function Lightbox({
     caption: string;
   }[];
 }) {
-  const [current, setCurrent] = useState<string>(currentImage);
-  const [zoom, setZoom] = useState(false);
-  const [activeDrags, setActiveDrags] = useState(0);
-  const [dragging, isDragging] = useState(false);
-  const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [caption, setCaption] = useState(currentCaption);
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "Escape":
-          active(false);
-          break;
-        case "ArrowLeft":
-          leftImage();
-          break;
-        case "ArrowRight":
-          rightImage();
-          break;
-        case "z":
-          zoomImage();
-          break;
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-    mobileSwipe(
-      () => leftImage(),
-      () => rightImage(),
-      () => toggleLightbox(),
-      () => toggleLightbox()
-    );
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(
+    medias.findIndex((media) => media.url === currentImage)
+  );
+  const [swiper, setSwiper] = useState<null | SwiperType>(null);
+  const [slideConfig, setSlideConfig] = useState({
+    isBeginning: medias.findIndex((media) => media.url === currentImage) === 0,
+    isEnd: activeIndex === (medias.length ?? 0) - 1,
   });
   const toggleLightbox = () => {
     active(!active);
   };
 
-  const onDragStart = () => {
-    setActiveDrags(activeDrags + 1);
+  const handleEscape = (e: KeyboardEvent) => {
+    if (e.key == "Escape") {
+      toggleLightbox();
+    }
   };
 
-  const onDragEnd = () => {
-    setActiveDrags(activeDrags - 1);
-  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscape);
 
-  const dragHandlers = { onStart: onDragStart, onStop: onDragEnd };
+    swiper?.on("slideChange", ({ activeIndex }) => {
+      setActiveIndex(activeIndex);
+      setSlideConfig({
+        isBeginning: activeIndex === 0,
+        isEnd: activeIndex === (medias.length ?? 0) - 1,
+      });
+      setCaption(medias[activeIndex].caption);
+    });
 
-  const resetImage = () => {
-    setZoom(false);
-    isDragging(false);
-    setDragPos({ x: 0, y: 0 });
-  };
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [swiper, medias]);
 
   const getMediaIndexByURL = (url: string) => {
     return medias.findIndex((media) => media.url === url);
   };
 
-  const leftImage = () => {
-    if (current == medias[0].url) {
-      setCurrent(medias[medias.length - 1].url);
-      setCaption(medias[medias.length - 1].caption);
-    } else {
-      setCurrent(medias[getMediaIndexByURL(current) - 1].url);
-      setCaption(medias[getMediaIndexByURL(current) - 1].caption);
-    }
-    resetImage();
-  };
-  const rightImage = () => {
-    if (current == medias[medias.length - 1].url) {
-      setCurrent(medias[0].url);
-      setCaption(medias[0].caption);
-    } else {
-      setCurrent(medias[getMediaIndexByURL(current) + 1].url);
-      setCaption(medias[getMediaIndexByURL(current) + 1].caption);
-    }
-    resetImage();
-  };
-
-  const zoomImage = () => {
-    if (zoom) {
-      setDragPos({ x: 0, y: 0 });
-    }
-    setZoom(!zoom);
-  };
   return (
     <div className='fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm'>
-      <div className='absolute h-full w-full select-none'>
-        <div className='absolute right-[0] top-[20px] z-[60] flex w-full justify-between px-6 pb-[50px] opacity-0 transition-opacity hover:opacity-100'>
-          <span className='relative text-lg font-medium'>
-            {getMediaIndexByURL(current) + 1}/{medias.length}
-          </span>
-          <div className='flex gap-8'>
-            <div onClick={zoomImage} className='cursor-pointer'>
-              <Icon
-                type={zoom ? "zoomOut" : "zoomIn"}
-                dark={false}
-                width={25}
-                height={25}
+      <Swiper
+        initialSlide={getMediaIndexByURL(currentImage)}
+        slidesPerView={1}
+        centeredSlides={true}
+        zoom={{
+          maxRatio: 2,
+          minRatio: 1,
+          toggle: true,
+        }}
+        onSwiper={(swiper) => setSwiper(swiper)}
+        keyboard={{
+          enabled: true,
+        }}
+        modules={[Keyboard, Zoom, Navigation]}
+      >
+        <div className='absolute h-full w-full select-none top-[0px]'>
+          <div className='absolute right-[0] top-[30px] z-[60] flex w-full justify-between px-8 pb-[50px] opacity-0 transition-opacity hover:opacity-100'>
+            <span className='relative text-lg font-medium'>
+              {`${activeIndex + 1}/${medias.length}`}
+            </span>
+            <div className='flex gap-8'>
+              <div
+                onClick={() => {
+                  isZoomed ? swiper?.zoom.out() : swiper?.zoom.in(2);
+                  setIsZoomed(!isZoomed);
+                }}
+                className='right-[50px] cursor-pointer'
+              >
+                <Icon
+                  type={isZoomed ? "zoomOut" : "zoomIn"}
+                  dark={false}
+                  width={25}
+                  height={25}
+                />
+              </div>
+              <div onClick={toggleLightbox} className='cursor-pointer'>
+                <Icon type='close' dark={false} width={25} height={25} />
+              </div>
+            </div>
+          </div>
+          {!isMobile && (
+            <>
+              {!slideConfig.isEnd && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    swiper?.slideNext();
+                  }}
+                  className='absolute right-[30px] top-[50%] z-50 cursor-pointer'
+                >
+                  <Icon type='right' dark={false} width={25} height={25} />
+                </button>
+              )}
+              {!slideConfig.isBeginning && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    swiper?.slidePrev();
+                  }}
+                  className='absolute left-[30px] top-[50%] z-50 cursor-pointer'
+                >
+                  <Icon type='back' dark={false} width={25} height={25} />
+                </button>
+              )}
+            </>
+          )}
+          {caption !== "" && (
+            <div className='absolute bottom-[0px] z-50 flex h-12 w-full items-center justify-center bg-gradient-to-t from-black from-10% opacity-0 transition-opacity hover:opacity-100'>
+              <p className='text-xl text-white'>{caption}</p>
+            </div>
+          )}
+        </div>
+        {medias.map((image, index) => (
+          <SwiperSlide zoom key={index}>
+            <div className='w-screen h-screen flex items-center justify-center relative'>
+              <Image
+                src={`/upload/${image.url}`}
+                alt={image.caption}
+                objectFit='contain'
+                fill
               />
             </div>
-            <div onClick={toggleLightbox} className='cursor-pointer'>
-              <Icon type='close' dark={false} width={25} height={25} />
-            </div>
-          </div>
-        </div>
-        <div className='absolute z-[50] flex h-full w-[350px] items-center pl-6 opacity-0 transition-opacity hover:opacity-100'>
-          <div onClick={leftImage} className='cursor-pointer'>
-            <Icon type='back' dark={false} width={25} height={25} />
-          </div>
-        </div>
-        <div className='absolute right-[0px] z-[50] flex h-full w-[350px] items-center justify-end pr-6 opacity-0 transition-opacity hover:opacity-100'>
-          <div onClick={rightImage} className='cursor-pointer'>
-            <Icon type='right' dark={false} width={25} height={25} />
-          </div>
-        </div>
-        {caption !== "" && (
-          <div className='absolute bottom-[0px] z-50 flex h-12 w-full items-center justify-center bg-gradient-to-t from-black from-10% opacity-0 transition-opacity hover:opacity-100'>
-            <p className='text-xl text-white'>{caption}</p>
-          </div>
-        )}
-      </div>
-      <div
-        className='absolute z-30 h-screen w-screen transition-all'
-        style={{ scale: zoom ? 2 : 1 }}
-      >
-        <Draggable
-          disabled={!zoom}
-          {...dragHandlers}
-          positionOffset={{ x: "-50%", y: "-50%" }}
-          position={dragPos}
-          onStart={() => {
-            isDragging(true);
-          }}
-          onStop={(e, pos) => {
-            setDragPos({ x: pos.x, y: pos.y });
-            isDragging(false);
-          }}
-          scale={zoom ? 2 : 1}
-        >
-          <img
-            src={`/upload/${current}`}
-            alt=''
-            className='absolute left-1/2 top-1/2 z-[100] max-h-full max-w-full'
-            draggable={false}
-            style={{
-              cursor: dragging ? "grabbing" : "grab",
-            }}
-          />
-        </Draggable>
-      </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }
+
+const ToggleZoom = () => {
+  const swiper = useSwiper();
+  const [isZoomed, setIsZoomed] = useState(false);
+  return (
+    <div
+      onClick={() => {
+        isZoomed ? swiper.zoom.out() : swiper.zoom.in(2);
+        setIsZoomed(!isZoomed);
+      }}
+      className='right-[50px] cursor-pointer'
+    >
+      <Icon
+        type={isZoomed ? "zoomOut" : "zoomIn"}
+        dark={false}
+        width={25}
+        height={25}
+      />
+    </div>
+  );
+};
