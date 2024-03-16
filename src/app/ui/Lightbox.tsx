@@ -65,6 +65,7 @@ export default function Lightbox({
         isEnd: activeIndex === (medias.length ?? 0) - 1,
       });
       setCaption(medias[activeIndex].caption);
+      setIsZoomed(false);
     });
 
     return () => document.removeEventListener("keydown", handleEscape);
