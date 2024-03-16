@@ -3,9 +3,11 @@
 import { AboutType, PersonType } from "@/app/lib/definitions";
 import Icon from "@/app/ui/Icon";
 import MediaManager from "@/app/ui/admin/MediaManager";
+import { linkStyle } from "@/app/ui/lib/linkStyle";
 import { globalProse } from "@/app/ui/lib/prose";
 import { updateAboutPage } from "@/server/pages/about";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
 
@@ -165,7 +167,18 @@ export default function EditForm({
           <div className='w-full'>
             <label className='mb-3 block text-xl font-semibold'>Preview</label>
             <div className={`prose-lg ${globalProse}`}>
-              <Markdown className='w-full'>{content}</Markdown>
+              <Markdown
+                components={{
+                  a: (props) => (
+                    <Link className={linkStyle} href={props.href as string}>
+                      {props.children}
+                    </Link>
+                  ),
+                }}
+                className='w-full'
+              >
+                {content}
+              </Markdown>
             </div>
           </div>
         </div>
