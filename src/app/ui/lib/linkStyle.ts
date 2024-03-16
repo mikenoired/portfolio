@@ -1,4 +1,6 @@
 export const linkStyle = [
+  "hover:underline",
+  "underline-offset-2",
   "relative",
   "pr-5",
   'after:content-["0"]',
