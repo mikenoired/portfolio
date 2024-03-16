@@ -9,6 +9,6 @@ export const linkStyle = [
   "after:ml-2",
   "after:inline",
   "after:mr-2",
-  "after:leading-snug",
+  "after:leading-[2.2]",
   "after:opacity-80",
 ].join(" ");
