@@ -3,11 +3,19 @@
 import AuthProvider from "@/app/context/AuthProvider";
 import grain from "@/app/ui/grain";
 import { Archivo } from "next/font/google";
+import localFont from "next/font/local";
 import { MutableRefObject, useEffect, useRef } from "react";
 import HeaderProvider from "./context/HeaderProvider";
 import "./globals.css";
 
-const archivo = Archivo({ subsets: ["latin"] });
+const archivo = Archivo({
+  subsets: ["latin"],
+});
+const symLinkFont = localFont({
+  src: "./fonts/symlink.woff2",
+  display: "swap",
+  variable: "--font-symlink",
+});
 
 export default function RootLayout({
   children,
@@ -34,9 +42,7 @@ export default function RootLayout({
       <AuthProvider>
         <HeaderProvider>
           <body
-            className={
-              archivo.className + " overflow-y-hidden bg-black text-white"
-            }
+            className={`${archivo.className} ${symLinkFont.variable} overflow-y-hidden bg-black text-white`}
           >
             {children}
             <div
