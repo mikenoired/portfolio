@@ -1,7 +1,7 @@
 export const linkStyle = [
   "relative",
   "pr-5",
-  'after:content-["\\0030"]',
+  'after:content-["0"]',
   "after:absolute",
   "after:right-0",
   "after:font-symlink",
