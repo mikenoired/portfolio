@@ -1,5 +1,6 @@
 import { PersonType } from "@/app/lib/definitions";
-import Icon from "@/app/ui/Icon";
+import { cn } from "@/app/lib/utils";
+import { linkStyle } from "@/app/ui/lib/linkStyle";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,17 +23,10 @@ export default function Person({ data }: { data: PersonType }) {
           data.socials.map((link, index) => (
             <div key={index} className='mb-3'>
               <Link
-                className='text-xl font-semibold relative pr-6'
+                className={cn("text-xl font-semibold", linkStyle)}
                 href={link.url}
               >
                 {link.name}
-                <Icon
-                  className='absolute top-[4px] right-[0]'
-                  type='link'
-                  width={14}
-                  height={14}
-                  dark={false}
-                />
               </Link>
             </div>
           ))}
