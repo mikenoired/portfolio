@@ -5,37 +5,38 @@ import { updateFlow } from "@/server/pages/flow";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function EditPage({
-  images,
-  description,
-}: {
+interface EditPageProps {
   images: string[];
   description: string;
-}) {
+}
+
+export default function EditPage({ images, description }: EditPageProps) {
   const [toggleManager, setToggleManager] = useState(false);
   const [flowImages, setImages] = useState(images);
   const [flowDescription, setDescription] = useState(description);
   const [changed, isChanged] = useState(false);
+
   useEffect(() => {
-    if (images !== flowImages || description !== flowDescription) {
-      isChanged(true);
-    } else {
-      isChanged(false);
-    }
+    isChanged(images !== flowImages || description !== flowDescription);
   }, [images, flowImages, description, flowDescription]);
+
   return (
     <>
       {toggleManager && (
         <MediaManager
           saveHandler={setImages}
-          initSelected={images}
+          initSelected={flowImages}
           active={setToggleManager}
           multiple
           fileType='image'
         />
       )}
       <div className='w-2/3 flex items-center flex-col'>
-        <form className='w-full' action={updateFlow}>
+        <form
+          className='w-full'
+          action={updateFlow}
+          onSubmit={() => isChanged(false)}
+        >
           {changed && (
             <div className='w-full'>
               <button className='h-10 w-full bg-white text-black' type='submit'>
