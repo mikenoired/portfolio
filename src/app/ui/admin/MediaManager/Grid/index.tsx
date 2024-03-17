@@ -27,7 +27,7 @@ export default function Grid({
     })
       .then((r) => r.json())
       .then((loadedMedia) => {
-        setLoadedMedia(loadedMedia);
+        setLoadedMedia(loadedMedia.reverse());
       });
     setSelectedMedia(initSelected);
   }, [setLoadedMedia, initSelected, setSelectedMedia, fileType]);
