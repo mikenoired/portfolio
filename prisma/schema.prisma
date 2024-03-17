@@ -69,3 +69,9 @@ model PageName {
   name String
   url  String
 }
+
+model Flow {
+  id          Int      @id @default(autoincrement())
+  description String
+  urls        String[]
+}
