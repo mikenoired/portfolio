@@ -30,16 +30,12 @@ export default function MediaManager({
   multiple,
   fileType,
 }: MediaManagerParams): JSX.Element {
-  const handleEscape = (e: KeyboardEvent) => {
-    if (e.key == "Escape") {
-      active(false);
-    }
-  };
   useEffect(() => {
-    document.addEventListener("keydown", (e) => handleEscape);
-    return () => {
-      document.removeEventListener("keydown", (e) => handleEscape);
-    };
+    document.addEventListener("keydown", (e) => {
+      if (e.key == "Escape") {
+        active(false);
+      }
+    });
   });
   return (
     <ManagerProvider>
