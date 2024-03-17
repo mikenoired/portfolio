@@ -6,30 +6,45 @@ import Grid from "./Grid";
 import { ManagerProvider } from "./ManagerContext";
 import Sidebar from "./Sidebar";
 
+interface MediaManagerParams {
+  active: (active: boolean) => void;
+  initSelected: string[];
+  saveHandler: (selectedMedia: string[]) => void;
+  multiple: boolean;
+  fileType: FileType["type"];
+}
+
+/**
+ * @description Component for managing media files.
+ * @param {function} active - Function to set the active state
+ * @param {string[]} initSelected - Array of initial selected media
+ * @param {function} saveHandler - Function to handle saving selected media
+ * @param {boolean} multiple - Allow multiple files to be selected
+ * @param {string} fileType - Type of file
+ * @return {JSX.Element} The TSX element representing the media manager component
+ */
 export default function MediaManager({
   active,
   initSelected,
   saveHandler,
   multiple,
   fileType,
-}: {
-  active: (active: boolean) => void;
-  initSelected: string[];
-  saveHandler: (selectedMedia: string[]) => void;
-  multiple: boolean;
-  fileType: FileType["type"];
-}) {
+}: MediaManagerParams): JSX.Element {
+  const handleEscape = (e: KeyboardEvent) => {
+    if (e.key == "Escape") {
+      active(false);
+    }
+  };
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      if (e.key == "Escape") {
-        active(false);
-      }
-    });
+    document.addEventListener("keydown", (e) => handleEscape);
+    return () => {
+      document.removeEventListener("keydown", (e) => handleEscape);
+    };
   });
   return (
     <ManagerProvider>
-      <div className="fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 p-6">
-        <div className="flex h-full w-full border bg-black">
+      <div className='fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 p-6'>
+        <div className='flex h-full w-full border bg-black'>
           <Sidebar
             fileType={fileType}
             toggleManager={active}
