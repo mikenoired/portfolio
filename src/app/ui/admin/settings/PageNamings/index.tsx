@@ -16,9 +16,7 @@ export default function PageNamings({
   const [pages, setPages] = useState(data);
   const [changed, isChanged] = useState(false);
   useEffect(() => {
-    if (data !== pages) {
-      isChanged(true);
-    }
+    isChanged(data !== pages);
   }, [data, pages]);
   return (
     <form
