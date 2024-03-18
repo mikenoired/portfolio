@@ -99,7 +99,7 @@ export interface ISettings {
         {
           url: string;
           media: string;
-        },
+        }
       ];
     };
   };
@@ -110,4 +110,9 @@ export interface ISettings {
     maximumScale: number;
     userScalable: boolean;
   };
+}
+
+export interface NotificationSettings {
+  text: string;
+  status: "normal" | "warning" | "error" | "success";
 }
