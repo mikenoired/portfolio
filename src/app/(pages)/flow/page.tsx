@@ -11,8 +11,8 @@ export default async function Page() {
       <Main moveTop={true}>
         {flow ? (
           <>
-            <div className='w-full p-11'>{flow.description}</div>
-            <div className='w-full'>
+            <div className="w-full p-11">{flow.description}</div>
+            <div className="w-full">
               {flow.urls.map((url, index) => (
                 <Image
                   key={index}
@@ -20,8 +20,9 @@ export default async function Page() {
                   alt={url}
                   width={200}
                   height={200}
-                  sizes='100vw'
-                  className='w-full'
+                  sizes="2680w"
+                  className="w-full"
+                  quality={80}
                 />
               ))}
             </div>
