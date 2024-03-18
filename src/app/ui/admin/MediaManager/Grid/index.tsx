@@ -87,6 +87,7 @@ export default function Grid({
                 height={300}
                 src={`/upload/${media.url}`}
                 onClick={() => handleSelection(media)}
+                sizes="(max-width: 640px) 100w, 640px"
               />
             )}
             {fileType == "video" && (
