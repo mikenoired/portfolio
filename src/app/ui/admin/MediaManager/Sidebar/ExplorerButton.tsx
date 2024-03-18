@@ -30,7 +30,7 @@ export default function ExplorerButton({ fileType }: { fileType: string }) {
     })
       .then((r) => r.json())
       .then((loadedMedia) => {
-        setLoadedMedia(loadedMedia);
+        setLoadedMedia(loadedMedia.reverse());
       });
 
     setFiles([]);
