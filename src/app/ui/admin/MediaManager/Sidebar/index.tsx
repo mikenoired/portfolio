@@ -2,10 +2,11 @@
 
 import Icon from "@/app/ui/Icon";
 import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
-import Caption from "./Caption";
-import ExplorerButton from "./ExplorerButton";
-import ImageData from "./ImageData";
-import SaveButton from "./SaveButton";
+import Caption from "@/app/ui/admin/MediaManager/Sidebar/Caption";
+import DeleteButton from "@/app/ui/admin/MediaManager/Sidebar/DeleteButton";
+import ExplorerButton from "@/app/ui/admin/MediaManager/Sidebar/ExplorerButton";
+import ImageData from "@/app/ui/admin/MediaManager/Sidebar/ImageData";
+import SaveButton from "@/app/ui/admin/MediaManager/Sidebar/SaveButton";
 
 interface SidebarProps {
   saveHandler: (selectedMedia: string[]) => void;
@@ -45,6 +46,7 @@ export default function Sidebar({
               type={currentModify.type}
             />
             <Caption fileType={fileType} />
+            <DeleteButton fileType={fileType} saveHandler={saveHandler} />
           </>
         )}
       </div>

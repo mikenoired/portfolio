@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/server/prisma";
-import { writeFile } from "fs/promises";
+import { unlink, writeFile } from "fs/promises";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function loadMedia(imageValue: FormDataEntryValue | null) {
@@ -54,6 +54,22 @@ export async function loadMedia(imageValue: FormDataEntryValue | null) {
     return data;
   } else {
     return { url: "" };
+  }
+}
+
+export async function deleteMedia(url: string) {
+  const mediaDir = `./public/upload/${url}`;
+  try {
+    await unlink(mediaDir).then(async () => {
+      const res = await prisma.media.delete({
+        where: {
+          url,
+        },
+      });
+    });
+    return `${url} was deleted!`;
+  } catch (err) {
+    console.error(err);
   }
 }
 
