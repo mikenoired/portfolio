@@ -1,19 +1,17 @@
 "use client";
 
-import { Reorder, useMotionValue } from "framer-motion";
+import { Reorder } from "framer-motion";
 import { Dispatch, SetStateAction } from "react";
 
-export default function PageBlock({
-  data,
-  onEdit,
-}: {
+interface PageBlockProps {
   data: {
     name: string;
     url: string;
   };
   onEdit: Dispatch<SetStateAction<{ name: string; url: string }[]>>;
-}) {
-  const y = useMotionValue(0);
+}
+
+export default function PageBlock({ data, onEdit }: PageBlockProps) {
   return (
     <Reorder.Item
       value={data}
