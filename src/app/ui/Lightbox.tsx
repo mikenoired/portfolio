@@ -4,7 +4,7 @@ import { cn } from "@/app/lib/utils";
 import Icon from "@/app/ui/Icon";
 import { isMobile } from "@/app/ui/lib/utils";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type SwiperType from "swiper";
 import "swiper/css";
 import "swiper/css/effect-creative";
@@ -45,15 +45,23 @@ export default function Lightbox({
     isEnd: activeIndex === (medias.length ?? 0) - 1,
   });
 
-  const toggleLightbox = () => {
+  const toggleLightbox = useCallback(() => {
     active(!active);
-  };
+  }, [active]);
 
-  const handleEscape = (e: KeyboardEvent) => {
-    if (e.key == "Escape") {
-      toggleLightbox();
-    }
-  };
+  const handleEscape = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key == "Escape") {
+        toggleLightbox();
+      }
+    },
+    [toggleLightbox],
+  );
+
+  const handleZoom = useCallback(() => {
+    isZoomed ? swiper?.zoom.out() : swiper?.zoom.in(2);
+    setIsZoomed(!isZoomed);
+  }, [isZoomed, swiper]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleEscape);
@@ -69,7 +77,7 @@ export default function Lightbox({
     });
 
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [swiper, medias]);
+  }, [swiper, medias, handleEscape]);
 
   return (
     <div className="fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm">
@@ -95,10 +103,7 @@ export default function Lightbox({
             </span>
             <div className="flex gap-8">
               <button
-                onClick={() => {
-                  isZoomed ? swiper?.zoom.out() : swiper?.zoom.in(2);
-                  setIsZoomed(!isZoomed);
-                }}
+                onClick={handleZoom}
                 className="right-[50px] cursor-pointer"
               >
                 <Icon
