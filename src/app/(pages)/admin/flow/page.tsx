@@ -8,7 +8,7 @@ export default async function Page() {
   const flow = await fetchFlow();
   return (
     <>
-      <Main className='mt-12 flex justify-center'>
+      <Main className="mt-12 flex justify-center">
         <EditPage
           images={flow?.urls || []}
           description={flow?.description || ""}

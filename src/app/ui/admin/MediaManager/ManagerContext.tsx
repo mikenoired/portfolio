@@ -7,7 +7,7 @@ export const ManagerContext = createContext<ContextType | undefined>(undefined);
 
 export function ManagerProvider({ children }: PropsWithChildren<{}>) {
   const [loadedMedia, setLoadedMedia] = useState<ContextType["loadedMedia"]>(
-    []
+    [],
   );
   const [selectedMedia, setSelectedMedia] = useState<
     ContextType["selectedMedia"]
@@ -36,7 +36,7 @@ export function useManagerContext() {
   const context = useContext(ManagerContext);
   if (!context) {
     throw new Error(
-      "useManagerContext must be used inside the ManagerProvider"
+      "useManagerContext must be used inside the ManagerProvider",
     );
   }
   return context;

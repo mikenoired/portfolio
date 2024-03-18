@@ -19,7 +19,7 @@ export default async function Page() {
   return (
     <>
       <Header subMenu={links} transparent={true} />
-      <Main className='flex flex-col items-end pt-[140px] md:pt-[160px]'>
+      <Main className="flex flex-col items-end pt-[140px] md:pt-[160px]">
         {data.map((link, index) => (
           <NavButton
             key={index}

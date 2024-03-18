@@ -39,8 +39,8 @@ export default function MediaManager({
   });
   return (
     <ManagerProvider>
-      <div className='fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 p-6'>
-        <div className='flex h-full w-full border bg-black'>
+      <div className="fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 p-6">
+        <div className="flex h-full w-full border bg-black">
           <Sidebar
             fileType={fileType}
             toggleManager={active}

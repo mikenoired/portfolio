@@ -25,7 +25,7 @@ export default function Notification({
         settings?.status === "normal" && "bg-white text-black",
         settings?.status === "warning" && "bg-orange text-black",
         settings?.status === "error" && "bg-red text-black",
-        settings?.status === "success" && "bg-green text-black"
+        settings?.status === "success" && "bg-green text-black",
       )}
     >
       {settings?.text}

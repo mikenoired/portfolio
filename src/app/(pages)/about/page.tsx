@@ -23,7 +23,7 @@ export default async function Page() {
   return (
     <>
       <Header subMenu={links} transparent border />
-      <Main className='flex w-full p-4 md:p-8'>
+      <Main className="flex w-full p-4 md:p-8">
         <Person data={personData as PersonType} />
         <Content data={aboutContent?.content as string} />
       </Main>

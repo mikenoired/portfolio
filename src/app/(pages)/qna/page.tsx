@@ -20,8 +20,8 @@ export default async function Page() {
   return (
     <>
       <Header subMenu={links} transparent border />
-      <Main className='flex flex-col items-center'>
-        <div className='masonry sm:masonry md:masonry-sm pl-4 pr-4 pt-8 md:max-w-[1050px]'>
+      <Main className="flex flex-col items-center">
+        <div className="masonry sm:masonry md:masonry-sm pl-4 pr-4 pt-8 md:max-w-[1050px]">
           {blocks.map((block, index) => (
             <Block key={index} data={block} />
           ))}

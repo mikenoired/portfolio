@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const data = await fetchMeta();
   const s = data as ISettings;
   const getSelectedData = (
-    items: { data: string | number | undefined; selected: boolean }[]
+    items: { data: string | number | undefined; selected: boolean }[],
   ) => {
     return items.find((item) => item.selected)?.data;
   };
@@ -32,13 +32,13 @@ export async function generateMetadata(): Promise<Metadata> {
         follow: s.metadata.robots.googleBot.follow,
         noimageindex: s.metadata.robots.googleBot.noimageindex,
         "max-video-preview": getSelectedData(
-          s.metadata.robots.googleBot.maxVideoPreview
+          s.metadata.robots.googleBot.maxVideoPreview,
         ),
         "max-image-preview": getSelectedData(
-          s.metadata.robots.googleBot.maxSnippet
+          s.metadata.robots.googleBot.maxSnippet,
         ) as "none" | "standard" | "large",
         "max-snippet": getSelectedData(
-          s.metadata.robots.googleBot.maxSnippet
+          s.metadata.robots.googleBot.maxSnippet,
         ) as number | undefined,
       },
     },
@@ -96,16 +96,16 @@ export default async function Home() {
     <>
       <Header subMenu={links} transparent={true} />
       <main>
-        <div className='relative h-screen w-screen'>
+        <div className="relative h-screen w-screen">
           {thumb && (
             <video
               src={`/upload/${thumb?.media}`}
               autoPlay
               controls={false}
-              role='presentation'
+              role="presentation"
               muted
               loop
-              className='h-dvh w-dvw object-cover'
+              className="h-dvh w-dvw object-cover"
             />
           )}
         </div>

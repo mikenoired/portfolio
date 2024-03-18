@@ -37,7 +37,7 @@ export default function Lightbox({
   const [isCaptionToggled, setIsCaptionToggled] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [activeIndex, setActiveIndex] = useState(
-    medias.findIndex((media) => media.url === currentImage)
+    medias.findIndex((media) => media.url === currentImage),
   );
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
   const [swiperConfig, setSwiperConfig] = useState({
@@ -72,7 +72,7 @@ export default function Lightbox({
   }, [swiper, medias]);
 
   return (
-    <div className='fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm'>
+    <div className="fixed left-[0px] top-[0px] z-20 h-full w-full bg-black bg-opacity-50 backdrop-blur-sm">
       <Swiper
         initialSlide={getMediaIndexByURL(currentImage)}
         slidesPerView={1}
@@ -88,18 +88,18 @@ export default function Lightbox({
         }}
         modules={[Keyboard, Zoom, Navigation]}
       >
-        <div className='absolute h-full w-full select-none top-[0px]'>
-          <div className='absolute right-[0] top-[30px] z-[60] flex w-full justify-between px-8 pb-[50px] opacity-0 transition-opacity hover:opacity-100'>
-            <span className='relative text-lg font-medium'>
+        <div className="absolute h-full w-full select-none top-[0px]">
+          <div className="absolute right-[0] top-[30px] z-[60] flex w-full justify-between px-8 pb-[50px] opacity-0 transition-opacity hover:opacity-100">
+            <span className="relative text-lg font-medium">
               {`${activeIndex + 1}/${medias.length}`}
             </span>
-            <div className='flex gap-8'>
+            <div className="flex gap-8">
               <button
                 onClick={() => {
                   isZoomed ? swiper?.zoom.out() : swiper?.zoom.in(2);
                   setIsZoomed(!isZoomed);
                 }}
-                className='right-[50px] cursor-pointer'
+                className="right-[50px] cursor-pointer"
               >
                 <Icon
                   type={isZoomed ? "zoomOut" : "zoomIn"}
@@ -108,36 +108,36 @@ export default function Lightbox({
                   height={25}
                 />
               </button>
-              <button onClick={toggleLightbox} className='cursor-pointer'>
-                <Icon type='close' dark={false} width={25} height={25} />
+              <button onClick={toggleLightbox} className="cursor-pointer">
+                <Icon type="close" dark={false} width={25} height={25} />
               </button>
             </div>
           </div>
           {!isMobile && (
             <>
               {!swiperConfig.isEnd && (
-                <div className='flex items-center justify-center absolute z-40 right-[0px] h-full px-8 opacity-0 hover:opacity-100 transition-opacity'>
+                <div className="flex items-center justify-center absolute z-40 right-[0px] h-full px-8 opacity-0 hover:opacity-100 transition-opacity">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       swiper?.slideNext();
                     }}
-                    className='z-50 cursor-pointer'
+                    className="z-50 cursor-pointer"
                   >
-                    <Icon type='right' dark={false} width={25} height={25} />
+                    <Icon type="right" dark={false} width={25} height={25} />
                   </button>
                 </div>
               )}
               {!swiperConfig.isBeginning && (
-                <div className='flex items-center justify-center absolute z-40 left-[0px] h-full px-8 opacity-0 hover:opacity-100 transition-opacity'>
+                <div className="flex items-center justify-center absolute z-40 left-[0px] h-full px-8 opacity-0 hover:opacity-100 transition-opacity">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       swiper?.slidePrev();
                     }}
-                    className='z-50 cursor-pointer'
+                    className="z-50 cursor-pointer"
                   >
-                    <Icon type='back' dark={false} width={25} height={25} />
+                    <Icon type="back" dark={false} width={25} height={25} />
                   </button>
                 </div>
               )}
@@ -151,10 +151,10 @@ export default function Lightbox({
                   ? isCaptionToggled
                     ? "opacity-100"
                     : "opacity-0"
-                  : "opacity-0 hover:opacity-100"
+                  : "opacity-0 hover:opacity-100",
               )}
             >
-              <p className='text-xl text-white'>{caption}</p>
+              <p className="text-xl text-white">{caption}</p>
             </div>
           )}
         </div>
@@ -164,11 +164,11 @@ export default function Lightbox({
             key={index}
             onClick={() => setIsCaptionToggled(!isCaptionToggled)}
           >
-            <div className='w-screen h-screen flex items-center justify-center relative'>
+            <div className="w-screen h-screen flex items-center justify-center relative">
               <Image
                 src={`/upload/${image.url}`}
                 alt={image.caption}
-                objectFit='contain'
+                objectFit="contain"
                 fill
               />
             </div>

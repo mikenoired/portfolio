@@ -16,7 +16,7 @@ export async function updateThumb(data: FormData) {
       data: {
         media: thumb,
       },
-    })
+    }),
   );
 
   revalidatePath("/admin");

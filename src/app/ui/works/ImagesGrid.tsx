@@ -20,7 +20,7 @@ export function ImagesGrid({ images }: { images: MediaType[] }) {
           medias={images}
         />
       )}
-      <div className='w-full p-8 masonry-sm'>
+      <div className="w-full p-8 masonry-sm">
         {images.map((image, index) => (
           <div
             onClick={() => {
@@ -28,10 +28,10 @@ export function ImagesGrid({ images }: { images: MediaType[] }) {
               setCurrentImage(images[index].url);
             }}
             key={index}
-            className='mb-5 relative w-full h-full cursor-pointer'
+            className="mb-5 relative w-full h-full cursor-pointer"
           >
             <img
-              className='w-full'
+              className="w-full"
               src={`/upload/${image.url}`}
               alt={image.caption}
             />

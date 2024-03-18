@@ -99,7 +99,7 @@ export interface ISettings {
         {
           url: string;
           media: string;
-        }
+        },
       ];
     };
   };

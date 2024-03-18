@@ -22,9 +22,9 @@ export default async function SlugPage({
   return (
     <>
       <Header subMenu={links} transparent border />
-      <Main className='flex'>
+      <Main className="flex">
         <Sidebar data={urlData} />
-        <div className='w-full md:pl-[250px]'>{children}</div>
+        <div className="w-full md:pl-[250px]">{children}</div>
       </Main>
     </>
   );

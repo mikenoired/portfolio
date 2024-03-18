@@ -39,7 +39,7 @@ export default function grain(ele: HTMLDivElement, options: OptionsType) {
   const addCSSRule = (
     sheet: CSSStyleSheet,
     selector: string,
-    rules: string
+    rules: string,
   ) => {
     let ins = "";
     selector.length ? (ins = `${selector}{${rules}}`) : (ins = rules);

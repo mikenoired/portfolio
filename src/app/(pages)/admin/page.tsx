@@ -1,7 +1,7 @@
 import { ThumbType } from "@/app/lib/definitions";
-import { fetchThumb } from "@/server/thumbnail";
-import EditThumb from "@/app/ui/admin/EditThumb";
 import Main from "@/app/ui/Main";
+import EditThumb from "@/app/ui/admin/EditThumb";
+import { fetchThumb } from "@/server/thumbnail";
 
 export default async function Page() {
   const thumb = (await fetchThumb()) as ThumbType;

@@ -38,7 +38,7 @@ export default function RootLayout({
     grain(grainedCont.current, options);
   });
   return (
-    <html lang='en'>
+    <html lang="en">
       <AuthProvider>
         <HeaderProvider>
           <body
@@ -47,8 +47,8 @@ export default function RootLayout({
             {children}
             <div
               ref={grainedCont}
-              id='container'
-              className='fixed top-[0px] -z-50 h-dvh w-dvw'
+              id="container"
+              className="fixed top-[0px] -z-50 h-dvh w-dvw"
             />
           </body>
         </HeaderProvider>
