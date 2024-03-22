@@ -27,5 +27,10 @@
     .break-inside {
       break-inside: avoid;
     }
+
+    .screen {
+      width: 100dvw;
+      height: 100dvh;
+    }
   }
 }
