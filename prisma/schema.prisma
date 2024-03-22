@@ -65,9 +65,9 @@ model SiteSettings {
 }
 
 model PageName {
-  id   Int    @id @unique @default(autoincrement())
-  name String
-  url  String
+  id    Int    @id @unique @default(autoincrement())
+  title String
+  url   String
 }
 
 model Flow {
