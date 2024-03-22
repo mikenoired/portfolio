@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/server/prisma";
-import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -41,6 +41,16 @@ export async function fetchWorkCat(url: string) {
 
 export async function fetchWorks() {
   const data = await prisma.work.findMany();
+  return data;
+}
+
+export async function fetchWorkCats() {
+  const data = await prisma.work.findMany({
+    select: {
+      title: true,
+      url: true,
+    },
+  });
   return data;
 }
 
