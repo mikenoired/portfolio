@@ -7,9 +7,11 @@ import { useState } from "react";
 export function ImagesGrid({ images }: { images: MediaType[] }) {
   const [activeLightbox, setActive] = useState(false);
   const [currentImage, setCurrentImage] = useState<string>("");
+
   const getCurrentCaption = (url: string) => {
     return images.find((image) => image.url === url)?.caption || "";
   };
+
   return (
     <>
       {activeLightbox && (
@@ -20,7 +22,7 @@ export function ImagesGrid({ images }: { images: MediaType[] }) {
           medias={images}
         />
       )}
-      <div className="w-full p-8 masonry-sm">
+      <div className="w-full p-5 md:p-8 masonry-sm">
         {images.map((image, index) => (
           <div
             onClick={() => {
