@@ -1,8 +1,7 @@
 "use client";
 
-import { linkStyle } from "@/app/ui/lib/linkStyle";
+import mdComponents from "@/app/ui/lib/mdComponents";
 import { newQNA } from "@/server/pages/QNA";
-import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
 
@@ -50,17 +49,7 @@ export function CreateForm() {
           <h1 className="mb-3 text-4xl font-bold">{title}</h1>
           <div>
             <div className="prose-xl prose-ul:list-disc prose-ol:list-decimal">
-              <Markdown
-                components={{
-                  a: (props) => (
-                    <Link className={linkStyle} href={props.href as string}>
-                      {props.children}
-                    </Link>
-                  ),
-                }}
-              >
-                {content}
-              </Markdown>
+              <Markdown components={mdComponents}>{content}</Markdown>
             </div>
           </div>
         </div>

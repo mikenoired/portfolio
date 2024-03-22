@@ -3,21 +3,19 @@
 import { AboutType, PersonType } from "@/app/lib/definitions";
 import Icon from "@/app/ui/Icon";
 import MediaManager from "@/app/ui/admin/MediaManager";
-import { linkStyle } from "@/app/ui/lib/linkStyle";
+import mdComponents from "@/app/ui/lib/mdComponents";
 import { globalProse } from "@/app/ui/lib/prose";
 import { updateAboutPage } from "@/server/pages/about";
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Markdown from "react-markdown";
 
-export default function EditForm({
-  personData,
-  aboutContent,
-}: {
+interface EditFormProps {
   personData: PersonType;
   aboutContent: AboutType;
-}) {
+}
+
+export default function EditForm({ personData, aboutContent }: EditFormProps) {
   const [content, setContent] = useState(aboutContent?.content);
   const [socials, setSocials] = useState(personData.socials);
   const [avatar, setAvatar] = useState([personData.avatar]);
@@ -27,6 +25,17 @@ export default function EditForm({
 
   const [toggleManager, setToggleManager] = useState(false);
   const [toggleCard, setToggleCard] = useState(false);
+
+  const handleAddLink = useCallback(() => {
+    const newData = [...socials];
+    newData.push({
+      name: "",
+      url: "",
+      personCardId: 1,
+      id: socials.length + 1,
+    });
+    setSocials(newData);
+  }, [socials]);
 
   return (
     <>
@@ -130,16 +139,7 @@ export default function EditForm({
                   </div>
                 ))}
               <button
-                onClick={() => {
-                  const newData = [...socials];
-                  newData.push({
-                    name: "",
-                    url: "",
-                    personCardId: 1,
-                    id: socials.length + 1,
-                  });
-                  setSocials(newData);
-                }}
+                onClick={handleAddLink}
                 type="button"
                 className="mt-3 bg-black p-4 text-white"
               >
@@ -167,16 +167,7 @@ export default function EditForm({
           <div className="w-full">
             <label className="mb-3 block text-xl font-semibold">Preview</label>
             <div className={`prose-lg ${globalProse}`}>
-              <Markdown
-                components={{
-                  a: (props) => (
-                    <Link className={linkStyle} href={props.href as string}>
-                      {props.children}
-                    </Link>
-                  ),
-                }}
-                className="w-full"
-              >
+              <Markdown components={mdComponents} className="w-full">
                 {content}
               </Markdown>
             </div>

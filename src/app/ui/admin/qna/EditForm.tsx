@@ -1,19 +1,17 @@
 "use client";
 
 import { QNAForm } from "@/app/lib/definitions";
-import { linkStyle } from "@/app/ui/lib/linkStyle";
+import mdComponents from "@/app/ui/lib/mdComponents";
 import { deleteQNAById, editQNA } from "@/server/pages/QNA";
-import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
 
-export default function EditForm({
-  id,
-  block,
-}: {
+interface EditFormProps {
   id: number;
   block: QNAForm;
-}) {
+}
+
+export default function EditForm({ id, block }: EditFormProps) {
   const updateQNA = editQNA.bind(null, Number(id));
   const [content, setContent] = useState(block.content);
   const [title, setTitle] = useState(block.title);
@@ -63,17 +61,7 @@ export default function EditForm({
           <h1 className="mb-3 text-4xl font-bold">{title}</h1>
           <div>
             <div className="prose-xl prose-ul:list-disc prose-ol:list-decimal">
-              <Markdown
-                components={{
-                  a: (props) => (
-                    <Link className={linkStyle} href={props.href as string}>
-                      {props.children}
-                    </Link>
-                  ),
-                }}
-              >
-                {content}
-              </Markdown>
+              <Markdown components={mdComponents}>{content}</Markdown>
             </div>
           </div>
         </div>
