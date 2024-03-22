@@ -1,7 +1,7 @@
 "use client";
 
-import { newWorkCat } from "@/server/pages/works";
 import MediaManager from "@/app/ui/admin/MediaManager";
+import { newWorkCat } from "@/server/pages/works";
 import { useState } from "react";
 
 export function CreateForm() {
@@ -55,12 +55,7 @@ export function CreateForm() {
               />
             </div>
             <div className="mt-4 flex flex-col">
-              <input
-                type="text"
-                name="thumbnail"
-                hidden
-                defaultValue={preview}
-              />
+              <input type="text" name="thumbnail" hidden value={preview} />
               <button
                 type="button"
                 className="mt-3 h-9 w-full bg-white text-base font-medium text-black"

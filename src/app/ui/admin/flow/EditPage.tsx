@@ -65,7 +65,7 @@ export default function EditPage({ images, description }: EditPageProps) {
             <input
               type="text"
               hidden
-              defaultValue={JSON.stringify(flowImages)}
+              value={JSON.stringify(flowImages)}
               name="urls"
             />
           </div>
