@@ -23,8 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const grainedCont = useRef() as MutableRefObject<HTMLDivElement>;
+
   useEffect(() => {
-    const options = {
+    grain(grainedCont.current, {
       animate: true,
       patternWidth: 500,
       patternHeight: 500,
@@ -34,9 +35,9 @@ export default function RootLayout({
       grainHeight: 0.5,
       grainChaos: 0.2,
       grainSpeed: 2,
-    };
-    grain(grainedCont.current, options);
+    });
   });
+
   return (
     <html lang="en">
       <AuthProvider>

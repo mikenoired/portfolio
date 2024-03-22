@@ -1,5 +1,7 @@
 "use client";
 
+import { NotificationSettings } from "@/app/lib/definitions";
+import Notification from "@/app/ui/Notification";
 import { AnimatePresence } from "framer-motion";
 import React, {
   Dispatch,
@@ -7,8 +9,6 @@ import React, {
   createContext,
   useState,
 } from "react";
-import { NotificationSettings } from "../lib/definitions";
-import Notification from "../ui/Notification";
 
 interface NotificationContextProps {
   settings: NotificationSettings | undefined;
