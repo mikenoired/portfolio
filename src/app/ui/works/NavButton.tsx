@@ -1,29 +1,29 @@
 "use client";
 
 import { cn } from "@/app/lib/utils";
+import { isMobile } from "@/app/ui/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export function NavButton({
-  title,
-  thumb,
-  url,
-}: {
+interface NavButtonProps {
   title: string;
   thumb: string;
   url: string;
-}) {
+}
+
+export function NavButton({ title, thumb, url }: NavButtonProps) {
   const [hover, setHover] = useState(false);
   const pathname = usePathname();
+
   return (
     <Link
-      onMouseEnter={(e) => setHover(true)}
-      onMouseLeave={(e) => setHover(false)}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       href={`${pathname}/${url}`}
       className="relative flex h-[90px] w-full xl:w-[1240px] -mt-1 items-center overflow-hidden border-y bg-cover bg-center bg-no-repeat transition-all"
       style={{
-        backgroundImage: hover ? `url('/upload/${thumb}')` : "none",
+        backgroundImage: hover || isMobile ? `url('/upload/${thumb}')` : "none",
         right: hover ? "0px" : "-35px",
       }}
     >
