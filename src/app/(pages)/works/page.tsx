@@ -5,20 +5,9 @@ import { fetchWorks } from "@/server/pages/works";
 
 export default async function Page() {
   const data = await fetchWorks();
-  const fetchWorksCats = await fetchWorks();
-  let links: { title: string; url: string }[] = [];
-  const workCats = () => {
-    fetchWorksCats.map((cat) => {
-      links.push({
-        title: cat.title,
-        url: cat.url,
-      });
-    });
-  };
-  workCats();
   return (
     <>
-      <Header subMenu={links} transparent={true} />
+      <Header />
       <Main className="flex flex-col items-end pt-[140px] md:pt-[160px]">
         {data.map((link, index) => (
           <NavButton

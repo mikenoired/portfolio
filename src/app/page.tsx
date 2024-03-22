@@ -1,5 +1,4 @@
 import Header from "@/app/ui/Header";
-import { fetchWorks } from "@/server/pages/works";
 import { fetchMeta } from "@/server/settings";
 import { fetchThumb } from "@/server/thumbnail";
 import type { Metadata } from "next";
@@ -81,22 +80,11 @@ export async function generateViewport() {
 
 export default async function Home() {
   const thumb = await fetchThumb();
-  const fetchWorksCats = await fetchWorks();
-  let links: { title: string; url: string }[] = [];
-  const workCats = () => {
-    fetchWorksCats.map((cat) => {
-      links.push({
-        title: cat.title,
-        url: cat.url,
-      });
-    });
-  };
-  workCats();
   return (
     <>
-      <Header subMenu={links} transparent={true} />
+      <Header invert />
       <main>
-        <div className="relative h-screen w-screen">
+        <div className="relative screen">
           {thumb && (
             <video
               src={`/upload/${thumb?.media}`}
