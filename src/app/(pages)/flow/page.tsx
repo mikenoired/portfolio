@@ -1,8 +1,11 @@
 "use server";
 
+import Heading from "@/app/ui/flow/Heading";
 import Main from "@/app/ui/Main";
 import { fetchFlow } from "@/server/pages/flow";
 import Image from "next/image";
+
+const pageTitle = "Поток".toUpperCase().split("");
 
 export default async function Page() {
   const flow = await fetchFlow();
@@ -11,9 +14,12 @@ export default async function Page() {
       <Main moveTop={true}>
         {flow ? (
           <>
-            <div className="w-full p-11">{flow.description}</div>
+            <Heading name={pageTitle} />
+            <p className="w-full p-6 md:p-10 sm:p-8 text-xl">
+              {flow.description}
+            </p>
             <div className="w-full">
-              {flow.urls.map((url, index) => (
+              {flow.urls.reverse().map((url, index) => (
                 <Image
                   key={index}
                   src={`/upload/${url}`}
