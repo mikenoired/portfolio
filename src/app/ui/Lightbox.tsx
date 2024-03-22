@@ -140,7 +140,12 @@ export default function Lightbox({
                     }}
                     className="z-50 cursor-pointer"
                   >
-                    <Icon type="right" dark={false} width={25} height={25} />
+                    <Icon
+                      type="arrowRight"
+                      dark={false}
+                      width={25}
+                      height={25}
+                    />
                   </button>
                 </div>
               )}
@@ -153,7 +158,12 @@ export default function Lightbox({
                     }}
                     className="z-50 cursor-pointer"
                   >
-                    <Icon type="back" dark={false} width={25} height={25} />
+                    <Icon
+                      type="arrowLeft"
+                      dark={false}
+                      width={25}
+                      height={25}
+                    />
                   </button>
                 </div>
               )}

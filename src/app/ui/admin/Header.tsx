@@ -36,7 +36,7 @@ export default function Header() {
           className="mr-4 flex cursor-pointer items-center"
           onClick={() => router.back()}
         >
-          <Icon dark={false} width={22} height={22} type="back" />
+          <Icon dark={false} width={22} height={22} type="left" />
         </div>
       </div>
       <div

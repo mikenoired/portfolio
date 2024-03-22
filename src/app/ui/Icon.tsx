@@ -10,8 +10,10 @@ interface IconProps {
     | "arrowDown"
     | "link"
     | "edit"
-    | "back"
+    | "left"
     | "right"
+    | "arrowLeft"
+    | "arrowRight"
     | "zoomIn"
     | "zoomOut";
   dark: boolean;
@@ -99,13 +101,11 @@ export default function Icon({
                 />
               </svg>
             );
-          case "back":
+          case "left":
             return (
               <svg viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M1.41431 6.08963L7.50192 0.00195312L8.91614 1.41617L3.82843 6.50388H15V8.50388H3.82855L8.91235 13.5877L7.49814 15.0019L1.41422 8.91809L0 7.50388L1.41431 6.08963Z"
+                  d="M7.50192 0.00195312L8.91614 1.41617L3.82843 6.50388H15V8.50388H3.82855L8.91235 13.5877L7.49814 15.0019L0 7.50388L7.50192 0.00195312Z"
                   fill={iconTheme}
                 />
               </svg>
@@ -114,9 +114,25 @@ export default function Icon({
             return (
               <svg viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                 <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M13.5857 8.91226L7.49808 14.9999L6.08386 13.5857L11.1716 8.49802L5.68416e-07 8.49802L7.43262e-07 6.49802L11.1714 6.49802L6.08765 1.41421L7.50186 -6.55508e-07L13.5858 6.0838L15 7.49802L13.5857 8.91226Z"
+                  d="M7.49808 14.9999L6.08386 13.5857L11.1716 8.49802L5.68416e-07 8.49802L7.43262e-07 6.49802L11.1714 6.49802L6.08765 1.41421L7.50186 -6.55508e-07L15 7.49802L7.49808 14.9999Z"
+                  fill={iconTheme}
+                />
+              </svg>
+            );
+          case "arrowLeft":
+            return (
+              <svg viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7.50192 0L8.91614 1.41422L2.82843 7.50192L8.91235 13.5857L7.49814 14.9999L0 7.50192L7.50192 0Z"
+                  fill={iconTheme}
+                />
+              </svg>
+            );
+          case "arrowRight":
+            return (
+              <svg viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.41409 14.9999L-0.000121947 13.5857L6.08758 7.49802L0.0036633 1.41421L1.41788 -6.55508e-07L8.91602 7.49802L1.41409 14.9999Z"
                   fill={iconTheme}
                 />
               </svg>
