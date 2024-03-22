@@ -1,4 +1,5 @@
 "use server";
+
 import prisma from "@/server/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -18,6 +19,7 @@ export async function updateFlow(data: FormData) {
       description: data.get("description") as string,
     },
   });
+
   if (res) {
     revalidatePath("/admin/flow");
     redirect("/admin/flow");

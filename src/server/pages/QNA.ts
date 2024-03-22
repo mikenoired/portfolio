@@ -19,7 +19,7 @@ export async function newQNA(data: FormData) {
     content: data.get("content"),
   });
 
-  const block = await prisma.answerBlock.create({
+  const res = await prisma.answerBlock.create({
     data: createBlock,
   });
 
@@ -34,7 +34,7 @@ export async function editQNA(id: number, data: FormData) {
     content: data.get("content"),
   });
 
-  const block = await prisma.answerBlock.update({
+  const res = await prisma.answerBlock.update({
     where: {
       id: editBlock.id,
     },
@@ -49,7 +49,7 @@ export async function editQNA(id: number, data: FormData) {
 }
 
 export async function deleteQNAById(data: FormData) {
-  const action = await prisma.answerBlock.delete({
+  const res = await prisma.answerBlock.delete({
     where: {
       id: Number(data.get("id")),
     },
