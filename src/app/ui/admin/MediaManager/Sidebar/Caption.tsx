@@ -5,6 +5,25 @@ import { useManagerContext } from "@/app/ui/admin/MediaManager/ManagerContext";
 export default function Caption({ fileType }: { fileType: string }) {
   const { currentModify, setCurrentModify } = useManagerContext();
   const { setLoadedMedia } = useManagerContext();
+
+  const handleSave = async () => {
+    await fetch(`/api/updateCaption`, {
+      method: "POST",
+      body: JSON.stringify({
+        url: currentModify.url,
+        caption: currentModify.caption,
+      }),
+    });
+    await fetch(`/api/getMedia`, {
+      method: "POST",
+      body: JSON.stringify({ type: fileType }),
+    })
+      .then((r) => r.json())
+      .then((loadedMedia) => {
+        setLoadedMedia(loadedMedia);
+      });
+  };
+
   return (
     <div className="mb-8">
       <div className="text-2xl font-semibold text-white">Caption</div>
@@ -22,23 +41,7 @@ export default function Caption({ fileType }: { fileType: string }) {
       />
       <button
         className="h-[50px] w-full items-center justify-center border border-white text-xl font-bold text-white hover:bg-white hover:text-black"
-        onClick={async () => {
-          await fetch("http://localhost:3000/api/updateCaption", {
-            method: "POST",
-            body: JSON.stringify({
-              url: currentModify.url,
-              caption: currentModify.caption,
-            }),
-          });
-          await fetch("http://localhost:3000/api/getMedia", {
-            method: "POST",
-            body: JSON.stringify({ type: fileType }),
-          })
-            .then((r) => r.json())
-            .then((loadedMedia) => {
-              setLoadedMedia(loadedMedia);
-            });
-        }}
+        onClick={handleSave}
       >
         Save
       </button>

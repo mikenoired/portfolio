@@ -2,15 +2,13 @@
 
 import { useState } from "react";
 
-export default function Select({
-  name,
-  value,
-  title,
-}: {
+interface SelectProps {
   value: { data: string | number; selected: boolean }[];
   title: string;
   name: string;
-}) {
+}
+
+export default function Select({ name, value, title }: SelectProps) {
   const [selected, setSelected] = useState(value);
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const updatedSelected = selected.map((item) => ({

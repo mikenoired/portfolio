@@ -51,7 +51,7 @@ export async function loadMedia(imageValue: FormDataEntryValue | null) {
 
     const res = await prisma.media.create({ data });
 
-    return data;
+    return res;
   } else {
     return { url: "" };
   }

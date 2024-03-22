@@ -23,6 +23,8 @@ export async function fetchAboutContent() {
 }
 
 export async function updateAboutPage(data: FormData) {
+  const socials: [] = JSON.parse(data.get("socials") as string);
+
   const updatePerson = await prisma.personCard.update({
     where: {
       id: 1,
@@ -45,14 +47,13 @@ export async function updateAboutPage(data: FormData) {
   });
 
   const deleteSocials = await prisma.socLink.deleteMany();
-  (JSON.parse(data.get("socials") as string) as []).map(
-    async (link: SocLinksType) => {
-      const addSocial = await prisma.socLink.create({
-        data: {
-          name: link.name,
-          url: link.url,
-        },
-      });
-    },
-  );
+
+  socials.map(async (link: SocLinksType) => {
+    const addSocial = await prisma.socLink.create({
+      data: {
+        name: link.name,
+        url: link.url,
+      },
+    });
+  });
 }

@@ -2,15 +2,13 @@
 
 import { useState } from "react";
 
-export default function Checkbox({
-  name,
-  value,
-  title,
-}: {
+interface CheckboxProps {
   value: boolean;
   title: string;
   name: string;
-}) {
+}
+
+export default function Checkbox({ name, value, title }: CheckboxProps) {
   const [isChecked, setChecked] = useState(value);
   return (
     <label className="flex items-center m-4">

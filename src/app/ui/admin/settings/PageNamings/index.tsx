@@ -1,32 +1,26 @@
 "use client";
 
+import { LinkType } from "@/app/lib/definitions";
 import { updatePageNames } from "@/server/settings";
 import { Reorder } from "framer-motion";
 import { useEffect, useState } from "react";
 import PageBlock from "./PageBlock";
 
-export default function PageNamings({
-  data,
-}: {
-  data: {
-    name: string;
-    url: string;
-  }[];
-}) {
+export default function PageNamings({ data }: { data: LinkType[] }) {
   const [pages, setPages] = useState(data);
   const [changed, isChanged] = useState(false);
+
   useEffect(() => {
     isChanged(data !== pages);
   }, [data, pages]);
+
+  const handleSubmit = async () => {
+    await updatePageNames(pages);
+    isChanged(false);
+  };
+
   return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await updatePageNames(pages);
-        isChanged(false);
-      }}
-      className="pb-8"
-    >
+    <form onSubmit={handleSubmit} className="pb-8">
       <h1 className="mb-6 text-4xl font-bold">Page naming</h1>
       <Reorder.Group
         axis="x"

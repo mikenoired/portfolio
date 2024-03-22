@@ -1,18 +1,16 @@
 "use client";
 
+import MediaManager from "@/app/ui/admin/MediaManager";
 import Image from "next/image";
 import { useState } from "react";
-import MediaManager from "@/app/ui/admin/MediaManager";
 
-export default function File({
-  name,
-  title,
-  value,
-}: {
+interface FileProps {
   title: string;
   name: string;
   value: string;
-}) {
+}
+
+export default function File({ name, title, value }: FileProps) {
   const [managerOpened, isManagerOpened] = useState(false);
   const [file, selectFile] = useState([value]);
   return (

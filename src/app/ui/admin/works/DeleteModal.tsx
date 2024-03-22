@@ -1,19 +1,19 @@
 "use client";
 
-import { deleteWorkByURL } from "@/server/pages/works";
 import Icon from "@/app/ui/Icon";
+import { deleteWorkByURL } from "@/server/pages/works";
 import { useState } from "react";
 
-export function DeleteModal({
-  url,
-  toggleModal,
-}: {
+interface DeleteModalProps {
   url: string;
   toggleModal: (toggle: boolean) => void;
-}) {
+}
+
+export function DeleteModal({ url, toggleModal }: DeleteModalProps) {
   const [activeButton, setActiveButton] = useState(false);
+
   return (
-    <div className="fixed z-10 h-screen w-screen bg-black bg-opacity-50 pt-11">
+    <div className="fixed z-10 screen bg-black bg-opacity-50 pt-11">
       <form
         action={deleteWorkByURL}
         className="relative ml-auto mr-auto w-[400px] bg-white p-9 text-black"

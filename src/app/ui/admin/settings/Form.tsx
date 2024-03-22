@@ -1,11 +1,11 @@
 "use client";
 
 import { ISettings } from "@/app/lib/definitions";
-import { updateMeta } from "@/server/settings";
 import Checkbox from "@/app/ui/admin/settings/Checkbox";
 import File from "@/app/ui/admin/settings/File";
 import Input from "@/app/ui/admin/settings/Input";
 import Select from "@/app/ui/admin/settings/Select";
+import { updateMeta } from "@/server/settings";
 
 export default function Form({ s }: { s: ISettings }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -15,9 +15,10 @@ export default function Form({ s }: { s: ISettings }) {
       const data = Object.fromEntries(formData.entries());
       await updateMeta(data);
     } catch (error) {
-      console.error("An error occurred:", error);
+      console.error("Error on settings saving:", error);
     }
   };
+
   return (
     <form onSubmit={handleSubmit} className="w-full">
       <h2 id="main" className="text-4xl font-bold">

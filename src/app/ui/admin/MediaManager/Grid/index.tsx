@@ -21,7 +21,7 @@ export default function Grid({
   const { selectedMedia, setSelectedMedia } = useManagerContext();
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/getMedia", {
+    fetch("/api/getMedia", {
       method: "POST",
       body: JSON.stringify({ type: fileType }),
     })

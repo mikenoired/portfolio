@@ -17,14 +17,14 @@ export default function ExplorerButton({ fileType }: { fileType: string }) {
       data.append(`file`, file, file.name);
     });
 
-    await fetch("http://localhost:3000/api/fileUpload", {
+    await fetch(`/api/fileUpload`, {
       method: "POST",
       body: data,
     })
       .then((res) => res.json())
       .catch((err) => console.error(err));
 
-    await fetch("http://localhost:3000/api/getMedia", {
+    await fetch(`/api/getMedia`, {
       method: "POST",
       body: JSON.stringify({ type: fileType }),
     })

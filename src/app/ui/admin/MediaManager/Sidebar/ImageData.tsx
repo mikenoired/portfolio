@@ -1,17 +1,14 @@
 "use client";
 
-import { formatDate } from "@/app/lib/utils";
-import { formatBytes } from "@/server/prisma";
+import { formatBytes, formatDate } from "@/app/lib/utils";
 
-export default function ImageData({
-  size,
-  type,
-  upd,
-}: {
+interface ImageDataProps {
   size: string;
   type: string;
   upd: string;
-}) {
+}
+
+export default function ImageData({ size, type, upd }: ImageDataProps) {
   return (
     <div className="mb-8">
       <div className="text-white text-2xl font-semibold">Image data</div>

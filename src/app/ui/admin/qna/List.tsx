@@ -7,7 +7,7 @@ import Link from "next/link";
 export default async function List({ qnas }: { qnas: AnswerBlock[] }) {
   return (
     <div className="w-full px-4 md:w-[700px]">
-      {qnas.length !== 0 ? (
+      {!!qnas.length ? (
         qnas.map((block, index) => (
           <div key={index} className="mb-5 flex justify-between border p-5">
             <div className="max-w-fit">{block.title}</div>
@@ -28,9 +28,9 @@ export default async function List({ qnas }: { qnas: AnswerBlock[] }) {
           </div>
         ))
       ) : (
-        <div className="py-5 text-center text-2xl font-bold">
+        <span className="py-5 text-center text-2xl font-bold">
           There is no blocks :(
-        </div>
+        </span>
       )}
       <Link
         href="qna/new"

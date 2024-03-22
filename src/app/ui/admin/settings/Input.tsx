@@ -1,18 +1,20 @@
 "use client";
 
+interface InputProps {
+  value: string | number;
+  title: string;
+  name: string;
+  numeric?: boolean;
+  big?: boolean;
+}
+
 export default function Input({
   value,
   title,
   name,
   numeric,
   big,
-}: {
-  value: string | number;
-  title: string;
-  name: string;
-  numeric?: boolean;
-  big?: boolean;
-}) {
+}: InputProps) {
   return (
     <label className="block m-4">
       <span className="text-lg">{title}</span>
