@@ -1,8 +1,8 @@
 "use client";
 
 import { WorkCat } from "@/app/lib/definitions";
-import { updateWorkCat } from "@/server/pages/works";
 import MediaManager from "@/app/ui/admin/MediaManager";
+import { updateWorkCat } from "@/server/pages/works";
 import Image from "next/image";
 import { useState } from "react";
 import { DeleteModal } from "./DeleteModal";
@@ -74,12 +74,7 @@ export function EditForm({ data }: { data: WorkCat }) {
               />
             </div>
             <div className="mt-4 flex flex-col">
-              <input
-                type="text"
-                name="thumbnail"
-                hidden
-                defaultValue={preview}
-              />
+              <input type="text" name="thumbnail" hidden value={preview} />
               <button
                 type="button"
                 className="mt-3 h-9 w-full bg-white text-base font-medium text-black"
