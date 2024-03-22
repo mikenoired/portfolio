@@ -9,16 +9,16 @@ export default async function Page() {
     <Main className="mt-10 flex flex-col items-center">
       <h1 className="mb-4 text-4xl font-bold">Admin panel</h1>
       <div className="grid w-full grid-cols-2 p-6">
-        {thumb ? (
-          <EditThumb thumb={thumb} />
-        ) : (
-          <EditThumb
-            thumb={{
-              id: 1,
-              media: "placeholder.jpg",
-            }}
-          />
-        )}
+        <EditThumb
+          thumb={
+            thumb
+              ? thumb
+              : {
+                  id: 1,
+                  media: "placeholder.jpg",
+                }
+          }
+        />
       </div>
     </Main>
   );

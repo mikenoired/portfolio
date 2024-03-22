@@ -1,7 +1,7 @@
 import { AboutType, PersonType } from "@/app/lib/definitions";
-import { fetchAboutContent, fetchPersonCard } from "@/server/pages/about";
 import EditForm from "@/app/ui/admin/about/EditForm";
 import Main from "@/app/ui/Main";
+import { fetchAboutContent, fetchPersonCard } from "@/server/pages/about";
 
 export default async function Page() {
   const personData = await fetchPersonCard();

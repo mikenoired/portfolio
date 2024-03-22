@@ -3,7 +3,7 @@
 import { fetchPagesName } from "@/server/settings";
 
 import { useSession } from "next-auth/react";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 export const HeaderContext = createContext<
   { id: number; name: string; url: string }[] | undefined
@@ -17,16 +17,19 @@ export default function HeaderProvider({
   const [names, setNames] =
     useState<{ id: number; name: string; url: string }[]>();
   const { data: session, status } = useSession();
+
+  const fetchData = useCallback(async () => {
+    const data = await fetchPagesName();
+    // @ts-ignore-next-line
+    if (session?.user?.role !== "admin") {
+      setNames(data?.filter((e) => e.url !== "admin"));
+    } else setNames(data);
+  }, [session?.user]);
+
   useEffect(() => {
-    async function fetchData() {
-      const data = await fetchPagesName();
-      // @ts-ignore-next-line
-      if (session?.user?.role !== "admin") {
-        setNames(data.filter((e) => e.url !== "admin"));
-      } else setNames(data);
-    }
     fetchData();
-  }, [session]);
+  }, [session, fetchData]);
+
   return (
     <HeaderContext.Provider value={names}>{children}</HeaderContext.Provider>
   );

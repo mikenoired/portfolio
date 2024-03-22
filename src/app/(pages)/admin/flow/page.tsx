@@ -9,10 +9,7 @@ export default async function Page() {
   return (
     <>
       <Main className="mt-12 flex justify-center">
-        <EditPage
-          images={flow?.urls || []}
-          description={flow?.description || ""}
-        />
+        {flow && <EditPage images={flow.urls} description={flow.description} />}
       </Main>
     </>
   );
