@@ -97,22 +97,33 @@ export default function Lightbox({
         modules={[Keyboard, Zoom, Navigation]}
       >
         <div className="absolute h-full w-full select-none top-[0px]">
-          <div className="absolute right-[0] top-[30px] z-[60] flex w-full justify-between px-8 pb-[50px] opacity-0 transition-opacity hover:opacity-100">
+          <div
+            className={cn(
+              "absolute right-[0] top-[30px] z-[60] flex w-full justify-between px-8 pb-[50px] transition-opacity",
+              isMobile
+                ? isCaptionToggled
+                  ? "opacity-100"
+                  : "opacity-0"
+                : "opacity-0 hover:opacity-100",
+            )}
+          >
             <span className="relative text-lg font-medium">
               {`${activeIndex + 1}/${medias.length}`}
             </span>
             <div className="flex gap-8">
-              <button
-                onClick={handleZoom}
-                className="right-[50px] cursor-pointer"
-              >
-                <Icon
-                  type={isZoomed ? "zoomOut" : "zoomIn"}
-                  dark={false}
-                  width={25}
-                  height={25}
-                />
-              </button>
+              {!isMobile && (
+                <button
+                  onClick={handleZoom}
+                  className="right-[50px] cursor-pointer"
+                >
+                  <Icon
+                    type={isZoomed ? "zoomOut" : "zoomIn"}
+                    dark={false}
+                    width={25}
+                    height={25}
+                  />
+                </button>
+              )}
               <button onClick={toggleLightbox} className="cursor-pointer">
                 <Icon type="close" dark={false} width={25} height={25} />
               </button>
@@ -169,7 +180,7 @@ export default function Lightbox({
             key={index}
             onClick={() => setIsCaptionToggled(!isCaptionToggled)}
           >
-            <div className="w-screen h-screen flex items-center justify-center relative">
+            <div className="screen flex items-center justify-center relative">
               <Image
                 src={`/upload/${image.url}`}
                 alt={image.caption}
