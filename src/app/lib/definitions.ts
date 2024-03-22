@@ -116,3 +116,8 @@ export interface NotificationSettings {
   text: string;
   status: "normal" | "warning" | "error" | "success";
 }
+
+export interface LinkType {
+  title: string;
+  url: string;
+}

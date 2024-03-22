@@ -1,12 +1,13 @@
 "use client";
 
-import { WorkCat } from "@/app/lib/definitions";
+import { LinkType } from "@/app/lib/definitions";
 import { cn } from "@/app/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export function Sidebar({ data }: { data: WorkCat[] }) {
+export function Sidebar({ data }: { data: LinkType[] }) {
   const pathname = usePathname();
+
   return (
     <aside className="fixed hidden h-screen w-[250px] md:block">
       <div className="flex h-full w-full flex-col border-r p-6">

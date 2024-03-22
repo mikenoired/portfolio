@@ -1,6 +1,6 @@
 "use server";
 
-import { ISettings } from "@/app/lib/definitions";
+import { ISettings, LinkType } from "@/app/lib/definitions";
 import prisma from "@/server/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -88,15 +88,11 @@ export async function fetchPagesName() {
   return res;
 }
 
-export async function updatePageNames(
-  data: {
-    name: string;
-    url: string;
-  }[],
-) {
+export async function updatePageNames(data: LinkType[]) {
   const del = await prisma.pageName.deleteMany();
   const create = await prisma.pageName.createMany({
-    data: data,
+    // @ts-ignore-next-line
+    data,
   });
   revalidatePath("/admin/settings");
 }
