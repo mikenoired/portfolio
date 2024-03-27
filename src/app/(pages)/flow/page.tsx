@@ -23,7 +23,7 @@ export default async function Page() {
             </p>
             <div className="w-full">
               {flow.urls.reverse().map((url, index) => (
-                <div className="flex">
+                <div className="flex" key={index}>
                   <div
                     className="rotate-180 p-3 py-5"
                     style={{ writingMode: "vertical-rl" }}
