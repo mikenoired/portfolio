@@ -66,12 +66,12 @@ model SiteSettings {
 
 model PageName {
   id    Int    @id @unique @default(autoincrement())
-  title String
+  title String @default("")
   url   String
 }
 
 model Flow {
-  id          Int      @id @default(autoincrement())
+  id          Int      @id @unique @default(autoincrement())
   description String
   urls        String[]
 }

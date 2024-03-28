@@ -118,6 +118,7 @@ export interface NotificationSettings {
 }
 
 export interface LinkType {
+  id?: number;
   title: string;
   url: string;
 }

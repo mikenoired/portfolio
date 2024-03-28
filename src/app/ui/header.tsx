@@ -43,7 +43,7 @@ export default function Header({ border, invert }: HeaderProps) {
                   "underline underline-offset-2 pointer-events-none",
               )}
             >
-              {name.name}
+              {name.title}
             </Link>
           ))}
         </nav>
@@ -74,7 +74,7 @@ export default function Header({ border, invert }: HeaderProps) {
               href={`/${name.url}`}
               className="pr-5 pt-2 text-xl font-medium uppercase inline-block"
             >
-              {name.name}
+              {name.title}
             </Link>
           ))}
         </div>

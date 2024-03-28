@@ -4,18 +4,16 @@ import { fetchPagesName } from "@/server/settings";
 
 import { useSession } from "next-auth/react";
 import { createContext, useCallback, useEffect, useState } from "react";
+import { LinkType } from "../lib/definitions";
 
-export const HeaderContext = createContext<
-  { id: number; name: string; url: string }[] | undefined
->(undefined);
+export const HeaderContext = createContext<LinkType[] | undefined>(undefined);
 
 export default function HeaderProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [names, setNames] =
-    useState<{ id: number; name: string; url: string }[]>();
+  const [names, setNames] = useState<LinkType[]>();
   const { data: session, status } = useSession();
 
   const fetchData = useCallback(async () => {
