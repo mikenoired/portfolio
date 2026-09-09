@@ -9,8 +9,8 @@
     "check": "tsc --noEmit && oxlint src && oxfmt --check src"
   },
   "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.13",
