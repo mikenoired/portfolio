@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import { ProgressiveBlur } from "./components/ProgressiveBlur";
 import { contacts, experience, projects, skills } from "./data";
 import ArrowUpRight from "./components/arrow-up-right";
@@ -90,6 +91,7 @@ function App() {
 
   return (
     <>
+      <Analytics />
       <header
         className={`topbar ${isScrolled ? "is-scrolled" : ""}`}
         aria-label="Навигация"
