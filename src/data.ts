@@ -46,6 +46,19 @@ export const experience = [
       "Настраивал CI/CD, Docker, dev/prod-окружения, PM2, Redis/MinIO и резервное копирование.",
     ],
   },
+  {
+    period: "фев 2022 — июн 2023",
+    company: "CyberТека",
+    city: "Волгодонск",
+    role: "Специалист наладки информационных систем / Администратор",
+    intro:
+      "Компьютерный клуб: администрирование системы GIZMO, поддержка мероприятий и первые коммерческие разработки на Electron и React.",
+    results: [
+      "Создал с нуля оболочки с бонусной системой и event mini app на Electron и React с привязкой аккаунтов к GIZMO.",
+      "Провёл реверс-инжиниринг GIZMO для кастомизации тем под задачи клуба.",
+      "Участвовал в мероприятиях, оперативно решал неполадки и стажировал новых сотрудников.",
+    ],
+  },
 ] as const;
 
 export const skills = [
@@ -57,25 +70,17 @@ export const skills = [
     "Vue",
     "Nuxt",
     "React Native",
-    "GPUI",
+    "JavaScript",
+    "HTML5",
+    "CSS3",
   ],
-  [
-    "Сервер",
-    "Node.js",
-    "Python",
-    "Hono",
-    "Elysia",
-    "REST API",
-    "JWT",
-    "Tokio",
-    "Rocket",
-  ],
+  ["Сервер", "Node.js", "Python", "Hono", "Elysia", "REST API", "JWT"],
   [
     "Данные и процессы",
     "PostgreSQL",
     "MySQL",
     "Redis",
-    "Dragondly",
+    "Dragonfly",
     "Drizzle ORM",
     "BullMQ",
     "Trigger.dev",

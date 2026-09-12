@@ -134,7 +134,7 @@ function App() {
           </p>
           <ul className="hero-proof" aria-label="Ключевые результаты">
             <li>
-              <strong>2 года 8 мес.</strong> коммерческого опыта
+              <strong>4 года 1 мес.</strong> коммерческого опыта
             </li>
             <li>
               <strong>8 модулей</strong> выпущено для Gramax
@@ -167,7 +167,7 @@ function App() {
 
         <section id="experience" aria-labelledby="experience-title">
           <SectionTitle id="experience-title">
-            Коммерческий опыт <span>2 года 8 месяцев</span>
+            Коммерческий опыт <span>4 года 1 месяц</span>
           </SectionTitle>
           <div className="timeline">
             {experience.map((job) => (

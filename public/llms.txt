@@ -1,6 +1,6 @@
 # Михаил Веткаль
 
-Fullstack-разработчик из Волгодонска. Ищу удалённую full-time позицию с фокусом на TypeScript, React, Next.js и Node.js. Коммерческий опыт — 2 года 8 месяцев. Готов к работе удалённо, без командировок.
+Fullstack-разработчик из Волгодонска. Ищу удалённую full-time позицию с фокусом на TypeScript, React, Next.js и Node.js. Общий коммерческий опыт — 4 года 1 месяц; fullstack-разработка — 2+ года. Готов к работе удалённо, без командировок.
 
 ## Контакты
 
@@ -30,9 +30,13 @@ Fullstack-разработчик из Волгодонска. Ищу удалё�
 - RAG для анализа КБЖУ по фотографии — оптимизация базы данных, ранжированный поиск BM25 и интеграция движка в Telegram Mini App.
 - Fren — помощь в интеграции новых интерфейсных функций во frontend Telegram Mini App: https://t.me/frenglobal
 
+### CyberТека · февраль 2022 — июнь 2023 · Специалист наладки информационных систем / Администратор
+
+Настраивал систему GIZMO для компьютерного клуба. Создал с нуля оболочки с бонусной системой и event mini app на Electron и React с привязкой аккаунтов к GIZMO. Проводил реверс-инжиниринг GIZMO для кастомизации тем, участвовал в мероприятиях, решал инциденты и стажировал новых сотрудников.
+
 ## Технологии
 
-TypeScript, JavaScript, React, Next.js, Vue, Nuxt, React Native, Node.js, Python, Hono, Elysia, PostgreSQL, MySQL, Redis, Dragonfly, Docker, CI/CD, BullMQ, Trigger.dev, MinIO, REST API, JWT, Git.
+TypeScript, JavaScript, React, Next.js, Vue, Nuxt, React Native, Node.js, Python, Hono, Elysia, PostgreSQL, MySQL, Redis, Dragonfly, Docker, CI/CD, BullMQ, Trigger.dev, MinIO, REST API, JWT, Git, HTML5, CSS3, Figma.
 
 ## Открытый код
 
