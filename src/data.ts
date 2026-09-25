@@ -91,6 +91,15 @@ export const skills = [
 
 export const projects = [
   {
+    name: "Расписание ДГТУ",
+    type: "Публичный проект · Telegram-бот",
+    description:
+      "Бот для публикации расписания: проверяет Excel-файлы, хранит версии по неделям и уведомляет студентов об обновлениях.",
+    stack: "Rust · Telegram Bot API · PostgreSQL · Excel",
+    url: "https://github.com/mikenoired/dstu-vdonsk-schedule-bot",
+    urlLabel: "Открыть репозиторий",
+  },
+  {
     name: "no.audio",
     type: "Коммерческий проект · Белая Доска",
     description:
